@@ -5,6 +5,9 @@ class World {
         new PufferFish(),
         new PufferFish()
     ];
+    lights = [
+        new Light()
+    ]
     canvas;
     ctx;
 
@@ -19,6 +22,9 @@ class World {
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         this.enemies.forEach(enemy => {
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
+        });
+        this.lights.forEach(light => {
+            this.ctx.drawImage(light.img, light.x, light.y, light.width, light.height);
         });
 
         // draw() wird immer wieder aufgerufen
