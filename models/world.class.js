@@ -1,22 +1,10 @@
 class World {
     character = new Character();
-    enemies = [
-        new PufferFish(),
-        new PufferFish(),
-        new PufferFish()
-    ];
-    lights = [
-        new Light()
-    ]
-    backgrounds = [
-        new BackgroundObject('img/3. Background/Layers/5. Water/D1.png', 0),
-        new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D1.png', 0),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D1.png', 0),
-        new BackgroundObject('img/3. Background/Layers/2. Floor/D1.png', 0)
-    ]
+    level = level1;
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -28,15 +16,20 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.level.game_sound.play();
     }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.addObjectsToMap(this.backgrounds);
-        this.addObjectsToMap(this.lights);
+        this.ctx.translate(this.camera_x, 0);
+
+        this.addObjectsToMap(this.level.backgrounds);
+        this.addObjectsToMap(this.level.lights);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.enemies);
+
+        this.ctx.translate(-this.camera_x, 0);
         
 
         // draw() wird immer wieder aufgerufen
