@@ -16,7 +16,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.level.game_sound.play();
+        // this.level.game_sound.play();
     }
 
     draw() {
