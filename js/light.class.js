@@ -6,13 +6,11 @@ class Light extends MovableObject{
         this.height = 300;
         this.x = (-100) + Math.random() * 200;
         this.y = 0;
+
         // this.animate();
     }
 
-    // animate() {
-    //     setInterval( () => {
-    //         this.x -= 0.01;
-    //     }, 1000 / 60) 
-    // }
-
+    animate() {
+         this.moveLeft();
+    }
 }
