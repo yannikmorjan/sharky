@@ -2,6 +2,7 @@ class Character extends MovableObject {
 
     width = 480;
     height = 480;
+    speed = 2;
     IMAGES_IDL = [
         'img/1.Sharkie/1.IDLE/1.png',
         'img/1.Sharkie/1.IDLE/2.png',
@@ -22,11 +23,21 @@ class Character extends MovableObject {
         'img/1.Sharkie/1.IDLE/17.png',
         'img/1.Sharkie/1.IDLE/18.png'
     ];
+    IMAGES_SWIM = [
+        'img/1.Sharkie/3.Swim/1.png',
+        'img/1.Sharkie/3.Swim/2.png',
+        'img/1.Sharkie/3.Swim/3.png',
+        'img/1.Sharkie/3.Swim/4.png',
+        'img/1.Sharkie/3.Swim/5.png',
+        'img/1.Sharkie/3.Swim/6.png'
+    ]
+    world;
     currentImage = 0;
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadImages(this.IMAGES_IDL);
+        this.loadImages(this.IMAGES_SWIM);
         this.x = 0;
         this.y = 0;
 
@@ -35,10 +46,23 @@ class Character extends MovableObject {
 
     animate() {
         setInterval( () => {
-            let i = this.currentImage % this.IMAGES_IDL.length;
-            let path = this.IMAGES_IDL[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
+            if(this.world.keyboard.RIGHT) {
+                this.x += this.speed;
+            }
+        },1000 / 60);
+
+        setInterval( () => {
+            if(this.world.keyboard.RIGHT) {
+                let i = this.currentImage % this.IMAGES_SWIM.length;
+                let path = this.IMAGES_SWIM[i];
+                this.img = this.imageCache[path];
+                this.currentImage++;
+            } else {
+                let i = this.currentImage % this.IMAGES_IDL.length;
+                let path = this.IMAGES_IDL[i];
+                this.img = this.imageCache[path];
+                this.currentImage++;
+            }
         },250);
     }
 
