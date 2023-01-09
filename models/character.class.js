@@ -54,6 +54,26 @@ class Character extends MovableObject {
         'img/1.Sharkie/4.Attack/Fin slap/7.png',
         'img/1.Sharkie/4.Attack/Fin slap/8.png'
     ];
+    IMAGES_DEAD_NORMAL = [
+        'img/1.Sharkie/6.dead/1.Standard/1.png',
+        'img/1.Sharkie/6.dead/1.Standard/2.png',
+        'img/1.Sharkie/6.dead/1.Standard/3.png',
+        'img/1.Sharkie/6.dead/1.Standard/4.png',
+        'img/1.Sharkie/6.dead/1.Standard/5.png',
+        'img/1.Sharkie/6.dead/1.Standard/6.png',
+        'img/1.Sharkie/6.dead/1.Standard/7.png',
+        'img/1.Sharkie/6.dead/1.Standard/8.png',
+        'img/1.Sharkie/6.dead/1.Standard/9.png',
+        'img/1.Sharkie/6.dead/1.Standard/10.png',
+        'img/1.Sharkie/6.dead/1.Standard/11.png',
+        'img/1.Sharkie/6.dead/1.Standard/12.png'
+    ];
+    IMAGES_HURT_POISON = [
+        'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/4.png'
+    ]
     width = 300;
     height = 300;
     x = 0;
@@ -69,6 +89,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDL_LONG);
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_FIN_SLAP);
+        this.loadImages(this.IMAGES_DEAD_NORMAL);
+        this.loadImages(this.IMAGES_HURT_POISON);
 
         this.animate();
     }
@@ -97,7 +119,13 @@ class Character extends MovableObject {
         },1000 / 60);
 
         setInterval( () => {
-            if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+            if(this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD_NORMAL);
+            } 
+            else if(this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT_POISON);
+            }
+            else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
             } else {
                 this.playAnimation(this.IMAGES_IDL);

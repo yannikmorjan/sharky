@@ -7,6 +7,8 @@ class MovableObject {
     width = 150;
     speed = 0.1;
     otherDirection = false;
+    energy = 100;
+    lastHit = 0;
 
     loadImage(path) {
         this.img = new Image();
@@ -70,5 +72,24 @@ class MovableObject {
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }
+
+    hit() {
+        this.energy -= 5;
+        if(this.energy < 0) {
+            this.energy = 0; 
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
+        timepassed = timepassed / 1000; // Difference in s
+        return timepassed < 1;
     }
 }
