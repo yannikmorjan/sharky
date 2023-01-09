@@ -12,11 +12,12 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     setWorld() {
         this.character.world = this;
-        // this.level.game_sound.play();
+        //this.level.game_sound.play();
     }
 
     draw() {
@@ -45,18 +46,42 @@ class World {
         });
     }
 
-    addToMap(object) {
-        if(object.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(object.width, 0);
-            this.ctx.scale(-1, 1);
-            object.x = object.x * -1;
+    addToMap(mo) {
+        if(mo.otherDirection) {
+            this.flipImage(mo);
         }
-        this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
-        if(object.otherDirection) {
-            object.x = object.x * -1;
-            this.ctx.restore();
+        mo.draw(this.ctx);
+        if (mo instanceof Character) {
+            mo.drawFrame(this.ctx, 'green');
+        }
+        if(mo instanceof PufferFish || mo instanceof Endboss) {
+            mo.drawFrame(this.ctx, 'red');
+        }
+        if(mo.otherDirection) {
+            this.flipImageBack(mo);
         }
     }
 
-}
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach( (enemy) => {
+               if(this.character.isColliding(enemy)){
+                 console.log('Colision with Character', enemy);
+               }
+            });
+        }, 1000);
+    }
+
+}   

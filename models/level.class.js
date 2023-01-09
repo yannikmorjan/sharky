@@ -4,7 +4,7 @@ class Level {
     lights;
     backgrounds;
     level_end_x = 720*5;
-    game_sound = new Audio('audio/gamesound.mp3');
+    game_sound = new Audio('audio/ambience_2.mp3');
 
     constructor(enemies, lights, backgrounds) {
         this.enemies = enemies;

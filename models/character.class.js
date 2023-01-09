@@ -76,21 +76,21 @@ class Character extends MovableObject {
     animate() {
         setInterval( () => {
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.x += this.speed;
+                this.moveRight();
                 this.otherDirection = false;
                 this.applySwimResistance();
             }
             if(this.world.keyboard.LEFT && this.x > 0) {
-                this.x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
                 this.applySwimResistance();
             }
             if(this.world.keyboard.UP && this.y > -130) {
-                this.y -= this.speed;
+                this.moveUp()
                 this.applySwimResistance();
             }
             if(this.world.keyboard.DOWN && this.y < 230) {
-                this.y += this.speed;
+                this.moveDown();
                 this.applySwimResistance();
             }
             this.world.camera_x = -this.x;
