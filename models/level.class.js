@@ -9,7 +9,4 @@ class Level {
         this.enemies = enemies;
         this.backgrounds = backgrounds;
     }
-
-    
-
 }

@@ -4,22 +4,6 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
 
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
-
-    drawFrame(ctx, color) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = color;
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-    }
-
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
