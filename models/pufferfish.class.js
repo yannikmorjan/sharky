@@ -1,7 +1,5 @@
 class PufferFish extends MovableObject {
 
-    width = 100;
-    height = 100;
     IMAGES_SWIM = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
@@ -9,6 +7,12 @@ class PufferFish extends MovableObject {
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
     ];
+    width = 50;
+    height = 50;
+    offsetX = 0;
+    offsetY = 0;
+    offsetWidth = 0;
+    offsetHeight = 10;
     currentImage = 0;
 
     constructor() {

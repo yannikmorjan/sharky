@@ -6,6 +6,10 @@ class DrawableObject {
     y = 250;
     height = 150;
     width = 150;
+    offsetX = 0;
+    offsetY = 0;
+    offsetWidth = 0;
+    offsetHeight = 0;
 
     loadImage(path) {
         this.img = new Image();
@@ -26,9 +30,9 @@ class DrawableObject {
 
     drawFrame(ctx, color) {
         ctx.beginPath();
-        ctx.lineWidth = '5';
+        ctx.lineWidth = '2';
         ctx.strokeStyle = color;
-        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.rect(this.x + this.offsetX, this.y + this.offsetY, this.width - this.offsetWidth, this.height - this.offsetHeight);
         ctx.stroke();
     }
 }

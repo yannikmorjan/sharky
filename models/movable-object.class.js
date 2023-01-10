@@ -4,21 +4,14 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
 
-    isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height;
+    isColliding(obj) {
+        return  (this.x + this.offsetX + this.width - this.offsetWidth) > obj.x + obj.offsetX &&
+            (this.x + this.offsetX) < (obj.x + obj.offsetX + obj.width - obj.offsetWidth) && 
+            (this.y + this.offsetY + this.height - this.offsetHeight) > obj.y + obj.offsetY &&
+            (this.y + this.offsetY) < (obj.y + obj.offsetY + obj.height - obj.offsetHeight);
+            // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+            // && obj.onCollisionCourse; 
     }
-
-    // Besser
-    // isColliding(obj) {
-    //     return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
-    //         (this.y + this.offsetY + this.height) >= obj.y &&
-    //         (this.y + this.offsetY) <= (obj.y + obj.height);
-    //         // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-    //         // && obj.onCollisionCourse; 
-    // }
 
     moveLeft() {
         this.x -= this.speed;

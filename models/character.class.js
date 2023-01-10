@@ -74,10 +74,14 @@ class Character extends MovableObject {
         'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/4.png'
     ]
-    width = 300;
-    height = 300;
+    width = 200;
+    height = 200;
     x = 0;
     y = 0;
+    offsetX = 40;
+    offsetY = 95;
+    offsetWidth = 80;
+    offsetHeight = 140;
     speed = 0;
     acceloration = 0.1;
     world;
