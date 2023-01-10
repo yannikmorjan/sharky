@@ -81,7 +81,6 @@ class Character extends MovableObject {
     speed = 0;
     acceloration = 0.1;
     world;
-    currentImage = 0;
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
