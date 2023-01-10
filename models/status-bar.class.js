@@ -30,7 +30,7 @@ class StatusBar extends DrawableObject {
 
     constructor(statusBar) {
         super();
-        this.differStatusbarImages(statusBar);
+        this.distinguishStatusbarImages(statusBar);
         this.loadImages(this.IMAGES);
         this.x = 10;
         this.width = 200;
@@ -60,7 +60,7 @@ class StatusBar extends DrawableObject {
         }
     }
 
-    differStatusbarImages(statusBar) {
+    distinguishStatusbarImages(statusBar) {
         if(statusBar == 'coin') {
             this.IMAGES = this.IMAGES_COIN_GREEN;
             this.y = 80;

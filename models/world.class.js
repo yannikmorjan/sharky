@@ -4,10 +4,11 @@ class World {
     canvas;
     ctx;
     keyboard;
-    camera_x = 0;
+    camera_x = 180;
     healthBar = new StatusBar('health');
     poisonBar = new StatusBar('poison');
     coinBar = new StatusBar('coin');
+    throwableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -15,7 +16,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
@@ -35,7 +36,7 @@ class World {
         this.addToMap(this.poisonBar);
         this.addToMap(this.coinBar);
         this.ctx.translate(this.camera_x, 0);
-
+        this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
 
@@ -60,7 +61,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        if (mo instanceof Character) {
+        if (mo instanceof Character || mo instanceof ThrowableObject) {
             mo.drawFrame(this.ctx, 'green');
         }
         if(mo instanceof PufferFish || mo instanceof Endboss) {
@@ -84,14 +85,29 @@ class World {
     }
 
     checkCollisions() {
+        this.level.enemies.forEach( (enemy) => {
+            if(this.character.isColliding(enemy)){
+                this.character.hit();
+                this.healthBar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach( (enemy) => {
-               if(this.character.isColliding(enemy)){
-                    this.character.hit();
-                    this.healthBar.setPercentage(this.character.energy);
-               }
-            });
+
+            this.checkCollisions();
+            this.checkTrowObjects();
+
         }, 200);
+    }
+
+    checkTrowObjects() {
+        if(this.keyboard.SPACE) {
+            let bubble = new ThrowableObject((this.character.x + this.character.offsetX + this.character.width - this.character.offsetWidth), (this.character.y + this.character.height / 2));
+            bubble.checkOtherDirection(this.character.otherDirection, (this.character.width - this.character.offsetWidth));
+            this.throwableObjects.push(bubble);
+        }
     }
 
 }   
