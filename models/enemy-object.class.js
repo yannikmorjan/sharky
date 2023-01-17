@@ -1,0 +1,3 @@
+class EnemyObject extends MovableObject {
+    
+}

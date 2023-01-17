@@ -1,4 +1,4 @@
-class Endboss extends MovableObject {
+class Endboss extends EnemyObject {
 
     IMAGES_SWIM = [
         'img/2.Enemy/3 Final Enemy/2.floating/1.png',

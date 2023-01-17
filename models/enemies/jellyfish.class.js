@@ -1,11 +1,10 @@
-class PufferFish extends MovableObject {
+class JellyFish extends EnemyObject {
 
     IMAGES_SWIM = [
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png',
-        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
+        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
+        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
+        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
+        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png'
     ];
     width = 50;
     height = 50;
@@ -16,7 +15,7 @@ class PufferFish extends MovableObject {
     currentImage = 0;
 
     constructor() {
-        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
+        super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
         this.loadImages(this.IMAGES_SWIM);
 
         this.x = 200 + Math.random() * 500;

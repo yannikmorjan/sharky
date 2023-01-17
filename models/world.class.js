@@ -5,6 +5,9 @@ class World {
     ctx;
     keyboard;
     camera_x = 180;
+    coin = new Coin(100,100);
+    poison = new Poison(500,400);
+    health = new Health(0,100);
     healthBar = new StatusBar('health');
     poisonBar = new StatusBar('poison');
     coinBar = new StatusBar('coin');
@@ -29,7 +32,9 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgrounds);
-
+        this.addToMap(this.coin);
+        this.addToMap(this.poison);
+        this.addToMap(this.health);
         this.ctx.translate(-this.camera_x, 0);
         // ----------- Space for fixed objects ----------
         this.addToMap(this.healthBar);
