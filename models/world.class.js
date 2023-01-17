@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1;
+    level = initLevel('lvl1');
     canvas;
     ctx;
     keyboard;
@@ -64,7 +64,7 @@ class World {
         if (mo instanceof Character || mo instanceof ThrowableObject) {
             mo.drawFrame(this.ctx, 'green');
         }
-        if(mo instanceof PufferFish || mo instanceof Endboss) {
+        if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
             mo.drawFrame(this.ctx, 'red');
         }
         if(mo.otherDirection) {

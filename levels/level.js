@@ -1,7 +1,13 @@
+function initLevel(lvl) {
+    if (lvl == 'lvl1') {
+        return level1
+    }
+}
+
 const level1 = new Level(
     [
         new PufferFish(),
-        new PufferFish(),
+        new JellyFish(),
         new PufferFish(),
         new Endboss()
     ],
