@@ -1,0 +1,41 @@
+@media (max-width: 900px),
+(max-height: 750px) {
+    .canvasFrame {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 1000px) {
+    .title {
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (max-height: 800px) {
+    .title {
+        margin-bottom: 50px;
+    }
+}
+
+@media only screen and (max-height: 660px) {
+    .title {
+        font-size: 2rem;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    .title {
+        display: none;
+    }
+    canvas {
+        height: 100vh;
+    }
+}
