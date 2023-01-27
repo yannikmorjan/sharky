@@ -6,7 +6,10 @@
 }
 
 @media only screen and (max-width: 720px) {
-    canvas {
+    /* canvas {
+        width: 100%;
+    } */
+    .canvasContainer {
         width: 100%;
     }
 }
@@ -35,7 +38,10 @@
     .title {
         display: none;
     }
-    canvas {
+    /* canvas {
+        height: 100vh;
+    } */
+    .canvasContainer {
         height: 100vh;
     }
 }

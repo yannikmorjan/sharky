@@ -12,8 +12,8 @@ const level1 = new Level(
         new Endboss()
     ],
     [
-        new RockVertical(-750,480),
-        new Tunnel(-750),
+        new RockVertical(-800,480),
+        new Tunnel(-800),
         new RockHorizontal(2*680),
     ],
     [
@@ -33,13 +33,13 @@ const level1 = new Level(
         new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D1.png', 720*4,-4),
         new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D2.png', 720*5,-4),
 
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', -720,-1),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D1.png', 0,-1),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', 720,-1),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D1.png', 720*2,-1),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', 720*3,-1),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D1.png', 720*4,-1),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', 720*5,-1),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', -720,-2),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D1.png', 0,-2),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', 720,-2),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D1.png', 720*2,-2),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', 720*3,-2),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D1.png', 720*4,-2),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D2.png', 720*5,-2),
 
         new BackgroundObject('img/3. Background/Layers/1. Light/2.png', -720,-0.5),
         new BackgroundObject('img/3. Background/Layers/1. Light/1.png', 0,-0.5),

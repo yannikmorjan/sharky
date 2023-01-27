@@ -87,7 +87,7 @@ class Character extends MovableObject {
     width = 200;
     height = 200;
     x = 0;
-    y = 0;
+    y = 100;
     offsetX = 40;
     offsetY = 95;
     offsetWidth = 80;
@@ -137,7 +137,7 @@ class Character extends MovableObject {
                     this.moveDown();
                     this.applySwimResistance();
                 }
-                this.world.camera_x = -this.x + 180;
+                this.world.camera_x = -this.x + 240;
             }
         },1000 / 60);
 

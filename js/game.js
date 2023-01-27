@@ -44,3 +44,8 @@ window.addEventListener('keyup', (e) => {
         keyboard.SPACE = false;
     }
 });
+
+function openSettings() {
+    document.getElementById('game-overlay').classList.add('d-none');
+    document.getElementById('settings-overlay').classList.remove('d-none');
+}
