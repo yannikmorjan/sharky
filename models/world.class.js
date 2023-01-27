@@ -67,7 +67,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectableObject) {
+        if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectableObject || mo instanceof BarrierObject) {
             mo.drawFrame(this.ctx, 'green');
         }
         if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {

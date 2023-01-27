@@ -93,7 +93,8 @@ class Character extends MovableObject {
     offsetWidth = 80;
     offsetHeight = 140;
     speed = 0;
-    acceloration = 5;
+    maxSpeed = 5;
+    acceloration = 0.1;
     world;
 
     constructor() {
@@ -104,7 +105,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_BUBBLE_TRAP);
         this.loadImages(this.IMAGES_DEAD_NORMAL);
         this.loadImages(this.IMAGES_HURT_POISON);
-
         this.animate();
     }
 
@@ -115,7 +115,8 @@ class Character extends MovableObject {
                     this.moveRight();
                     this.otherDirection = false;
                     this.world.level.backgrounds.forEach(e => { 
-                        e.moveLeft()
+                        e.moveLeft();
+                        e.applySwimResistance();
                     });
                     this.applySwimResistance();
                 }
@@ -124,6 +125,7 @@ class Character extends MovableObject {
                     this.otherDirection = true;
                     this.world.level.backgrounds.forEach(e => { 
                         e.moveRight();
+                        e.applySwimResistance();
                     });
                     this.applySwimResistance();
                 }
@@ -151,12 +153,15 @@ class Character extends MovableObject {
             } else {
                 this.playAnimation(this.IMAGES_IDL);
                 this.speed = 0;
+                this.world.level.backgrounds.forEach(e => { 
+                    e.speed = 0;
+                });
             }
         },250);
     }
 
     applySwimResistance() {
-        if(this.speed <= 5) {
+        if(this.speed < this.maxSpeed) {
             this.speed += this.acceloration;
         }
     }

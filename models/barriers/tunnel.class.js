@@ -2,8 +2,8 @@ class Tunnel extends BarrierObject {
 
     IMAGE = 'img/3. Background/Barrier/1.png';
 
-    width = 360;
-    height = 240;
+    width = 720;
+    height = 480;
 
     constructor(x) {
         super().loadImage(this.IMAGE);

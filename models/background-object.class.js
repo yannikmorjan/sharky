@@ -2,12 +2,20 @@ class BackgroundObject extends MovableObject {
 
     width = 720;
     height = 480;
-    world;
+    speed = 0;
+    maxSpeed;
+    acceloration = 0.1;
 
-    constructor(imagePath, x, speed) {
+    constructor(imagePath, x, maxSpeed) {
         super().loadImage(imagePath);
         this.y = 480 - this.height;
         this.x = x;
-        this.speed = speed;
+        this.maxSpeed = maxSpeed;
+    }
+
+    applySwimResistance() {
+        if(this.speed > this.maxSpeed) {
+            this.speed -= this.acceloration;
+        }
     }
 }
