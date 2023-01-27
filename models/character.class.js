@@ -93,7 +93,7 @@ class Character extends MovableObject {
     offsetWidth = 80;
     offsetHeight = 140;
     speed = 0;
-    acceloration = 0.1;
+    acceloration = 5;
     world;
 
     constructor() {
@@ -114,11 +114,17 @@ class Character extends MovableObject {
                 if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
+                    this.world.level.backgrounds.forEach(e => { 
+                        e.moveLeft()
+                    });
                     this.applySwimResistance();
                 }
                 if(this.world.keyboard.LEFT && this.x > -500) {
                     this.moveLeft();
                     this.otherDirection = true;
+                    this.world.level.backgrounds.forEach(e => { 
+                        e.moveRight();
+                    });
                     this.applySwimResistance();
                 }
                 if(this.world.keyboard.UP && this.y > -60) {
@@ -150,7 +156,7 @@ class Character extends MovableObject {
     }
 
     applySwimResistance() {
-        if(this.speed <= 10) {
+        if(this.speed <= 5) {
             this.speed += this.acceloration;
         }
     }

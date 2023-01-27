@@ -32,6 +32,7 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgrounds);
+        this.addObjectsToMap(this.level.barriers);
         this.addToMap(this.coin);
         this.addToMap(this.poison);
         this.addToMap(this.health);
@@ -66,7 +67,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        if (mo instanceof Character || mo instanceof ThrowableObject) {
+        if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectableObject) {
             mo.drawFrame(this.ctx, 'green');
         }
         if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {

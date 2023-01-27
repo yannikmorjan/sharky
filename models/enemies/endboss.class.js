@@ -1,5 +1,18 @@
 class Endboss extends EnemyObject {
 
+    IMAGES_INTRO = [
+        'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/3.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/4.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/5.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/6.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/7.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/8.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/9.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/10.png'
+    ]
+
     IMAGES_SWIM = [
         'img/2.Enemy/3 Final Enemy/2.floating/1.png',
         'img/2.Enemy/3 Final Enemy/2.floating/2.png',
@@ -25,7 +38,8 @@ class Endboss extends EnemyObject {
     
 
     constructor() {
-        super().loadImage('img/2.Enemy/3 Final Enemy/2.floating/1.png');
+        super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
+        this.loadImages(this.IMAGES_INTRO);
         this.loadImages(this.IMAGES_SWIM);
 
         this.x = 200 + Math.random() * 500;
@@ -36,8 +50,14 @@ class Endboss extends EnemyObject {
     }
 
     animate() {
+        let i = 0
         setInterval( () => {
-            this.playAnimation(this.IMAGES_SWIM);
+            if(i < 10){
+                this.playAnimation(this.IMAGES_INTRO);
+            } else {
+                this.playAnimation(this.IMAGES_SWIM);
+            }
+            i++;
         },100);
     }
 
