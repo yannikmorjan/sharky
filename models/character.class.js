@@ -114,18 +114,22 @@ class Character extends MovableObject {
                 if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
-                    this.world.level.backgrounds.forEach(e => { 
-                        e.moveLeft();
-                        e.applySwimResistance();
+                    this.world.level.backgrounds.forEach(l => { 
+                        l.forEach(b => {
+                            b.moveLeft();
+                            b.applySwimResistance();
+                        }); 
                     });
                     this.applySwimResistance();
                 }
                 if(this.world.keyboard.LEFT && this.x > -500) {
                     this.moveLeft();
                     this.otherDirection = true;
-                    this.world.level.backgrounds.forEach(e => { 
-                        e.moveRight();
-                        e.applySwimResistance();
+                    this.world.level.backgrounds.forEach(l => {
+                        l.forEach(b => { 
+                            b.moveRight();
+                            b.applySwimResistance();
+                        }); 
                     });
                     this.applySwimResistance();
                 }
@@ -153,8 +157,10 @@ class Character extends MovableObject {
             } else {
                 this.playAnimation(this.IMAGES_IDL);
                 this.speed = 0;
-                this.world.level.backgrounds.forEach(e => { 
-                    e.speed = 0;
+                this.world.level.backgrounds.forEach(l => { 
+                    l.forEach(b => {
+                        b.speed = 0;
+                    });
                 });
             }
         },250);

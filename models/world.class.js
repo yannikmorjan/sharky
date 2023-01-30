@@ -31,7 +31,9 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgrounds);
+        for(let i = 0; i < this.level.backgrounds.length; i++) {
+            this.addObjectsToMap(this.level.backgrounds[i]);
+        }
         this.addObjectsToMap(this.level.barriers);
         this.addToMap(this.coin);
         this.addToMap(this.poison);
