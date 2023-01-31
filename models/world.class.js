@@ -5,9 +5,6 @@ class World {
     ctx;
     keyboard;
     camera_x = 180;
-    coin = new Coin(100,100);
-    poison = new Poison(500,400);
-    health = new Health(0,100);
     healthBar = new StatusBar('health');
     poisonBar = new StatusBar('poison');
     coinBar = new StatusBar('coin');
@@ -35,9 +32,9 @@ class World {
             this.addObjectsToMap(this.level.backgrounds[i]);
         }
         this.addObjectsToMap(this.level.barriers);
-        this.addToMap(this.coin);
-        this.addToMap(this.poison);
-        this.addToMap(this.health);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.poisons);
+        this.addObjectsToMap(this.level.hearts);
         this.ctx.translate(-this.camera_x, 0);
         // ----------- Space for fixed objects ----------
         this.addToMap(this.healthBar);
@@ -69,7 +66,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectableObject || mo instanceof BarrierObject) {
+        if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectibleObject || mo instanceof BarrierObject) {
             mo.drawFrame(this.ctx, 'green');
         }
         if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
@@ -99,6 +96,27 @@ class World {
                 this.healthBar.setPercentage(this.character.energy);
             }
         });
+        this.level.coins.forEach( (coin) => {
+            if(this.character.isColliding(coin)){
+                this.character.collectedCoin();
+                this.coinBar.setPercentage(this.character.coins*20);
+                this.level.coins.splice(this.level.coins.indexOf(coin),1);
+            }
+        });
+        this.level.poisons.forEach( (poison) => {
+            if(this.character.isColliding(poison)){
+                this.character.collectedPoison();
+                this.poisonBar.setPercentage(this.character.poison*20);
+                this.level.poisons.splice(this.level.poisons.indexOf(poison),1);
+            }
+        });
+        this.level.hearts.forEach( (heart) => {
+            if(this.character.isColliding(heart) && this.healthBar.percentage != 100){
+                this.character.collectedHeart();
+                this.healthBar.setPercentage(this.character.energy);
+                this.level.hearts.splice(this.level.hearts.indexOf(),1);
+            }
+        });
     }
 
     run() {
@@ -118,4 +136,4 @@ class World {
         }
     }
 
-}   
+}

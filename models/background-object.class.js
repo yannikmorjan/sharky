@@ -1,5 +1,4 @@
 class BackgroundObject extends MovableObject {
-
     width = 1440;
     height = 480;
     speed = 0;
@@ -16,6 +15,12 @@ class BackgroundObject extends MovableObject {
     applySwimResistance() {
         if(this.speed > this.maxSpeed) {
             this.speed -= this.acceloration;
+        }
+    }
+
+    update(characterX, siblingX) {
+        if(characterX >= (siblingX + this.width / 4)) {
+            this.x = siblingX + this.width;
         }
     }
 }

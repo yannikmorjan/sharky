@@ -1,4 +1,4 @@
-class Coin extends CollectableObject {
+class Coin extends CollectibleObject {
 
     IMAGES = [
         'img/4. Marcadores/1. Coins/1.png',

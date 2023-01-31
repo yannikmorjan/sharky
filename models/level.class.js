@@ -3,11 +3,18 @@ class Level {
     enemies;
     backgrounds;
     barriers;
-    level_end_x = 720*5;
+    coins;
+    poisons;
+    hearts;
+    level_end_x = 1440*5;
+    level_start_x = 1440*(-3);
     game_sound = new Audio('audio/ambience_2.mp3');
 
-    constructor(enemies, barriers, bgL5, bgL4, bgL3, bgL2, bgL1) {
+    constructor(enemies, coins, poisons, hearts, barriers, bgL5, bgL4, bgL3, bgL2, bgL1) {
         this.enemies = enemies;
+        this.coins = coins;
+        this.poisons = poisons;
+        this.hearts = hearts;
         this.barriers = barriers;
         this.backgrounds = [bgL5, bgL4, bgL3, bgL2, bgL1];
     }

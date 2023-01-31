@@ -95,6 +95,8 @@ class Character extends MovableObject {
     speed = 0;
     maxSpeed = 5;
     acceloration = 0.1;
+    coins = 0;
+    poison = 0;
     world;
 
     constructor() {
@@ -114,15 +116,20 @@ class Character extends MovableObject {
                 if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
-                    this.world.level.backgrounds.forEach(l => { 
-                        l.forEach(b => {
-                            b.moveLeft();
-                            b.applySwimResistance();
-                        }); 
+                    this.world.level.backgrounds.forEach(l => {
+                        // console.log('characterX', this.x); 
+                        l[0].moveLeft();
+                        l[0].applySwimResistance();
+                        // console.log('bg1', l[0].x);
+                        // l[0].update(this.Character, l[1].x);
+                        l[1].moveLeft();
+                        l[1].applySwimResistance();
+                        // console.log('bg2', l[1].x);
+                        // l[1].update(this.Character, l[0].x);
                     });
                     this.applySwimResistance();
                 }
-                if(this.world.keyboard.LEFT && this.x > -500) {
+                if(this.world.keyboard.LEFT && this.x > this.world.level.level_start_x) {
                     this.moveLeft();
                     this.otherDirection = true;
                     this.world.level.backgrounds.forEach(l => {
@@ -170,5 +177,23 @@ class Character extends MovableObject {
         if(this.speed < this.maxSpeed) {
             this.speed += this.acceloration;
         }
+    }
+
+    collectedCoin() {
+        this.coins += 1;
+        if(this.coins > 5) {
+            this.coins = 5; 
+        }
+    }
+
+    collectedPoison() {
+        this.poison += 1;
+        if(this.poison > 5) {
+            this.poison = 5; 
+        }
+    }
+
+    collectedHeart() {
+        this.energy = 100;
     }
 }

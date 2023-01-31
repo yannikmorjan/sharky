@@ -1,4 +1,4 @@
-class Poison extends CollectableObject {
+class Poison extends CollectibleObject {
 
     IMAGE_DARK_LEFT = 'img/4. Marcadores/Posión/Dark - Left.png';
     IMAGE_DARK_RIGHT = 'img/4. Marcadores/Posión/Dark - Right.png';

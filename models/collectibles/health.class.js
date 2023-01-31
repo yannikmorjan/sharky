@@ -1,4 +1,4 @@
-class Health extends CollectableObject {
+class Health extends CollectibleObject {
     
     IMAGE = 'img/4. Marcadores/green/100_  copia 3.png';
 
