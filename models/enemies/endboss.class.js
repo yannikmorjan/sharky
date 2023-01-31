@@ -37,7 +37,7 @@ class Endboss extends EnemyObject {
     offsetWidth = 25;
     offsetHeight = 120;
     intro = true;
-    damage = 20;
+    damage = 40;
     
 
     constructor(x, y, rangeX, rangeY) {

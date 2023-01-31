@@ -15,7 +15,7 @@ class PufferFish extends EnemyObject {
     offsetWidth = 0;
     offsetHeight = 10;
     currentImage = 0;
-    damage = 5;
+    damage = 20;
 
     constructor(x, y, rangeX, rangeY) {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
