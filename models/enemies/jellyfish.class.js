@@ -14,6 +14,7 @@ class JellyFish extends EnemyObject {
     offsetWidth = 0;
     offsetHeight = 10;
     currentImage = 0;
+    damage = 5;
     
 
     constructor(x, y, rangeX, rangeY) {
