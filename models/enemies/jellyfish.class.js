@@ -6,7 +6,7 @@ class JellyFish extends EnemyObject {
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png'
     ];
-    
+
     width = 50;
     height = 50;
     offsetX = 0;
@@ -26,7 +26,15 @@ class JellyFish extends EnemyObject {
         this.startX = x;
         this.startY = y;
         this.speed = 0.1 + Math.random() * 0.5;
-        this.animate(this.IMAGES_SWIM);
+        this.movement();
+        this.animate();
     }
+    
+    animate() {
+        setInterval( () => {
+            this.playAnimation(this.IMAGES_SWIM);
+        },150);
+    }
+    
 
 }

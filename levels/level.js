@@ -9,7 +9,7 @@ const level1 = new Level(
         new PufferFish(200, 300, 100, 0),
         new JellyFish(200, 300, 0, 100),
         new PufferFish(300, 200, 100, 100),
-        new Endboss()
+        new Endboss(500, 100, 100, 200)
     ],
     [
         new Coin(100,100),

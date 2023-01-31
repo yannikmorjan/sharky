@@ -28,6 +28,7 @@ class Endboss extends EnemyObject {
         'img/2.Enemy/3 Final Enemy/2.floating/12.png',
         'img/2.Enemy/3 Final Enemy/2.floating/13.png',
     ];
+
     currentImage = 0;
     width = 250;
     height = 250;
@@ -35,18 +36,22 @@ class Endboss extends EnemyObject {
     offsetY = 80;
     offsetWidth = 25;
     offsetHeight = 120;
+    intro = true;
     
 
-    constructor() {
+    constructor(x, y, rangeX, rangeY) {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.loadImages(this.IMAGES_INTRO);
         this.loadImages(this.IMAGES_SWIM);
-
-        this.x = 200 + Math.random() * 500;
-        this.y = 100;
+        this.x = x;
+        this.y = y;
+        this.rangeX = rangeX;
+        this.rangeY = rangeY;
+        this.startX = x;
+        this.startY = y;
         this.speed = 0.1 + Math.random() * 0.5;
-
         this.animate();
+        this.movement();
     }
 
     animate() {
@@ -56,9 +61,10 @@ class Endboss extends EnemyObject {
                 this.playAnimation(this.IMAGES_INTRO);
             } else {
                 this.playAnimation(this.IMAGES_SWIM);
+                this.intro = false;
             }
             i++;
-        },100);
+        },150);
     }
 
 }

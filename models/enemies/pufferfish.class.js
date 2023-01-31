@@ -26,8 +26,14 @@ class PufferFish extends EnemyObject {
         this.startX = x;
         this.startY = y;
         this.speed = 0.1 + Math.random() * 0.5;
+        this.movement();
+        this.animate();
+    }
 
-        this.animate(this.IMAGES_SWIM);
+    animate() {
+        setInterval( () => {
+            this.playAnimation(this.IMAGES_SWIM);
+        },150);
     }
 
 }
