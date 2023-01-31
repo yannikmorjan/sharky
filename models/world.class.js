@@ -121,10 +121,8 @@ class World {
 
     run() {
         setInterval(() => {
-
             this.checkCollisions();
             this.checkTrowObjects();
-
         }, 200);
     }
 

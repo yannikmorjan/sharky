@@ -6,9 +6,9 @@ function initLevel(lvl) {
 
 const level1 = new Level(
     [
-        new PufferFish(),
-        new JellyFish(),
-        new PufferFish(),
+        new PufferFish(200, 300, 100, 0),
+        new JellyFish(200, 300, 0, 100),
+        new PufferFish(300, 200, 100, 100),
         new Endboss()
     ],
     [
