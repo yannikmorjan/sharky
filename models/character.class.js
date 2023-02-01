@@ -64,6 +64,16 @@ class Character extends MovableObject {
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
     ];
+    IMAGES_POISON_BUBBLE = [
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/1.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/5.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png'
+    ]
     IMAGES_DEAD_NORMAL = [
         'img/1.Sharkie/6.dead/1.Standard/1.png',
         'img/1.Sharkie/6.dead/1.Standard/2.png',
@@ -105,6 +115,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDL_LONG);
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_BUBBLE_TRAP);
+        this.loadImages(this.IMAGES_POISON_BUBBLE);
+        this.loadImages(this.IMAGES_FIN_SLAP);
         this.loadImages(this.IMAGES_DEAD_NORMAL);
         this.loadImages(this.IMAGES_HURT_POISON);
         this.animate();
@@ -159,8 +171,12 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT_POISON);
             } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
-            } else if(this.world.keyboard.SPACE) {
+            } else if(this.world.keyboard.H) {
                 this.playAnimation(this.IMAGES_BUBBLE_TRAP);
+            } else if(this.world.keyboard.SPACE) {
+                this.playAnimation(this.IMAGES_FIN_SLAP); 
+            } else if(this.world.keyboard.J) {
+                this.playAnimation(this.IMAGES_POISON_BUBBLE); 
             } else {
                 this.playAnimation(this.IMAGES_IDL);
                 this.speed = 0;

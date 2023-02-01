@@ -10,6 +10,7 @@ function init() {
 }
 
 window.addEventListener('keydown', (e) => {
+    console.log(e.keyCode);
     if(e.keyCode == 39 || e.keyCode == 68) {
         keyboard.RIGHT = true;
     }
@@ -21,6 +22,12 @@ window.addEventListener('keydown', (e) => {
     }
     if(e.keyCode == 40 || e.keyCode == 83) {
         keyboard.DOWN = true;
+    }
+    if(e.keyCode == 72) {
+        keyboard.H = true;
+    }
+    if(e.keyCode == 74) {
+        keyboard.J = true;
     }
     if(e.keyCode == 32) {
         keyboard.SPACE = true;
@@ -39,6 +46,12 @@ window.addEventListener('keyup', (e) => {
     }
     if(e.keyCode == 40 || e.keyCode == 83) {
         keyboard.DOWN = false;
+    }
+    if(e.keyCode == 72) {
+        keyboard.H = false;
+    }
+    if(e.keyCode == 74) {
+        keyboard.J = false;
     }
     if(e.keyCode == 32) {
         keyboard.SPACE = false;
