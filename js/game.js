@@ -10,7 +10,6 @@ function init() {
 }
 
 window.addEventListener('keydown', (e) => {
-    console.log(e.keyCode);
     if(e.keyCode == 39 || e.keyCode == 68) {
         keyboard.RIGHT = true;
     }

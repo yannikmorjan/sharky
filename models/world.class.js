@@ -41,15 +41,14 @@ class World {
         this.addToMap(this.healthBar);
         this.addToMap(this.poisonBar);
         this.addToMap(this.coinBar);
+        
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.bubbles);
         this.addObjectsToMap(this.poisonedBubbles);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-
         this.ctx.translate(-this.camera_x, 0);
         
-
         // draw() wird immer wieder aufgerufen
         self = this;
         requestAnimationFrame(function() {
@@ -64,7 +63,7 @@ class World {
     }
 
     addToMap(mo) {
-        if(mo.otherDirection) {
+        if(mo.otherDirection || mo.otherDirectionY) {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
@@ -74,20 +73,32 @@ class World {
         if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
             mo.drawFrame(this.ctx, 'red');
         }
-        if(mo.otherDirection) {
+        if(mo.otherDirection || mo.otherDirectionY) {
             this.flipImageBack(mo);
         }
     }
 
     flipImage(mo) {
         this.ctx.save();
-        this.ctx.translate(mo.width, 0);
-        this.ctx.scale(-1, 1);
-        mo.x = mo.x * -1;
+        if(mo.otherDirection) {
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);
+            mo.x = mo.x * -1;
+        }
+        if(mo.otherDirectionY) {
+            this.ctx.translate(0, mo.height);
+            this.ctx.scale(1, -1);
+            mo.y = mo.y * -1;
+        }
     }
 
     flipImageBack(mo) {
-        mo.x = mo.x * -1;
+        if(mo.otherDirection) {
+            mo.x = mo.x * -1;
+        }
+        if(mo.otherDirectionY){
+            mo.y = mo.y * -1;
+        }
         this.ctx.restore();
     }
 
