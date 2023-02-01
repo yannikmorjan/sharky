@@ -8,7 +8,8 @@ class World {
     healthBar = new StatusBar('health');
     poisonBar = new StatusBar('poison');
     coinBar = new StatusBar('coin');
-    throwableObjects = [];
+    bubbles = [];
+    poisonedBubbles = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -41,7 +42,8 @@ class World {
         this.addToMap(this.poisonBar);
         this.addToMap(this.coinBar);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.bubbles);
+        this.addObjectsToMap(this.poisonedBubbles);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
 
@@ -127,10 +129,15 @@ class World {
     }
 
     checkTrowObjects() {
-        if(this.keyboard.SPACE) {
-            let bubble = new ThrowableObject((this.character.x + this.character.offsetX + this.character.width - this.character.offsetWidth), (this.character.y + this.character.height / 2));
+        if(this.keyboard.H) {
+            let bubble = new ThrowableObject((this.character.x + this.character.offsetX + this.character.width - this.character.offsetWidth), (this.character.y + this.character.height / 2), false);
             bubble.checkOtherDirection(this.character.otherDirection, (this.character.width - this.character.offsetWidth));
-            this.throwableObjects.push(bubble);
+            this.bubbles.push(bubble);
+        }
+        if(this.keyboard.J) {
+            let bubble = new ThrowableObject((this.character.x + this.character.offsetX + this.character.width - this.character.offsetWidth), (this.character.y + this.character.height / 2), true);
+            bubble.checkOtherDirection(this.character.otherDirection, (this.character.width - this.character.offsetWidth));
+            this.poisonedBubbles.push(bubble);
         }
     }
 

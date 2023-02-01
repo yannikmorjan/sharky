@@ -2,9 +2,15 @@ class ThrowableObject extends MovableObject {
 
     IMAGE_NORMAL_BUBBLE = 'img/1.Sharkie/4.Attack/Bubble trap/Bubble.png';
     IMAGE_POISON_BUBBLE = 'img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png'
+    poisoned;
 
-    constructor(x,y) {
-        super().loadImage(this.IMAGE_NORMAL_BUBBLE);
+    constructor(x, y, poisoned) {
+        super().poisoned = poisoned;
+        if(this.poisoned){
+            this.loadImage(this.IMAGE_POISON_BUBBLE);
+        } else {
+            this.loadImage(this.IMAGE_NORMAL_BUBBLE);
+        }
         this.x = x;
         this.y = y;
         this.width = 40;
