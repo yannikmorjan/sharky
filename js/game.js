@@ -53,9 +53,11 @@ window.addEventListener('keyup', (e) => {
     }
     if(e.keyCode == 74) {
         keyboard.J = false;
+        world.character.isAttacking = false;
     }
     if(e.keyCode == 32) {
         keyboard.SPACE = false;
+        world.character.isAttacking = false;
     }
 });
 

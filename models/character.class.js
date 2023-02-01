@@ -176,7 +176,11 @@ class Character extends MovableObject {
             } else if(this.world.keyboard.SPACE) {
                 this.attack(this.IMAGES_FIN_SLAP, false, false); 
             } else if(this.world.keyboard.J) {
-                this.attack(this.IMAGES_POISON_BUBBLE, true, true); 
+                if(this.world.poisonBar.percentage < 10) {
+                    this.attack(this.IMAGES_NORMAL_BUBBLE, true, false); 
+                } else {
+                    this.attack(this.IMAGES_POISON_BUBBLE, true, true); 
+                }
             } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
             } else {
@@ -211,6 +215,13 @@ class Character extends MovableObject {
         }
     }
 
+    usePoison() {
+        this.poison -= 0.5;
+        if(this.poison < 0) {
+            this.poison = 0; 
+        }
+    }
+
     collectedHeart() {
         this.energy = 100;
     }
@@ -242,5 +253,7 @@ class Character extends MovableObject {
         let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), true);
         bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
         this.world.poisonedBubbles.push(bubble);
+        this.usePoison();
+        this.world.poisonBar.setPercentage(this.poison*20);
     }
 }
