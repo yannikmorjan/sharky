@@ -106,7 +106,7 @@ class World {
             }
         });
         this.level.poisons.forEach( (poison) => {
-            if(this.character.isColliding(poison)){
+            if(this.character.isColliding(poison) && this.poisonBar.percentage != 100){
                 this.character.collectedPoison();
                 this.poisonBar.setPercentage(this.character.poison*20);
                 this.level.poisons.splice(this.level.poisons.indexOf(poison),1);
@@ -124,21 +124,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkTrowObjects();
         }, 200);
-    }
-
-    checkTrowObjects() {
-        if(this.keyboard.H) {
-            let bubble = new ThrowableObject((this.character.x + this.character.offsetX + this.character.width - this.character.offsetWidth), (this.character.y + this.character.height / 2), false);
-            bubble.checkOtherDirection(this.character.otherDirection, (this.character.width - this.character.offsetWidth));
-            this.bubbles.push(bubble);
-        }
-        if(this.keyboard.J) {
-            let bubble = new ThrowableObject((this.character.x + this.character.offsetX + this.character.width - this.character.offsetWidth), (this.character.y + this.character.height / 2), true);
-            bubble.checkOtherDirection(this.character.otherDirection, (this.character.width - this.character.offsetWidth));
-            this.poisonedBubbles.push(bubble);
-        }
     }
 
 }

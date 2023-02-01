@@ -49,6 +49,7 @@ window.addEventListener('keyup', (e) => {
     }
     if(e.keyCode == 72) {
         keyboard.H = false;
+        world.character.isAttacking = false;
     }
     if(e.keyCode == 74) {
         keyboard.J = false;

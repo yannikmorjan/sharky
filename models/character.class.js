@@ -54,7 +54,7 @@ class Character extends MovableObject {
         'img/1.Sharkie/4.Attack/Fin slap/7.png',
         'img/1.Sharkie/4.Attack/Fin slap/8.png'
     ];
-    IMAGES_BUBBLE_TRAP = [
+    IMAGES_NORMAL_BUBBLE = [
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
@@ -105,16 +105,18 @@ class Character extends MovableObject {
     speed = 0;
     maxSpeed = 5;
     acceloration = 0.1;
+    world;
+
     coins = 0;
     poison = 0;
-    world;
+    isAttacking = false;
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadImages(this.IMAGES_IDL);
         this.loadImages(this.IMAGES_IDL_LONG);
         this.loadImages(this.IMAGES_SWIM);
-        this.loadImages(this.IMAGES_BUBBLE_TRAP);
+        this.loadImages(this.IMAGES_NORMAL_BUBBLE);
         this.loadImages(this.IMAGES_POISON_BUBBLE);
         this.loadImages(this.IMAGES_FIN_SLAP);
         this.loadImages(this.IMAGES_DEAD_NORMAL);
@@ -169,14 +171,14 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD_NORMAL);
             } else if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT_POISON);
+            } else if(this.world.keyboard.H) {
+                this.attack(this.IMAGES_NORMAL_BUBBLE, true, false);
+            } else if(this.world.keyboard.SPACE) {
+                this.attack(this.IMAGES_FIN_SLAP, false, false); 
+            } else if(this.world.keyboard.J) {
+                this.attack(this.IMAGES_POISON_BUBBLE, true, true); 
             } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
-            } else if(this.world.keyboard.H) {
-                this.playAnimation(this.IMAGES_BUBBLE_TRAP);
-            } else if(this.world.keyboard.SPACE) {
-                this.playAnimation(this.IMAGES_FIN_SLAP); 
-            } else if(this.world.keyboard.J) {
-                this.playAnimation(this.IMAGES_POISON_BUBBLE); 
             } else {
                 this.playAnimation(this.IMAGES_IDL);
                 this.speed = 0;
@@ -186,7 +188,7 @@ class Character extends MovableObject {
                     });
                 });
             }
-        },250);
+        },200);
     }
 
     applySwimResistance() {
@@ -211,5 +213,34 @@ class Character extends MovableObject {
 
     collectedHeart() {
         this.energy = 100;
+    }
+
+    attack(IMAGE, bubble, poisoned) {
+        if(!this.isAttacking) {
+            this.currentImage = 0;
+            this.isAttacking = true;
+        }
+        this.playAnimation(IMAGE);
+        if(this.isAttacking && this.currentImage == 8) {
+            if(bubble && !poisoned) {
+                this.createBubble();
+            }
+            if(bubble && poisoned) {
+                this.createPoisonBubble()
+            }
+            this.isAttacking = false;
+        }
+    }
+
+    createBubble() {
+        let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), false);
+        bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
+        this.world.bubbles.push(bubble);
+    }
+
+    createPoisonBubble() {
+        let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), true);
+        bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
+        this.world.poisonedBubbles.push(bubble);
     }
 }
