@@ -88,12 +88,29 @@ class Character extends MovableObject {
         'img/1.Sharkie/6.dead/1.Standard/11.png',
         'img/1.Sharkie/6.dead/1.Standard/12.png'
     ];
+    IMAGES_DEAD_ELECTRO = [
+        'img/1.Sharkie/6.dead/2.Electro_shock/1.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/2.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/3.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/4.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/5.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/6.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/7.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/8.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/9.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/10.png'
+    ];
     IMAGES_HURT_POISON = [
         'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/4.png'
-    ]
+    ];
+    IMAGES_HURT_ELECTRO = [
+        'img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
+    ];
     width = 200;
     height = 200;
     x = 0;
@@ -110,9 +127,16 @@ class Character extends MovableObject {
     coins = 0;
     poison = 0;
     isAttacking = false;
+    lastInjuryNormal = true;
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
+        this.loadAllImages();
+        this.movement();
+        this.animate();
+    }
+
+    loadAllImages() {
         this.loadImages(this.IMAGES_IDL);
         this.loadImages(this.IMAGES_IDL_LONG);
         this.loadImages(this.IMAGES_SWIM);
@@ -120,26 +144,22 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_POISON_BUBBLE);
         this.loadImages(this.IMAGES_FIN_SLAP);
         this.loadImages(this.IMAGES_DEAD_NORMAL);
+        this.loadImages(this.IMAGES_DEAD_ELECTRO);
         this.loadImages(this.IMAGES_HURT_POISON);
-        this.animate();
+        this.loadImages(this.IMAGES_HURT_ELECTRO);
     }
 
-    animate() {
+    movement() {
         setInterval( () => {
             if(!this.isDead()) {
                 if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
-                    this.world.level.backgrounds.forEach(l => {
-                        // console.log('characterX', this.x); 
-                        l[0].moveLeft();
-                        l[0].applySwimResistance();
-                        // console.log('bg1', l[0].x);
-                        // l[0].update(this.Character, l[1].x);
-                        l[1].moveLeft();
-                        l[1].applySwimResistance();
-                        // console.log('bg2', l[1].x);
-                        // l[1].update(this.Character, l[0].x);
+                    this.world.level.backgrounds.forEach(l => { 
+                        l.forEach(b => {
+                            b.moveLeft();
+                            b.applySwimResistance();
+                        })
                     });
                     this.applySwimResistance();
                 }
@@ -165,12 +185,14 @@ class Character extends MovableObject {
                 this.world.camera_x = -this.x + 240;
             }
         },1000 / 60);
+    }
 
+    animate() {
         setInterval( () => {
             if(this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD_NORMAL);
+                this.deathAnimation();
             } else if(this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT_POISON);
+                this.hurtAnimation();
             } else if(this.world.keyboard.H) {
                 this.attack(this.IMAGES_NORMAL_BUBBLE, true, false);
             } else if(this.world.keyboard.SPACE) {
@@ -255,5 +277,21 @@ class Character extends MovableObject {
         this.world.poisonedBubbles.push(bubble);
         this.usePoison();
         this.world.poisonBar.setPercentage(this.poison*20);
+    }
+
+    deathAnimation() {
+            if(!this.lastInjuryNormal) {
+                this.playAnimation(this.IMAGES_DEAD_ELECTRO);
+            } else {
+                this.playAnimation(this.IMAGES_DEAD_NORMAL);
+            }
+    }
+
+    hurtAnimation() {
+        if(!this.lastInjuryNormal) {
+            this.playAnimation(this.IMAGES_HURT_ELECTRO);
+        } else {
+            this.playAnimation(this.IMAGES_HURT_POISON);
+        }
     }
 }

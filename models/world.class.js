@@ -94,6 +94,11 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach( (enemy) => {
             if(this.character.isColliding(enemy) && !this.character.isHurt()){
+                if(enemy instanceof PufferFish || enemy instanceof Endboss) {
+                    this.character.lastInjuryNormal = true;
+                } else if(enemy instanceof JellyFish) {
+                    this.character.lastInjuryNormal = false;
+                }
                 this.character.hit(enemy.damage);
                 this.healthBar.setPercentage(this.character.energy);
             }
