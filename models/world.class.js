@@ -102,7 +102,7 @@ class World {
         this.ctx.restore();
     }
 
-    checkCollisions() {
+    checkCharacterCollisions() {
         this.level.enemies.forEach( (enemy) => {
             if(this.character.isColliding(enemy) && !this.character.isHurt()){
                 if(enemy instanceof PufferFish || enemy instanceof Endboss) {
@@ -132,14 +132,37 @@ class World {
             if(this.character.isColliding(heart) && this.healthBar.percentage != 100){
                 this.character.collectedHeart();
                 this.healthBar.setPercentage(this.character.energy);
-                this.level.hearts.splice(this.level.hearts.indexOf(),1);
+                this.level.hearts.splice(this.level.hearts.indexOf(heart),1);
             }
         });
     }
 
+    checkBubbleCollisions() {
+        this.bubbles.forEach( (bubble) => {
+            this.level.enemies.forEach( (enemy) => {
+                if(bubble.isColliding(enemy)) {
+                    this.bubbles.splice(this.bubbles.indexOf(bubble, 1));
+                    if(enemy instanceof JellyFish) {
+                        enemy.dead = true;
+                    }
+                }
+            })
+        })  
+    }
+
+    checkEnemyOutOfGame() {
+        this.level.enemies.forEach( (enemy) => {
+            if(enemy.y <= -100 && enemy.dead) {
+                this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
+            }
+        })
+    }
+
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkCharacterCollisions();
+            this.checkBubbleCollisions();
+            this.checkEnemyOutOfGame();
         }, 200);
     }
 

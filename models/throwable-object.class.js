@@ -15,10 +15,10 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.width = 40;
         this.height = 40;
-        this.trow();
+        this.throw();
     }
 
-    trow() {
+    throw() {
         this.speed = 2;
         setInterval(() => {
             if(this.otherDirection){

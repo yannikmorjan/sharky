@@ -7,44 +7,54 @@ class EnemyObject extends MovableObject {
     turnX = false;
     turnY = false;
     intro = false;
+    dead = false;
 
     movement() {
         setInterval( () => {
-            if(!this.intro && !this.turnX && this.rangeX > 0) {
-                if(this instanceof PufferFish || this instanceof Endboss) {
-                    this.otherDirection = false;
+            if(!this.dead) {
+                if(!this.intro && !this.turnX && this.rangeX > 0) {
+                    if(this instanceof PufferFish || this instanceof Endboss) {
+                        this.otherDirection = false;
+                    }
+                    this.moveLeft();
+                    if(this.x <= (this.startX - this.rangeX)){
+                        this.turnX = true;
+                    }
                 }
-                this.moveLeft();
-                if(this.x <= (this.startX - this.rangeX)){
-                    this.turnX = true;
+                if(!this.intro && this.turnX && this.rangeX > 0) {
+                    if(this instanceof PufferFish || this instanceof Endboss) {
+                        this.otherDirection = true;
+                    }
+                    this.moveRight();
+                    if(this.x == this.startX){
+                        this.turnX = false;
+                    }
                 }
-            }
-            if(!this.intro && this.turnX && this.rangeX > 0) {
-                if(this instanceof PufferFish || this instanceof Endboss) {
-                    this.otherDirection = true;
+                if(!this.intro && !this.turnY && this.rangeY > 0) {
+                    if(this instanceof JellyFish) {
+                        this.otherDirectionY = false;
+                    }
+                    this.moveUp();
+                    if(this.y <= (this.startY - this.rangeY)){
+                        this.turnY = true;
+                    }
                 }
-                this.moveRight();
-                if(this.x == this.startX){
-                    this.turnX = false;
+                if(!this.intro && this.turnY && this.rangeY > 0) {
+                    if(this instanceof JellyFish) {
+                        this.otherDirectionY = true;
+                    }
+                    this.moveDown();
+                    if(this.y == this.startY){
+                        this.turnY = false;
+                    }
                 }
-            }
-            if(!this.intro && !this.turnY && this.rangeY > 0) {
+            } else if (this.dead) {
                 if(this instanceof JellyFish) {
-                    this.otherDirectionY = false;
+                    this.damage = 0;
+                    this.speed = 1;
+                    this.moveUp();
                 }
-                this.moveUp();
-                if(this.y <= (this.startY - this.rangeY)){
-                    this.turnY = true;
-                }
-            }
-            if(!this.intro && this.turnY && this.rangeY > 0) {
-                if(this instanceof JellyFish) {
-                    this.otherDirectionY = true;
-                }
-                this.moveDown();
-                if(this.y == this.startY){
-                    this.turnY = false;
-                }
+                
             }
         }, 1000 / 60);
     }
