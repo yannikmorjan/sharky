@@ -22,9 +22,9 @@ class PufferFish extends EnemyObject {
         'img/2.Enemy/1.Puffer fish/3.Bubbleeswim/1.bubbleswim5.png'
     ]
     IMAGES_DEAD = [
-        'img/2.Enemy/1.Puffer fish/4.DIE/1.Dead 1 (can animate by going up).png',
-        'img/2.Enemy/1.Puffer fish/4.DIE/1.Dead 2 (can animate by going up).png',
-        'img/2.Enemy/1.Puffer fish/4.DIE/1.Dead 3 (can animate by going up).png'
+        'img/2.Enemy/1.Puffer fish/4.DIE/1.Dead 1.png',
+        'img/2.Enemy/1.Puffer fish/4.DIE/1.Dead 2.png',
+        'img/2.Enemy/1.Puffer fish/4.DIE/1.Dead 3.png'
     ]
     
     width = 50;
@@ -57,9 +57,28 @@ class PufferFish extends EnemyObject {
 
     animate() {
         setInterval( () => {
-            this.playAnimation(this.IMAGES_SWIM);
-            //this.playAnimationOnce(this.IMAGES_SWIM);
+            if(this.dead) {
+                this.playAnimationOnce(this.IMAGES_DEAD);
+            } else if(this.blownUp) {
+                this.playAnimation(this.IMAGES_BUBBLE_SWIM);
+            } else if(this.transition) {
+                this.playTransitionAnimation(this.IMAGES_TRANSITION);
+            } else {
+                this.playAnimation(this.IMAGES_SWIM);
+            }
         },150);
+    }
+
+    playTransitionAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        if(i != (images.length-1)) {
+            this.currentImage++;
+        } else {
+            this.blownUp = true;
+            this.transition = false;
+        }
     }
 
 }

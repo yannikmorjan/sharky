@@ -158,11 +158,21 @@ class World {
         })
     }
 
+    checkEnemyTransitions() {
+        this.level.enemies.forEach( (enemy) => {
+            if(enemy instanceof PufferFish && this.character.isNear(enemy)) {
+                enemy.transition = true;
+                enemy.offsetHeight = 0;   
+            }
+        })
+    }
+
     run() {
         setInterval(() => {
             this.checkCharacterCollisions();
             this.checkBubbleCollisions();
             this.checkEnemyOutOfGame();
+            this.checkEnemyTransitions();
         }, 200);
     }
 
