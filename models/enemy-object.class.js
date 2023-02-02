@@ -49,8 +49,8 @@ class EnemyObject extends MovableObject {
                     }
                 }
             } else if (this.dead) {
+                this.damage = 0;
                 if(this instanceof JellyFish) {
-                    this.damage = 0;
                     this.speed = 1;
                     this.moveUp();
                 }

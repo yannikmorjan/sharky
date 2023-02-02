@@ -42,4 +42,13 @@ class DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
+    playAnimationOnce(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        if(i != (images.length-1)) {
+            this.currentImage++;
+        }
+    }
 }

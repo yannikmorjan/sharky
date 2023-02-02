@@ -281,9 +281,9 @@ class Character extends MovableObject {
 
     deathAnimation() {
             if(!this.lastInjuryNormal) {
-                this.playAnimation(this.IMAGES_DEAD_ELECTRO);
+                this.playAnimationOnce(this.IMAGES_DEAD_ELECTRO);
             } else {
-                this.playAnimation(this.IMAGES_DEAD_NORMAL);
+                this.playAnimationOnce(this.IMAGES_DEAD_NORMAL);
             }
     }
 
