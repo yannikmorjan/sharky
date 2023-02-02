@@ -48,15 +48,17 @@ window.addEventListener('keyup', (e) => {
     }
     if(e.keyCode == 72) {
         keyboard.H = false;
-        world.character.isAttacking = false;
+        world.character.isBubbleAttacking = false;
     }
     if(e.keyCode == 74) {
         keyboard.J = false;
-        world.character.isAttacking = false;
+        world.character.isBubbleAttacking = false;
     }
     if(e.keyCode == 32) {
         keyboard.SPACE = false;
-        world.character.isAttacking = false;
+        world.character.isFinSlaping = false;
+        world.character.invincible = false;
+        world.character.finSlaped = false;
     }
 });
 

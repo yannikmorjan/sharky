@@ -13,8 +13,8 @@ class MovableObject extends DrawableObject {
     }
 
     isNear(obj) {
-        return  (this.x + this.offsetX + this.width - this.offsetWidth) > (obj.x + obj.offsetX - 100) &&
-            (this.x + this.offsetX) < (obj.x + obj.offsetX + obj.width - obj.offsetWidth + 100) && 
+        return  (this.x + this.offsetX + this.width - this.offsetWidth) > (obj.x + obj.offsetX - 90) &&
+            (this.x + this.offsetX) < (obj.x + obj.offsetX + obj.width - obj.offsetWidth + 90) && 
             (this.y + this.offsetY + this.height - this.offsetHeight) > (obj.y + obj.offsetY - 45) &&
             (this.y + this.offsetY) < (obj.y + obj.offsetY + obj.height - obj.offsetHeight + 45);
     }

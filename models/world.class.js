@@ -8,6 +8,7 @@ class World {
     healthBar = new StatusBar('health');
     poisonBar = new StatusBar('poison');
     coinBar = new StatusBar('coin');
+    showHitboxes = true;
     bubbles = [];
     poisonedBubbles = [];
 
@@ -67,11 +68,13 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectibleObject || mo instanceof BarrierObject) {
-            mo.drawFrame(this.ctx, 'green');
-        }
-        if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
-            mo.drawFrame(this.ctx, 'red');
+        if(this.showHitboxes) {
+            if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectibleObject || mo instanceof BarrierObject) {
+                mo.drawFrame(this.ctx, 'green');
+            }
+            if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
+                mo.drawFrame(this.ctx, 'red');
+            }
         }
         if(mo.otherDirection || mo.otherDirectionY) {
             this.flipImageBack(mo);
@@ -104,7 +107,7 @@ class World {
 
     checkCharacterCollisions() {
         this.level.enemies.forEach( (enemy) => {
-            if(this.character.isColliding(enemy) && !this.character.isHurt()){
+            if(!enemy.dead && this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.invincible) {
                 if(enemy instanceof PufferFish || enemy instanceof Endboss) {
                     this.character.lastInjuryNormal = true;
                 } else if(enemy instanceof JellyFish) {
@@ -112,6 +115,10 @@ class World {
                 }
                 this.character.hit(enemy.damage);
                 this.healthBar.setPercentage(this.character.energy);
+            }
+            if(this.character.finSlaped && enemy instanceof PufferFish && this.character.isColliding(enemy)) {
+                enemy.dead = true;
+                
             }
         });
         this.level.coins.forEach( (coin) => {
@@ -150,19 +157,22 @@ class World {
         })  
     }
 
-    checkEnemyOutOfGame() {
-        this.level.enemies.forEach( (enemy) => {
-            if(enemy.y <= -100 && enemy.dead) {
-                this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
-            }
-        })
-    }
-
     checkEnemyTransitions() {
         this.level.enemies.forEach( (enemy) => {
-            if(enemy instanceof PufferFish && this.character.isNear(enemy)) {
-                enemy.transition = true;
-                enemy.offsetHeight = 0;   
+            if(enemy instanceof JellyFish) {
+                if(enemy.dead && enemy.y <= -100) {
+                    this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
+                }
+            }
+            if(enemy instanceof PufferFish) {
+                if(this.character.isNear(enemy) && !enemy.dead) {
+                    enemy.transition = true;
+                    enemy.offsetHeight = 0;   
+                }
+                if(enemy.dead && enemy.y >= 400) {
+                    this.level.poisons.push(new Poison(enemy.x, enemy.y));
+                    this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
+                }
             }
         })
     }
@@ -171,7 +181,6 @@ class World {
         setInterval(() => {
             this.checkCharacterCollisions();
             this.checkBubbleCollisions();
-            this.checkEnemyOutOfGame();
             this.checkEnemyTransitions();
         }, 200);
     }

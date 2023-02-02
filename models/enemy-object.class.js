@@ -54,6 +54,12 @@ class EnemyObject extends MovableObject {
                     this.speed = 1;
                     this.moveUp();
                 }
+                if(this instanceof PufferFish) {
+                    this.speed = 0.5;
+                    if(this.y <= 400) {
+                        this.moveDown();
+                    }
+                }
                 
             }
         }, 1000 / 60);

@@ -126,7 +126,10 @@ class Character extends MovableObject {
 
     coins = 0;
     poison = 0;
-    isAttacking = false;
+    isBubbleAttacking = false;
+    isFinSlaping = false;
+    finSlaped = false;
+    invincible = false;
     lastInjuryNormal = true;
 
     constructor() {
@@ -194,15 +197,11 @@ class Character extends MovableObject {
             } else if(this.isHurt()) {
                 this.hurtAnimation();
             } else if(this.world.keyboard.H) {
-                this.attack(this.IMAGES_NORMAL_BUBBLE, true, false);
+                this.bubbleAttack(this.IMAGES_NORMAL_BUBBLE, false);
             } else if(this.world.keyboard.SPACE) {
-                this.attack(this.IMAGES_FIN_SLAP, false, false); 
-            } else if(this.world.keyboard.J) {
-                if(this.world.poisonBar.percentage < 10) {
-                    this.attack(this.IMAGES_NORMAL_BUBBLE, true, false); 
-                } else {
-                    this.attack(this.IMAGES_POISON_BUBBLE, true, true); 
-                }
+                this.finAttack(this.IMAGES_FIN_SLAP); 
+            } else if(this.world.keyboard.J && this.world.poisonBar.percentage >= 10) {
+                this.bubbleAttack(this.IMAGES_POISON_BUBBLE, true);
             } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
             } else {
@@ -248,20 +247,39 @@ class Character extends MovableObject {
         this.energy = 100;
     }
 
-    attack(IMAGE, bubble, poisoned) {
-        if(!this.isAttacking) {
+    bubbleAttack(IMAGE, poisoned) {
+        if(!this.isBubbleAttacking) {
             this.currentImage = 0;
-            this.isAttacking = true;
+            this.isBubbleAttacking = true;
         }
         this.playAnimation(IMAGE);
-        if(this.isAttacking && this.currentImage == 8) {
-            if(bubble && !poisoned) {
+        if(this.isBubbleAttacking && this.currentImage == 8) {
+            if(!poisoned) {
                 this.createBubble();
             }
-            if(bubble && poisoned) {
+            if(poisoned) {
                 this.createPoisonBubble()
             }
-            this.isAttacking = false;
+            this.isBubbleAttacking = false;
+        }
+    }
+
+    finAttack(IMAGE) {
+        if(!this.isFinSlaping) {
+            this.currentImage = 0;
+            this.invincible = false;
+            this.finSlaped = false;
+            this.isFinSlaping = true;
+        }
+        this.playAnimation(IMAGE);
+        if(this.isFinSlaping && this.currentImage >= 1) {
+            this.invincible = true
+            if(this.currentImage >= 5 && this.currentImage <= 7) {
+                this.finSlaped = true;
+            }
+            if(this.currentImage == 8) {
+                this.isFinSlaping = false;
+            } 
         }
     }
 
