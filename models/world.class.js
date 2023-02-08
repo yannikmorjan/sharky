@@ -151,15 +151,31 @@ class World {
 
     checkBubbleCollisions() {
         this.bubbles.forEach( (bubble) => {
+            if(bubble.y <= 0) {
+                this.bubbles.splice(this.bubbles.indexOf(bubble),1);
+            }
             this.level.enemies.forEach( (enemy) => {
                 if(bubble.isColliding(enemy)) {
-                    this.bubbles.splice(this.bubbles.indexOf(bubble, 1));
+                    this.bubbles.splice(this.bubbles.indexOf(bubble),1);
                     if(enemy instanceof JellyFish) {
                         enemy.dead = true;
                     }
                 }
             })
-        })  
+        })
+        this.poisonedBubbles.forEach( (pBubble) => {
+            if(pBubble.y <= 0) {
+                this.poisonedBubbles.splice(this.poisonedBubbles.indexOf(pBubble),1);
+            }
+            this.level.enemies.forEach( (enemy) => {
+                if(pBubble.isColliding(enemy)) {
+                    this.poisonedBubbles.splice(this.poisonedBubbles.indexOf(pBubble),1);
+                    if(enemy instanceof Endboss) {
+                        console.log('hit');
+                    }
+                }
+            })
+        })    
     }
 
     checkEnemyTransitions() {

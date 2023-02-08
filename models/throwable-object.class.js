@@ -2,7 +2,12 @@ class ThrowableObject extends MovableObject {
 
     IMAGE_NORMAL_BUBBLE = 'img/1.Sharkie/4.Attack/Bubble trap/Bubble.png';
     IMAGE_POISON_BUBBLE = 'img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png'
+    
     poisoned;
+    uplift = 0;
+    speed = 2;
+    acceloration = 0.1;
+    characterWidth;
 
     constructor(x, y, poisoned) {
         super().poisoned = poisoned;
@@ -19,18 +24,27 @@ class ThrowableObject extends MovableObject {
     }
 
     throw() {
-        this.speed = 2;
+        let startX = this.x;
         setInterval(() => {
             if(this.otherDirection){
-                this.x -= this.speed; 
+                this.x -= this.speed;
+                if(this.x <= (startX - this.characterWidth - this.width - 25)) {
+                    this.y -= this.uplift;
+                    this.uplift += this.acceloration;
+                } 
             } else {
                 this.x += this.speed;
+                if(this.x >= (startX + 25)) {
+                    this.y -= this.uplift;
+                    this.uplift += this.acceloration;
+                }
             }
             
         }, 1000 / 60)
     }
 
     checkOtherDirection(otherDirection, changePosition) {
+        this.characterWidth = changePosition;
         if(otherDirection) {
             this.otherDirection = true;
             this.x -= changePosition + this.width;
