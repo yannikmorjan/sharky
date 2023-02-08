@@ -107,7 +107,7 @@ class World {
 
     checkCharacterCollisions() {
         this.level.enemies.forEach( (enemy) => {
-            if(!enemy.dead && this.character.isColliding(enemy) && !this.character.isHurt()) {
+            if(!enemy.dead && !this.character.isDead() && this.character.isColliding(enemy) && !this.character.isHurt()) {
                 if(enemy instanceof PufferFish && !this.character.invincible) {
                     this.character.lastInjuryNormal = true;
                     this.character.hit(enemy.damage);
