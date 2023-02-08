@@ -107,18 +107,23 @@ class World {
 
     checkCharacterCollisions() {
         this.level.enemies.forEach( (enemy) => {
-            if(!enemy.dead && this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.invincible) {
-                if(enemy instanceof PufferFish || enemy instanceof Endboss) {
+            if(!enemy.dead && this.character.isColliding(enemy) && !this.character.isHurt()) {
+                if(enemy instanceof PufferFish && !this.character.invincible) {
                     this.character.lastInjuryNormal = true;
+                    this.character.hit(enemy.damage);
+                    this.healthBar.setPercentage(this.character.energy);
                 } else if(enemy instanceof JellyFish) {
                     this.character.lastInjuryNormal = false;
+                    this.character.hit(enemy.damage);
+                    this.healthBar.setPercentage(this.character.energy);
+                } else if(enemy instanceof Endboss) {
+                    this.character.lastInjuryNormal = true;
+                    this.character.hit(enemy.damage);
+                    this.healthBar.setPercentage(this.character.energy);
                 }
-                this.character.hit(enemy.damage);
-                this.healthBar.setPercentage(this.character.energy);
             }
             if(this.character.finSlaped && enemy instanceof PufferFish && this.character.isColliding(enemy)) {
                 enemy.dead = true;
-                
             }
         });
         this.level.coins.forEach( (coin) => {
