@@ -69,11 +69,14 @@ class World {
         }
         mo.draw(this.ctx);
         if(this.showHitboxes) {
-            if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectibleObject || mo instanceof BarrierObject) {
+            if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectibleObject) {
                 mo.drawFrame(this.ctx, 'green');
             }
             if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
                 mo.drawFrame(this.ctx, 'red');
+            }
+            if(mo instanceof BarrierObject) {
+                mo.drawFrame(this.ctx, 'green');
             }
         }
         if(mo.otherDirection || mo.otherDirectionY) {

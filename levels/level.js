@@ -27,7 +27,7 @@ const level1 = new Level(
     ],
     [
         new RockVertical(-800,480),
-        new Tunnel(-800),
+        new Tunnel(-1500),
         new RockHorizontal(2*680),
     ],
     [
