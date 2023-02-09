@@ -29,6 +29,26 @@ class Endboss extends EnemyObject {
         'img/2.Enemy/3 Final Enemy/2.floating/13.png',
     ];
 
+    IMAGES_HURT = [
+        'img/2.Enemy/3 Final Enemy/Hurt/1.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/2.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/3.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/4.png'
+    ]
+
+    IMAGES_DEAD = [
+        'img/2.Enemy/3 Final Enemy/Hurt/1.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/2.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/3.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/2.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/3.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
+    ];
+
     currentImage = 0;
     width = 250;
     height = 250;
@@ -44,6 +64,8 @@ class Endboss extends EnemyObject {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.loadImages(this.IMAGES_INTRO);
         this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = x;
         this.y = y;
         this.rangeX = rangeX;
@@ -60,6 +82,11 @@ class Endboss extends EnemyObject {
         setInterval( () => {
             if(i < 10){
                 this.playAnimation(this.IMAGES_INTRO);
+            } else if(this.isDead()) {
+                this.dead = true;
+                this.playAnimationOnce(this.IMAGES_DEAD);
+            } else if(this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT)
             } else {
                 this.playAnimation(this.IMAGES_SWIM);
                 this.intro = false;

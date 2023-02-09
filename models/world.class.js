@@ -171,7 +171,8 @@ class World {
                 if(pBubble.isColliding(enemy)) {
                     this.poisonedBubbles.splice(this.poisonedBubbles.indexOf(pBubble),1);
                     if(enemy instanceof Endboss) {
-                        console.log('hit');
+                        enemy.hit(10);
+                        console.log(enemy.energy)
                     }
                 }
             })

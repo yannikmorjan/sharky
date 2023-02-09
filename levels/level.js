@@ -17,7 +17,10 @@ const level1 = new Level(
     ],
     [
         new Poison(500,400),
-        new Poison(400,400)
+        new Poison(400,400),
+        new Poison(300,400),
+        new Poison(200,400),
+        new Poison(100,400)
     ],
     [
         new Health(0,100)
