@@ -5,6 +5,29 @@ class Tunnel extends BarrierObject {
     width = 720;
     height = 480;
 
+    upperFrame = [
+        [this.x + this.width - 5, 100],
+        [this.x + this.width - 180, 180],
+        [this.x + this.width - 300, 100],
+        [this.x + this.width - 330, 100],
+        [this.x + this.width - 425, 130],
+        [this.x + this.width - 475, 100],
+        [this.x + this.width - 500, 100],
+        [this.x + this.width - 650, 140],
+        [this.x + 5, 100]
+    ];
+
+    bottomFrame = [
+        [this.x + 100, this.y + this.height - 90],
+        [this.x + 400, this.y + this.height - 125],
+        [this.x + this.width - 70, this.y + this.height - 100],
+        [this.x + this.width - 30, this.y + this.height - 70],
+        [this.x + this.width - 20, this.y + this.height],
+        [this.x, this.y + this.height],
+        [this.x + 20, this.y + this.height - 50],
+        [this.x + 100, this.y + this.height - 90]
+    ];
+
     constructor(x) {
         super().loadImage(this.IMAGE);
         this.y = 480 - this.height;
@@ -15,6 +38,7 @@ class Tunnel extends BarrierObject {
         ctx.beginPath();
         ctx.lineWidth = '1';
         ctx.strokeStyle = color;
+        // UpperFrame
         ctx.rect(this.x + 5, this.y, this.width - 10, 100);
         ctx.moveTo(this.x + this.width - 5, 100);
         ctx.lineTo(this.x + this.width - 180, 180);
@@ -28,6 +52,7 @@ class Tunnel extends BarrierObject {
         ctx.lineTo(this.x + this.width - 650, 140);
         ctx.moveTo(this.x + this.width - 650, 140);
         ctx.lineTo(this.x + 5, 100);
+        // BottomFrame
         ctx.moveTo(this.x + 100, this.y + this.height -90);
         ctx.lineTo(this.x + 400, this.y + this.height -125);
         ctx.moveTo(this.x + 400, this.y + this.height -125);
@@ -42,6 +67,8 @@ class Tunnel extends BarrierObject {
         ctx.lineTo(this.x + 20, this.y + this.height -50);
         ctx.moveTo(this.x + 20, this.y + this.height -50);
         ctx.lineTo(this.x + 100, this.y + this.height -90);
+
         ctx.stroke();
     }
+    
 }

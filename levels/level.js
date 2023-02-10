@@ -26,7 +26,7 @@ const level1 = new Level(
         new Health(0,100)
     ],
     [
-        new RockVertical(-800,480),
+        new RockVertical(-100,480),
         new Tunnel(-1500),
         new RockHorizontal(2*680),
     ],
