@@ -11,11 +11,15 @@ class RockHorizontal extends BarrierObject {
         this.x = x;
     }
 
-    drawBarrierFrame(ctx, color) {
+    drawFrame(ctx, color) {
         ctx.beginPath();
         ctx.lineWidth = '1';
         ctx.strokeStyle = color;
-        ctx.rect(this.x + this.offsetX, this.y + this.offsetY, this.width - this.offsetWidth, this.height - this.offsetHeight);
+        ctx.rect(this.x + 10, this.y + this.height, this.width - 290, -this.height + 130);
+        ctx.rect(this.x + 80, this.y + this.height, this.width - 290, -this.height + 50);
+        ctx.rect(this.x + 150, this.y + this.height, this.width - 260, -this.height + 20);
+        ctx.rect(this.x + 250, this.y + this.height, this.width - 320, -this.height + 5);
+        ctx.rect(this.x + 290, this.y + this.height, this.width - 300, -this.height + 90);
         ctx.stroke();
     }
 }

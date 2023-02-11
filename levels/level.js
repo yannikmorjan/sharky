@@ -26,9 +26,9 @@ const level1 = new Level(
         new Health(0,100)
     ],
     [
-        new RockVertical(-100,480),
+        new RockVertical(-800,480),
         new Tunnel(-1500),
-        new RockHorizontal(2*680),
+        new RockHorizontal(-100),
     ],
     [
         new BackgroundObject('img/3. Background/Layers/5. Water/D.png', -1440,-4),
