@@ -5,21 +5,19 @@ class RockHorizontal extends BarrierObject {
     width = 360;
     height = 240;
 
+    
+
     constructor(x) {
         super().loadImage(this.IMAGE);
         this.y = 480 - this.height;
         this.x = x;
+        this.rectColider = [
+            {x: (this.x + 10), y: (this.y + this.height), width: (this.width - 290), height: (-this.height + 130)},
+            {x: (this.x + 80), y: (this.y + this.height), width: (this.width - 290), height: (-this.height + 50)},
+            {x: (this.x + 150), y: (this.y + this.height), width: (this.width - 260), height: (-this.height + 20)},
+            {x: (this.x + 250), y: (this.y + this.height), width: (this.width - 320), height: (-this.height + 5)},
+            {x: (this.x + 290), y: (this.y + this.height), width: (this.width - 300), height: (-this.height + 90)}
+        ];
     }
 
-    drawFrame(ctx, color) {
-        ctx.beginPath();
-        ctx.lineWidth = '1';
-        ctx.strokeStyle = color;
-        ctx.rect(this.x + 10, this.y + this.height, this.width - 290, -this.height + 130);
-        ctx.rect(this.x + 80, this.y + this.height, this.width - 290, -this.height + 50);
-        ctx.rect(this.x + 150, this.y + this.height, this.width - 260, -this.height + 20);
-        ctx.rect(this.x + 250, this.y + this.height, this.width - 320, -this.height + 5);
-        ctx.rect(this.x + 290, this.y + this.height, this.width - 300, -this.height + 90);
-        ctx.stroke();
-    }
 }

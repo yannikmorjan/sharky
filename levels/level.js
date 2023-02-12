@@ -23,12 +23,12 @@ const level1 = new Level(
         new Poison(100,400)
     ],
     [
-        new Health(0,100)
+        new Health(-200,100)
     ],
     [
         new RockVertical(-800,480),
-        new Tunnel(-1500),
-        new RockHorizontal(-100),
+        new Tunnel(-240),
+        new RockHorizontal(-600),
     ],
     [
         new BackgroundObject('img/3. Background/Layers/5. Water/D.png', -1440,-4),
