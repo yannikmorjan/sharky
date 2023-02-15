@@ -108,7 +108,7 @@ class World {
         this.ctx.restore();
     }
 
-    checkCharacterCollisions() {
+    checkEnemyCollisions() {
         this.level.enemies.forEach( (enemy) => {
             if(!enemy.dead && !this.character.isDead() && this.character.isColliding(enemy) && !this.character.isHurt()) {
                 if(enemy instanceof PufferFish && !this.character.invincible) {
@@ -129,6 +129,9 @@ class World {
                 enemy.dead = true;
             }
         });
+    }
+
+    checkCollectibleCollision() {
         this.level.coins.forEach( (coin) => {
             if(this.character.isColliding(coin)){
                 this.character.collectedCoin();
@@ -166,6 +169,9 @@ class World {
                 }
             })
         })
+    }
+
+    checkPoisenedBubbleCollisons() {
         this.poisonedBubbles.forEach( (pBubble) => {
             if(pBubble.y <= 0) {
                 this.poisonedBubbles.splice(this.poisonedBubbles.indexOf(pBubble),1);
@@ -202,11 +208,23 @@ class World {
         })
     }
 
+    checkBarrierCollision() {
+        this.level.barriers.forEach( (barrier) => {
+            if(this.character.isBlocked(barrier)) {
+                console.log('Blocked')
+            }
+        })
+        
+    }
+
     run() {
         setInterval(() => {
-            this.checkCharacterCollisions();
+            this.checkEnemyCollisions();
+            this.checkCollectibleCollision();
             this.checkBubbleCollisions();
+            this.checkPoisenedBubbleCollisons();
             this.checkEnemyTransitions();
+            this.checkBarrierCollision();
         }, 200);
     }
 

@@ -19,6 +19,17 @@ class MovableObject extends DrawableObject {
             (this.y + this.offsetY) < (obj.y + obj.offsetY + obj.height - obj.offsetHeight + 45);
     }
 
+    isBlocked(obj) {
+        for (let i = 0; i < obj.rectColider.lenght; i++) {
+            if(obj.rectColider.x < (this.x + this.offsetX + this.width - this.offsetWidth) &&
+              (obj.rectColider.x + obj.rectColider.width) > this.x + this.offsetX &&
+               obj.rectColider.y < (this.y + this.offsetY + this.height - this.offsetHeight) &&
+              (obj.rectColider.y + obj.rectColider.height) > this.y + this.offsetY) {
+                return true;
+              }
+        }
+    }
+
     moveLeft() {
         this.x -= this.speed;
     }
