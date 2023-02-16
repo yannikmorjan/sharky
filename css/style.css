@@ -96,6 +96,16 @@ canvas {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    cursor: default;
+}
+
+.settingPannel a {
+    cursor: pointer;
+}
+
+.settingPannel a:hover {
+    color: rgb(198, 198, 198);
 }
 
 .bottomPannel {
