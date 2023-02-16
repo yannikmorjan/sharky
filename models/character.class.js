@@ -131,6 +131,11 @@ class Character extends MovableObject {
     finSlaped = false;
     invincible = false;
     lastInjuryNormal = true;
+    rightBlocked = false;
+    leftBlocked = false;
+    upBlocked = false;
+    downBlocked = false;
+    
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -155,7 +160,7 @@ class Character extends MovableObject {
     movement() {
         setInterval( () => {
             if(!this.isDead()) {
-                if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                if(!this.rightBlocked && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
                     this.world.level.backgrounds.forEach(l => { 
@@ -166,7 +171,7 @@ class Character extends MovableObject {
                     });
                     this.applySwimResistance();
                 }
-                if(this.world.keyboard.LEFT && this.x > this.world.level.level_start_x) {
+                if(!this.leftBlocked && this.world.keyboard.LEFT && this.x > this.world.level.level_start_x) {
                     this.moveLeft();
                     this.otherDirection = true;
                     this.world.level.backgrounds.forEach(l => {
@@ -177,11 +182,11 @@ class Character extends MovableObject {
                     });
                     this.applySwimResistance();
                 }
-                if(this.world.keyboard.UP && this.y > -60) {
+                if(!this.upBlocked && this.world.keyboard.UP && this.y > -60) {
                     this.moveUp()
                     this.applySwimResistance();
                 }
-                if(this.world.keyboard.DOWN && this.y < 300) {
+                if(!this.downBlocked && this.world.keyboard.DOWN && this.y < 300) {
                     this.moveDown();
                     this.applySwimResistance();
                 }

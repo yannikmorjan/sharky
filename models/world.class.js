@@ -208,14 +208,24 @@ class World {
         })
     }
 
-    checkBarrierCollision() {
-        this.level.barriers.forEach( (barrier) => {
-            if(this.character.isBlocked(barrier)) {
-                console.log('Blocked')
-            }
-        })
-        
-    }
+
+    // checkBarrierCollision() {
+    //     this.level.barriers.forEach( (barrier) => {
+    //         for (let i = 0; i < barrier.rectColider.length; i++) {
+    //             if(this.character.isBlocked(barrier.rectColider[i])) {
+    //                 if(this.keyboard.LEFT) {
+    //                     this.keyboard.LEFT = false;
+    //                 } else if(this.keyboard.RIGHT) {
+    //                     this.keyboard.RIGHT = false;
+    //                 } else if(this.keyboard.UP) {
+    //                     this.keyboard.UP = false;
+    //                 } else if(this.keyboard.DOWN) {
+    //                     this.keyboard.DOWN = false;
+    //                 }
+    //             } 
+    //         }
+    //     })
+    // }
 
     run() {
         setInterval(() => {
@@ -224,8 +234,8 @@ class World {
             this.checkBubbleCollisions();
             this.checkPoisenedBubbleCollisons();
             this.checkEnemyTransitions();
-            this.checkBarrierCollision();
-        }, 200);
+            //this.checkBarrierCollision();
+        }, 100);
     }
 
 }

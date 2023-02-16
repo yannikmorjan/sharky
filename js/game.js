@@ -63,6 +63,36 @@ window.addEventListener('keyup', (e) => {
 });
 
 function openSettings() {
-    document.getElementById('game-overlay').classList.add('d-none');
-    document.getElementById('settings-overlay').classList.remove('d-none');
+    document.getElementById('top-pannel').innerHTML = ``;
+    document.getElementById('mid-pannel').innerHTML = `
+        <div onclick="closeSettings()" class="settingPannel">
+            <img src="" class="">
+            <span>Settings</span>
+            <a>
+                <img>
+                <span>Toggle Sound</span>
+            </a>
+            <a>
+                <img>
+                <span>Toggle Fullscreen</span>
+            </a>
+            <a>
+                <img>
+                <span>Instruction</span>
+            </a>
+            <a>
+                <img>
+                <span>Show Hitboxes</span>
+            </a>
+        </div>`;
+    document.getElementById('bottom-pannel').innerHTML = `
+        <a href="#">Data Privacy</a>
+        <a href="#">Imprint</a>`;
+}
+
+function closeSettings() {
+    document.getElementById('top-pannel').innerHTML = `
+    <img onclick="openSettings()" src="img/6.Botones/Settings/settings.png">`;
+    document.getElementById('mid-pannel').innerHTML = ``;
+    document.getElementById('bottom-pannel').innerHTML = ``;
 }
