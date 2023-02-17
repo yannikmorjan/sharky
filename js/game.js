@@ -1,14 +1,11 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let sound = false;
 let fullscreen = false;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    
-    console.log(world)
 }
 
 window.addEventListener('keydown', (e) => {
@@ -63,37 +60,52 @@ window.addEventListener('keyup', (e) => {
         world.character.finSlaped = false;
     }
 });
+document.addEventListener('fullscreenchange', exitHandler);
+document.addEventListener('webkitfullscreenchange', exitHandler);
+document.addEventListener('mozfullscreenchange', exitHandler);
+document.addEventListener('MSFullscreenChange', exitHandler);
 
 function openSettings() {
     document.getElementById('top-pannel').innerHTML = ``;
     document.getElementById('mid-pannel').innerHTML = `
         <div class="settingPannel">
-            <img src="" class="">
-            <span onclick="closeSettings()">Settings</span>
-            <a>
+            <div class="settingHeader">
+                <span>Settings</span>
+                <img src="img/x-mark-32.png" class="closeMark" onclick="closeSettings()">
+            </div>
+            <a id="sound-button" onclick="toggleSound(this)">
                 <img>
                 <span>Toggle Sound</span>
             </a>
             <a id="fullscreen-button">
-                <img>
+                <img src="img/fullscreen-32.png">
                 <span>Toggle Fullscreen</span>
             </a>
             <a>
-                <img>
+                <img src="img/help-32.png">
                 <span>Instruction</span>
             </a>
-            <a>
-                <img>
+            <a id="hitboxes-button" onclick="toggleHitboxes(this)">
+                <img src="img/square-32.png">
                 <span>Show Hitboxes</span>
             </a>
         </div>`;
     document.getElementById('bottom-pannel').innerHTML = `
         <a href="#">Data Privacy</a>
         <a href="#">Imprint</a>`;
+    loadSettings();
+}
+
+function loadSettings() {
     if(fullscreen) {
         document.getElementById('fullscreen-button').onclick = function() {closeFullscreen();}
-    } else {
+    } else if(!fullscreen) {
         document.getElementById('fullscreen-button').onclick = function() {openFullscreen();}
+    }
+    if(world.sound) {
+        document.getElementById('sound-button').childNodes[1].src = 'img/sound-32.png';
+    } else if(!world.sound) {
+        document.getElementById('sound-button').childNodes[1].src = 'img/mute-32.png';
     }
 }
 
@@ -121,15 +133,40 @@ function openFullscreen() {
 }
 
 function closeFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE11 */
-        document.msExitFullscreen();
+        document.getElementById('canvas-frame').classList.remove('d-none');
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+        }
+        document.getElementById('canvas').style.width = '720px';
+        document.getElementById('canvas').style.height = '480px';
+        fullscreen = false;
+        closeSettings();
+}
+
+function exitHandler() {
+    if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+        closeFullscreen();
     }
-    document.getElementById('canvas').style.width = '720px';
-    document.getElementById('canvas').style.height = '480px';
-    fullscreen = false;
-    closeSettings();
+}
+
+function toggleSound(element) {
+    world.sound ? muteSound(element) : enableSound(element);
+}
+
+function enableSound(element) {
+    world.sound = true;
+    element.childNodes[1].src = 'img/sound-32.png';
+}
+
+function muteSound(element) {
+    world.sound = false;
+    element.childNodes[1].src = 'img/mute-32.png';
+}
+
+function toggleHitboxes(element) {
+    world.hitboxes = !world.hitboxes
 }

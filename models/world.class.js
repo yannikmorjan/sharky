@@ -8,7 +8,8 @@ class World {
     healthBar = new StatusBar('health');
     poisonBar = new StatusBar('poison');
     coinBar = new StatusBar('coin');
-    showHitboxes = true;
+    hitboxes = false;
+    sound = false;
     bubbles = [];
     poisonedBubbles = [];
 
@@ -68,16 +69,16 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        if(this.showHitboxes) {
-            if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectibleObject) {
+        if(this.hitboxes) {
+            if (mo instanceof Character || mo instanceof ThrowableObject || mo instanceof CollectibleObject || mo instanceof BarrierObject) {
                 mo.drawFrame(this.ctx, 'green');
             }
             if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
                 mo.drawFrame(this.ctx, 'red');
             }
-            if(mo instanceof BarrierObject) {
-                mo.drawFrame(this.ctx, 'green');
-            }
+            // if(mo instanceof BarrierObject) {
+            //     mo.drawFrame(this.ctx, 'green');
+            // }
         }
         if(mo.otherDirection || mo.otherDirectionY) {
             this.flipImageBack(mo);
