@@ -13,6 +13,8 @@ class Poison extends CollectibleObject {
         'img/4. Marcadores/Posión/Animada/8.png'
     ];
 
+    collect_sound = new Audio('audio/collect_poison.mp3');
+
     constructor(x,y) {
         super().loadImage(this.IMAGE_DARK_LEFT);
         this.x = x;

@@ -111,6 +111,12 @@ class Character extends MovableObject {
         'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
         'img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
     ];
+
+    poisoned_sound = new Audio('audio/poisoned.mp3');
+    electroshock_sound = new Audio('audio/electricity.mp3');
+    punsh_sound = new Audio('audio/punsh.mp3');
+    bubble_sound = new Audio('audio/bubble_creat.mp3');
+
     width = 200;
     height = 200;
     x = 0;
@@ -281,6 +287,7 @@ class Character extends MovableObject {
             this.invincible = true
             if(this.currentImage >= 5 && this.currentImage <= 7) {
                 this.finSlaped = true;
+                this.punsh_sound.play();
             }
             if(this.currentImage == 8) {
                 this.isFinSlaping = false;
@@ -292,12 +299,14 @@ class Character extends MovableObject {
         let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), false);
         bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
         this.world.bubbles.push(bubble);
+        this.bubble_sound.play();
     }
 
     createPoisonBubble() {
         let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), true);
         bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
         this.world.poisonedBubbles.push(bubble);
+        this.bubble_sound.play();
         this.usePoison();
         this.world.poisonBar.setPercentage(this.poison*20);
     }
@@ -313,8 +322,10 @@ class Character extends MovableObject {
     hurtAnimation() {
         if(!this.lastInjuryNormal) {
             this.playAnimation(this.IMAGES_HURT_ELECTRO);
+            this.electroshock_sound.play();
         } else {
             this.playAnimation(this.IMAGES_HURT_POISON);
+            this.poisoned_sound.play();
         }
     }
 }

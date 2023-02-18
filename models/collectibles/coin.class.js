@@ -6,6 +6,9 @@ class Coin extends CollectibleObject {
         'img/4. Marcadores/1. Coins/3.png',
         'img/4. Marcadores/1. Coins/4.png'
     ];
+
+    collect_sound = new Audio('audio/collect_coin.mp3');
+    
     currentImage = 0;
 
     constructor(x,y) {

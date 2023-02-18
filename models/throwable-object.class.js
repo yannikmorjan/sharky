@@ -3,6 +3,10 @@ class ThrowableObject extends MovableObject {
     IMAGE_NORMAL_BUBBLE = 'img/1.Sharkie/4.Attack/Bubble trap/Bubble.png';
     IMAGE_POISON_BUBBLE = 'img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png'
     
+    catch_sound = new Audio('audio/bubble_catch.mp3');
+    hit_sound = new Audio('audio/bubble_hit.mp3');
+    pop_sound = new Audio('audio/bubble_pop.mp3');
+
     poisoned;
     uplift = 0;
     speed = 2;

@@ -24,7 +24,10 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        //this.level.game_sound.play();
+        // this.level.ambience_sound.play();
+        // this.level.ambience_sound.loop = true;
+        // this.level.game_sound.play();
+        // this.level.game_sound.loop = true;
     }
 
     draw() {
@@ -138,6 +141,7 @@ class World {
                 this.character.collectedCoin();
                 this.coinBar.setPercentage(this.character.coins*20);
                 this.level.coins.splice(this.level.coins.indexOf(coin),1);
+                coin.collect_sound.play();
             }
         });
         this.level.poisons.forEach( (poison) => {
@@ -145,6 +149,7 @@ class World {
                 this.character.collectedPoison();
                 this.poisonBar.setPercentage(this.character.poison*20);
                 this.level.poisons.splice(this.level.poisons.indexOf(poison),1);
+                poison.collect_sound.play();
             }
         });
         this.level.hearts.forEach( (heart) => {
@@ -152,6 +157,7 @@ class World {
                 this.character.collectedHeart();
                 this.healthBar.setPercentage(this.character.energy);
                 this.level.hearts.splice(this.level.hearts.indexOf(heart),1);
+                heart.collect_sound.play();
             }
         });
     }
@@ -166,6 +172,9 @@ class World {
                     this.bubbles.splice(this.bubbles.indexOf(bubble),1);
                     if(enemy instanceof JellyFish) {
                         enemy.dead = true;
+                        bubble.catch_sound.play();
+                    } else {
+                        bubble.pop_sound.play();
                     }
                 }
             })
@@ -182,7 +191,9 @@ class World {
                     this.poisonedBubbles.splice(this.poisonedBubbles.indexOf(pBubble),1);
                     if(enemy instanceof Endboss) {
                         enemy.hit(10);
-                        console.log(enemy.energy)
+                        pBubble.hit_sound.play();
+                    } else {
+                        pBubble.pop_sound.play();
                     }
                 }
             })
