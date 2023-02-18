@@ -287,7 +287,7 @@ class Character extends MovableObject {
             this.invincible = true
             if(this.currentImage >= 5 && this.currentImage <= 7) {
                 this.finSlaped = true;
-                this.punsh_sound.play();
+                this.world.playSound(this.punsh_sound);
             }
             if(this.currentImage == 8) {
                 this.isFinSlaping = false;
@@ -299,14 +299,14 @@ class Character extends MovableObject {
         let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), false);
         bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
         this.world.bubbles.push(bubble);
-        this.bubble_sound.play();
+        this.world.playSound(this.bubble_sound);
     }
 
     createPoisonBubble() {
         let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), true);
         bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
         this.world.poisonedBubbles.push(bubble);
-        this.bubble_sound.play();
+        this.world.playSound(this.bubble_sound);
         this.usePoison();
         this.world.poisonBar.setPercentage(this.poison*20);
     }
@@ -322,10 +322,10 @@ class Character extends MovableObject {
     hurtAnimation() {
         if(!this.lastInjuryNormal) {
             this.playAnimation(this.IMAGES_HURT_ELECTRO);
-            this.electroshock_sound.play();
+            this.world.playSound(this.electroshock_sound);
         } else {
             this.playAnimation(this.IMAGES_HURT_POISON);
-            this.poisoned_sound.play();
+            this.world.playSound(this.poisoned_sound);
         }
     }
 }

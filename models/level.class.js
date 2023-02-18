@@ -18,5 +18,8 @@ class Level {
         this.hearts = hearts;
         this.barriers = barriers;
         this.backgrounds = [bgL5, bgL4, bgL3, bgL2, bgL1];
+        
+        this.game_sound.loop = true;
+        this.ambience_sound.loop = true;
     }
 }
