@@ -60,15 +60,15 @@ window.addEventListener('keyup', (e) => {
         world.character.finSlaped = false;
     }
 });
-document.addEventListener('fullscreenchange', exitHandler);
-document.addEventListener('webkitfullscreenchange', exitHandler);
-document.addEventListener('mozfullscreenchange', exitHandler);
-document.addEventListener('MSFullscreenChange', exitHandler);
+document.addEventListener('fullscreenchange', exitFullscreenEventHandler);
+document.addEventListener('webkitfullscreenchange', exitFullscreenEventHandler);
+document.addEventListener('mozfullscreenchange', exitFullscreenEventHandler);
+document.addEventListener('MSFullscreenChange', exitFullscreenEventHandler);
 
 function openSettings() {
     document.getElementById('top-pannel').innerHTML = ``;
     document.getElementById('mid-pannel').innerHTML = `
-        <div class="settingPannel">
+        <div id="setting-pannel" class="settingPannel">
             <div class="settingHeader">
                 <span>Settings</span>
                 <img src="img/x-mark-32.png" class="closeMark" onclick="closeSettings()">
@@ -85,7 +85,7 @@ function openSettings() {
                 <img src="img/help-32.png">
                 <span>Instruction</span>
             </a>
-            <a id="hitboxes-button" onclick="toggleHitboxes(this)">
+            <a id="hitboxes-button" onclick="toggleHitboxes()">
                 <img src="img/square-32.png">
                 <span>Show Hitboxes</span>
             </a>
@@ -93,10 +93,10 @@ function openSettings() {
     document.getElementById('bottom-pannel').innerHTML = `
         <a href="#">Data Privacy</a>
         <a href="#">Imprint</a>`;
-    loadSettings();
+    settingsUpdate();
 }
 
-function loadSettings() {
+function settingsUpdate() {
     if(fullscreen) {
         document.getElementById('fullscreen-button').onclick = function() {closeFullscreen();}
     } else if(!fullscreen) {
@@ -117,7 +117,6 @@ function closeSettings() {
 }
 
 function openFullscreen() {
-    document.getElementById('canvas-frame').classList.add('d-none');
     elem = document.getElementById('canvas-container');
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
@@ -126,47 +125,57 @@ function openFullscreen() {
     } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
     }
+    fullscreen = true;
+    enterFullscreenHandler();
+}
+
+function enterFullscreenHandler() {
+    document.getElementById('canvas-frame').classList.add('d-none');
     document.getElementById('canvas').style.width = '100vw';
     document.getElementById('canvas').style.height = '100vh';
-    fullscreen = true;
-    closeSettings();
+    document.getElementById('top-pannel').classList.add('topBotPannelFullScreen');
+    document.getElementById('mid-pannel').classList.add('midPannelFullScreen');
+    document.getElementById('bottom-pannel').classList.add('topBotPannelFullScreen');
+    settingsUpdate();
 }
 
 function closeFullscreen() {
-        document.getElementById('canvas-frame').classList.remove('d-none');
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { /* Safari */
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { /* IE11 */
-            document.msExitFullscreen();
-        }
-        document.getElementById('canvas').style.width = '720px';
-        document.getElementById('canvas').style.height = '480px';
-        fullscreen = false;
-        closeSettings();
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+    fullscreen = false;
+    exitFullscreenHandler();
 }
 
-function exitHandler() {
+function exitFullscreenHandler() {
+    document.getElementById('canvas-frame').classList.remove('d-none');
+    document.getElementById('canvas').style.width = '720px';
+    document.getElementById('canvas').style.height = '480px';
+    document.getElementById('top-pannel').classList.remove('topBotPannelFullScreen');
+    document.getElementById('mid-pannel').classList.remove('midPannelFullScreen');
+    document.getElementById('bottom-pannel').classList.remove('topBotPannelFullScreen');
+    settingsUpdate();
+}
+
+function exitFullscreenEventHandler() {
     if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
         closeFullscreen();
     }
 }
 
 function toggleSound(element) {
-    world.sound ? muteSound(element) : enableSound(element);
+    world.sound = !world.sound;
+    if(world.sound) {
+        element.childNodes[1].src = 'img/sound-32.png';
+    } else {
+        element.childNodes[1].src = 'img/mute-32.png';
+    }
 }
 
-function enableSound(element) {
-    world.sound = true;
-    element.childNodes[1].src = 'img/sound-32.png';
-}
-
-function muteSound(element) {
-    world.sound = false;
-    element.childNodes[1].src = 'img/mute-32.png';
-}
-
-function toggleHitboxes(element) {
+function toggleHitboxes() {
     world.hitboxes = !world.hitboxes
 }
