@@ -19,14 +19,30 @@ class MovableObject extends DrawableObject {
             (this.y + this.offsetY) < (obj.y + obj.offsetY + obj.height - obj.offsetHeight + 45);
     }
 
-    // isBlocked(obj) {
-    //     if(obj.x < (this.x + this.offsetX + this.width - this.offsetWidth) &&
-    //         (obj.x + obj.width) > this.x + this.offsetX &&
-    //         obj.y < (this.y + this.offsetY + this.height - this.offsetHeight) &&
-    //         (obj.y + obj.height) > this.y + this.offsetY) {
-    //         return true;
-    //     }  
-    // }
+    isBlocked(obj) {
+        if(obj.x < (this.x + this.offsetX + this.width - this.offsetWidth) &&
+        (obj.x + obj.width) > this.x + this.offsetX &&
+        obj.y < (this.y + this.offsetY + this.height - this.offsetHeight) &&
+        (obj.y + obj.height) > this.y + this.offsetY) {
+            
+            const top_diff = obj.y + obj.height - this.y + this.offsetY;
+            const bottom_diff = this.y + this.offsetY + this.height - this.offsetHeight - obj.y;
+            const left_diff = obj.x + obj.width - this.x + this.offsetX;
+            const right_diff = this.x + this.offsetX + this.width - this.offsetWidth - obj.x;
+                  
+            const min = Math.min(bottom_diff, top_diff, left_diff, right_diff);
+            
+            return {
+                bottom: bottom_diff == min,
+                right: right_diff == min,
+                left: left_diff == min,
+                top: top_diff == min
+            }
+        }
+        return null;
+    }
+          
+    
 
     moveLeft() {
         this.x -= this.speed;

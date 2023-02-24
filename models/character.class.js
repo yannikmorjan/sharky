@@ -139,8 +139,8 @@ class Character extends MovableObject {
     lastInjuryNormal = true;
     rightBlocked = false;
     leftBlocked = false;
-    upBlocked = false;
-    downBlocked = false;
+    topBlocked = false;
+    bottomBlocked = false;
     
 
     constructor() {
@@ -188,11 +188,11 @@ class Character extends MovableObject {
                     });
                     this.applySwimResistance();
                 }
-                if(!this.upBlocked && this.world.keyboard.UP && this.y > -60) {
+                if(!this.topBlocked && this.world.keyboard.UP && this.y > -60) {
                     this.moveUp()
                     this.applySwimResistance();
                 }
-                if(!this.downBlocked && this.world.keyboard.DOWN && this.y < 300) {
+                if(!this.bottomBlocked && this.world.keyboard.DOWN && this.y < 300) {
                     this.moveDown();
                     this.applySwimResistance();
                 }
