@@ -120,6 +120,7 @@ class World {
                     this.character.hit(enemy.damage);
                     this.healthBar.setPercentage(this.character.energy);
                 } else if(enemy instanceof Endboss) {
+                    enemy.attacking = true;
                     this.character.lastInjuryNormal = true;
                     this.character.hit(enemy.damage);
                     this.healthBar.setPercentage(this.character.energy);

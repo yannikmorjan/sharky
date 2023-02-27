@@ -29,6 +29,15 @@ class Endboss extends EnemyObject {
         'img/2.Enemy/3 Final Enemy/2.floating/13.png',
     ];
 
+    IMAGES_ATTACK = [
+        'img/2.Enemy/3 Final Enemy/Attack/1.png',
+        'img/2.Enemy/3 Final Enemy/Attack/2.png',
+        'img/2.Enemy/3 Final Enemy/Attack/3.png',
+        'img/2.Enemy/3 Final Enemy/Attack/4.png',
+        'img/2.Enemy/3 Final Enemy/Attack/5.png',
+        'img/2.Enemy/3 Final Enemy/Attack/6.png'
+    ]
+
     IMAGES_HURT = [
         'img/2.Enemy/3 Final Enemy/Hurt/1.png',
         'img/2.Enemy/3 Final Enemy/Hurt/2.png',
@@ -57,13 +66,15 @@ class Endboss extends EnemyObject {
     offsetWidth = 25;
     offsetHeight = 120;
     intro = true;
-    damage = 40;
+    attacking = false;
+    damage = 50;
     
 
     constructor(x, y, rangeX, rangeY) {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.loadImages(this.IMAGES_INTRO);
         this.loadImages(this.IMAGES_SWIM);
+        this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = x;
@@ -81,18 +92,25 @@ class Endboss extends EnemyObject {
         let i = 0
         setInterval( () => {
             if(i < 10){
-                this.playAnimation(this.IMAGES_INTRO);
+                this.playAnimationOnce(this.IMAGES_INTRO);
             } else if(this.isDead()) {
                 this.dead = true;
                 this.playAnimationOnce(this.IMAGES_DEAD);
             } else if(this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT)
+                this.playAnimation(this.IMAGES_HURT);
+            } else if(this.attacking) {
+                this.playAnimation(this.IMAGES_ATTACK);
+                this.attacking = false;
             } else {
                 this.playAnimation(this.IMAGES_SWIM);
                 this.intro = false;
             }
             i++;
         },150);
+    }
+
+    isAttacking() {
+        
     }
 
 }
