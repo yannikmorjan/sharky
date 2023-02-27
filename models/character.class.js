@@ -20,7 +20,7 @@ class Character extends MovableObject {
         'img/1.Sharkie/1.IDLE/17.png',
         'img/1.Sharkie/1.IDLE/18.png'
     ];
-    IMAGES_IDL_LONG = [
+    IMAGES_FALLING_A_SLEEP = [
         'img/1.Sharkie/2.Long_IDLE/1.png',
         'img/1.Sharkie/2.Long_IDLE/2.png',
         'img/1.Sharkie/2.Long_IDLE/3.png',
@@ -30,12 +30,14 @@ class Character extends MovableObject {
         'img/1.Sharkie/2.Long_IDLE/7.png',
         'img/1.Sharkie/2.Long_IDLE/8.png',
         'img/1.Sharkie/2.Long_IDLE/9.png',
-        'img/1.Sharkie/2.Long_IDLE/10.png',
+        'img/1.Sharkie/2.Long_IDLE/10.png'
+    ];
+    IMAGES_SLEEPING = [
         'img/1.Sharkie/2.Long_IDLE/11.png',
         'img/1.Sharkie/2.Long_IDLE/12.png',
         'img/1.Sharkie/2.Long_IDLE/13.png',
         'img/1.Sharkie/2.Long_IDLE/14.png'
-    ];
+    ]
     IMAGES_SWIM = [
         'img/1.Sharkie/3.Swim/1.png',
         'img/1.Sharkie/3.Swim/2.png',
@@ -137,6 +139,10 @@ class Character extends MovableObject {
     finSlaped = false;
     invincible = false;
     lastInjuryNormal = true;
+    sleepCountdown = 0;
+    fallingASleep = false;
+    sleeping = false;
+
     rightBlocked = false;
     leftBlocked = false;
     topBlocked = false;
@@ -152,7 +158,8 @@ class Character extends MovableObject {
 
     loadAllImages() {
         this.loadImages(this.IMAGES_IDL);
-        this.loadImages(this.IMAGES_IDL_LONG);
+        this.loadImages(this.IMAGES_FALLING_A_SLEEP);
+        this.loadImages(this.IMAGES_SLEEPING);
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_NORMAL_BUBBLE);
         this.loadImages(this.IMAGES_POISON_BUBBLE);
@@ -196,6 +203,10 @@ class Character extends MovableObject {
                     this.moveDown();
                     this.applySwimResistance();
                 }
+                if(!this.bottomBlocked && this.fallingASleep && this.y < 300) {
+                    this.speed = 1;
+                    this.moveDown();
+                }
                 this.world.camera_x = -this.x + 240;
             }
         },1000 / 60);
@@ -215,8 +226,12 @@ class Character extends MovableObject {
                 this.bubbleAttack(this.IMAGES_POISON_BUBBLE, true);
             } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIM);
+                this.resetSleepCountdown();
+            } else if(this.fallingASleep) {
+                this.sleepAnimation();
             } else {
                 this.playAnimation(this.IMAGES_IDL);
+                this.runSleepCountdown();
                 this.speed = 0;
                 this.world.level.backgrounds.forEach(l => { 
                     l.forEach(b => {
@@ -308,7 +323,7 @@ class Character extends MovableObject {
         this.world.poisonedBubbles.push(bubble);
         this.world.playSound(this.bubble_sound);
         this.usePoison();
-        this.world.poisonBar.setPercentage(this.poison*20);
+        this.world.poisonBar.setercentage(this.poison*20);
     }
 
     deathAnimation() {
@@ -326,6 +341,32 @@ class Character extends MovableObject {
         } else {
             this.playAnimation(this.IMAGES_HURT_POISON);
             this.world.playSound(this.poisoned_sound);
+        }
+    }
+
+    runSleepCountdown() {
+        this.sleepCountdown++;
+        if(this.sleepCountdown >= 20) {
+            this.fallingASleep = true;
+        }
+    }
+
+    resetSleepCountdown() {
+        if(this.sleepCountdown != 0) {
+            this.sleepCountdown = 0;
+            this.fallingASleep = false;
+            this.sleeping = false;
+        } 
+    }
+
+    sleepAnimation() {
+        if(!this.sleeping) {
+            this.playAnimationOnce(this.IMAGES_FALLING_A_SLEEP)
+            if(this.bottomBlocked || this.y >= 300) {
+                this.sleeping = true;
+            }
+        } else {
+            this.playAnimation(this.IMAGES_SLEEPING)
         }
     }
 }
