@@ -1,4 +1,4 @@
-class PufferFish extends EnemyObject {
+class GreenPufferFish extends PufferFish {
 
     IMAGES_SWIM = [
         'img/2.Enemy/1.Puffer fish/1.Swim/1.swim1.png',
@@ -27,15 +27,6 @@ class PufferFish extends EnemyObject {
         'img/2.Enemy/1.Puffer fish/4.DIE/1.Dead 3.png'
     ]
     
-    width = 50;
-    height = 50;
-    offsetX = 0;
-    offsetY = 0;
-    offsetWidth = 0;
-    offsetHeight = 10;
-
-    transition = false;
-    blownUp = false;
     damage = 20;
 
     constructor(x, y, rangeX, rangeY) {
@@ -54,31 +45,4 @@ class PufferFish extends EnemyObject {
         this.movement();
         this.animate();
     }
-
-    animate() {
-        setInterval( () => {
-            if(this.dead) {
-                this.playAnimationOnce(this.IMAGES_DEAD);
-            } else if(this.blownUp) {
-                this.playAnimation(this.IMAGES_BUBBLE_SWIM);
-            } else if(this.transition) {
-                this.playTransitionAnimation(this.IMAGES_TRANSITION);
-            } else {
-                this.playAnimation(this.IMAGES_SWIM);
-            }
-        },150);
-    }
-
-    playTransitionAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        if(i != (images.length-1)) {
-            this.currentImage++;
-        } else {
-            this.blownUp = true;
-            this.transition = false;
-        }
-    }
-
 }

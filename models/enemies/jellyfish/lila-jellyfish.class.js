@@ -1,4 +1,4 @@
-class JellyFish extends EnemyObject {
+class LilaJellyFish extends JellyFish {
 
     IMAGES_SWIM = [
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
@@ -13,15 +13,7 @@ class JellyFish extends EnemyObject {
         'img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png'
     ];
 
-    width = 50;
-    height = 50;
-    offsetX = 0;
-    offsetY = 0;
-    offsetWidth = 0;
-    offsetHeight = 10;
-    currentImage = 0;
     damage = 20;
-    
 
     constructor(x, y, rangeX, rangeY) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
@@ -37,16 +29,4 @@ class JellyFish extends EnemyObject {
         this.movement();
         this.animate();
     }
-    
-    animate() {
-        setInterval( () => {
-            if(!this.dead) {
-                this.playAnimation(this.IMAGES_SWIM);
-            } else {
-                this.playAnimation(this.IMAGES_DEAD);
-            }
-        },150);
-    }
-    
-
 }
