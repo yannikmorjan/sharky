@@ -19,7 +19,8 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.run();
+        const self = this;
+        setPausableInterval(() => setPausableFn(self, self.run), 100);
     }
 
     setWorld() {
@@ -230,17 +231,27 @@ class World {
         })
     }
 
-    run() {
-        setInterval(() => {
-            this.checkEnemyCollisions();
-            this.checkCollectibleCollision();
-            this.checkBubbleCollisions();
-            this.checkPoisenedBubbleCollisons();
-            this.checkEnemyTransitions();
-            
-            this.checkBarrierCollision();
-            
-        }, 100);
+    triggerEndboss() {
+        let id = this.level.enemies.length - 1;
+        if(this.character.x >= this.level.enemies[id].triggerPoint && this.level.enemies[id].firstContact != true) {
+            this.level.enemies[id].firstContact = true;
+            if(this.sound) {
+                this.level.game_sound.pause();
+                this.level.boss_sound.play();
+            }
+        }
+    }
+
+
+    run(self) {
+        self.checkEnemyCollisions();
+        self.checkCollectibleCollision();
+        self.checkBubbleCollisions();
+        self.checkPoisenedBubbleCollisons();
+        self.checkEnemyTransitions();
+        self.triggerEndboss();
+        // Not yet working well    
+        self.checkBarrierCollision();
     }
 
     playSound(element) {

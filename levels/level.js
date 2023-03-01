@@ -15,7 +15,7 @@ const level1 = new Level(
         new HeavyGreenJellyFish(300, 200, 0, 100),
         new HeavyPinkJellyFish(400, 200, 0, 100),
         
-        new Endboss(500, 100, 100, 200)
+        new Endboss(500, 100, 100, 200, 250)
     ],
     [
         new Coin(100,100),

@@ -186,12 +186,22 @@ function toggleSound(element) {
     world.sound = !world.sound;
     if(world.sound) {
         world.level.ambience_sound.play();
-        world.level.game_sound.play();
+        chooseGameSound();
         element.childNodes[1].src = 'img/sound-32.png';
     } else {
         element.childNodes[1].src = 'img/mute-32.png';
         world.level.ambience_sound.pause();
         world.level.game_sound.pause();
+        world.level.boss_sound.pause();
+    }
+}
+
+function chooseGameSound() {
+    let id = world.level.enemies.length -1
+    if(world.level.enemies[id].firstContact) {
+        world.level.boss_sound.play();
+    } else {
+        world.level.game_sound.play();
     }
 }
 

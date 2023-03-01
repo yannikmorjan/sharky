@@ -65,13 +65,14 @@ class Endboss extends EnemyObject {
     offsetY = 80;
     offsetWidth = 25;
     offsetHeight = 120;
+    triggerPoint;
     firstContact = false;
     intro = true;
     attacking = false;
     damage = 50;
     
 
-    constructor(x, startY, rangeX, rangeY) {
+    constructor(x, startY, rangeX, rangeY, triggerPoint) {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.loadImages(this.IMAGES_INTRO);
         this.loadImages(this.IMAGES_SWIM);
@@ -84,6 +85,7 @@ class Endboss extends EnemyObject {
         this.rangeY = rangeY;
         this.startX = x;
         this.startY = startY;
+        this.triggerPoint = triggerPoint;
         this.speed = 0.5 + Math.random() * 0.4;
         const self = this;
         setPausableInterval(() => setPausableFn(self, self.movement), 1000/60);
