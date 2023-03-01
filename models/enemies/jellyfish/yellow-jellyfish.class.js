@@ -25,7 +25,7 @@ class YellowJellyFish extends JellyFish {
         this.rangeY = rangeY;
         this.startX = x;
         this.startY = y;
-        this.speed = 0.1 + Math.random() * 0.5;
+        this.speed = 0.2 + Math.random() * 0.4;
         const self = this;
         setPausableInterval(() => setPausableFn(self, self.movement), 1000/60);
         setPausableInterval(() => setPausableFn(self, self.animate), 150);

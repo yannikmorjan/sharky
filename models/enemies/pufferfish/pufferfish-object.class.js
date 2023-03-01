@@ -11,7 +11,7 @@ class PufferFish extends EnemyObject {
     blownUp = false;
 
     animate(self) {
-        if(self.dead) {
+        if(self.isDead()) {
             self.playAnimationOnce(self.IMAGES_DEAD);
         } else if(self.blownUp) {
             self.playAnimation(self.IMAGES_BUBBLE_SWIM);
@@ -31,6 +31,31 @@ class PufferFish extends EnemyObject {
         } else {
             this.blownUp = true;
             this.transition = false;
+        }
+    }
+
+    movement(self) {
+        if(!self.isDead()) {
+            if(!self.turnX && self.rangeX > 0) {
+                self.otherDirection = false;
+                self.routingLeft();
+            }
+            if(self.turnX && self.rangeX > 0) {
+                self.otherDirection = true;
+                self.routingRight();
+            }
+            if(!self.turnY && self.rangeY > 0) {
+                self.routingUp();
+            }
+            if(self.turnY && self.rangeY > 0) {
+                self.routingDown();
+            }
+        } else if (self.isDead()) {
+            self.damage = 0;
+            self.speed = 1;
+            if(self.y <= 400) {
+                self.moveDown();
+            }    
         }
     }
 

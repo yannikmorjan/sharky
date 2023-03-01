@@ -65,12 +65,13 @@ class Endboss extends EnemyObject {
     offsetY = 80;
     offsetWidth = 25;
     offsetHeight = 120;
+    firstContact = false;
     intro = true;
     attacking = false;
     damage = 50;
     
 
-    constructor(x, y, rangeX, rangeY) {
+    constructor(x, startY, rangeX, rangeY) {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.loadImages(this.IMAGES_INTRO);
         this.loadImages(this.IMAGES_SWIM);
@@ -78,33 +79,56 @@ class Endboss extends EnemyObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = x;
-        this.y = y;
+        this.y = 0;
         this.rangeX = rangeX;
         this.rangeY = rangeY;
         this.startX = x;
-        this.startY = y;
-        this.speed = 0.1 + Math.random() * 0.5;
+        this.startY = startY;
+        this.speed = 0.5 + Math.random() * 0.4;
         const self = this;
         setPausableInterval(() => setPausableFn(self, self.movement), 1000/60);
         setPausableInterval(() => setPausableFn(self, self.animate), 150);
     }
 
     animate(self) {
-        if(self.intro){
-            self.playAnimationOnce(self.IMAGES_INTRO);
-            if(self.currentImage == 9) {
-                self.intro = false;
+        if(self.firstContact) {
+            if(self.intro){
+                self.playAnimationOnce(self.IMAGES_INTRO);
+                if(self.currentImage == 9) {
+                    self.intro = false;
+                }
+            } else if(self.isDead()) {
+                self.dead = true;
+                self.playAnimationOnce(self.IMAGES_DEAD);
+            } else if(self.isHurt()) {
+                self.playAnimation(self.IMAGES_HURT);
+            } else if(self.attacking) {
+                self.playAnimation(self.IMAGES_ATTACK);
+                self.attacking = false;
+            } else {
+                self.playAnimation(self.IMAGES_SWIM);
             }
-        } else if(self.isDead()) {
-            self.dead = true;
-            self.playAnimationOnce(self.IMAGES_DEAD);
-        } else if(self.isHurt()) {
-            self.playAnimation(self.IMAGES_HURT);
-        } else if(self.attacking) {
-            self.playAnimation(self.IMAGES_ATTACK);
-            self.attacking = false;
-        } else {
-            self.playAnimation(self.IMAGES_SWIM);
+        }
+    }
+
+    movement(self) {
+        if(!self.isDead() && !self.intro) {
+            if(!self.turnX && self.rangeX > 0) {
+                self.otherDirection = false;
+                self.routingLeft();
+            }
+            if(self.turnX && self.rangeX > 0) {
+                self.otherDirection = true;
+                self.routingRight();
+            }
+            if(!self.turnY && self.rangeY > 0) {
+                self.routingUp();
+            }
+            if(self.turnY && self.rangeY > 0) {
+                self.routingDown();
+            }
+        } else if (self.isDead()) {
+            self.damage = 0;
         }
     }
 

@@ -107,7 +107,7 @@ class World {
 
     checkEnemyCollisions() {
         this.level.enemies.forEach( (enemy) => {
-            if(!enemy.dead && !this.character.isDead() && this.character.isColliding(enemy) && !this.character.isHurt()) {
+            if(!enemy.isDead() && !this.character.isDead() && this.character.isColliding(enemy) && !this.character.isHurt()) {
                 if(enemy instanceof PufferFish && !this.character.invincible) {
                     this.character.lastInjuryNormal = true;
                     this.character.hit(enemy.damage);
@@ -124,7 +124,7 @@ class World {
                 }
             }
             if(this.character.finSlaped && enemy instanceof PufferFish && this.character.isColliding(enemy)) {
-                enemy.dead = true;
+                enemy.hit(100);
             }
         });
     }
@@ -165,7 +165,7 @@ class World {
                 if(bubble.isColliding(enemy)) {
                     this.bubbles.splice(this.bubbles.indexOf(bubble),1);
                     if(enemy instanceof JellyFish) {
-                        enemy.dead = true;
+                        enemy.hit(100);
                         this.playSound(bubble.catch_sound);
                     } else {
                         this.playSound(bubble.pop_sound);
@@ -197,16 +197,16 @@ class World {
     checkEnemyTransitions() {
         this.level.enemies.forEach( (enemy) => {
             if(enemy instanceof JellyFish) {
-                if(enemy.dead && enemy.y <= -100) {
+                if(enemy.isDead() && enemy.y <= -100) {
                     this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
                 }
             }
             if(enemy instanceof PufferFish) {
-                if(this.character.isNear(enemy) && !enemy.dead) {
+                if(this.character.isNear(enemy) && !enemy.isDead()) {
                     enemy.transition = true;
                     enemy.offsetHeight = 0;   
                 }
-                if(enemy.dead && enemy.y >= 400) {
+                if(enemy.isDead && enemy.y >= 400) {
                     this.level.poisons.push(new Poison(enemy.x, enemy.y));
                     this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
                 }

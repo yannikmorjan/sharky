@@ -320,7 +320,7 @@ class Character extends MovableObject {
         this.world.poisonedBubbles.push(bubble);
         this.world.playSound(this.bubble_sound);
         this.usePoison();
-        this.world.poisonBar.setercentage(this.poison*20);
+        this.world.poisonBar.setPercentage(this.poison*20);
     }
 
     deathAnimation() {
