@@ -152,8 +152,9 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadAllImages();
-        this.movement();
-        this.animate();
+        const self = this;
+        setPausableInterval(() => setPausableFn(self, self.movement), 1000/60);
+        setPausableInterval(() => setPausableFn(self, self.animate), 200);
     }
 
     loadAllImages() {
@@ -170,76 +171,72 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_ELECTRO);
     }
 
-    movement() {
-        setInterval( () => {
-            if(!this.isDead()) {
-                if(!this.rightBlocked && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                    this.moveRight();
-                    this.otherDirection = false;
-                    this.world.level.backgrounds.forEach(l => { 
-                        l.forEach(b => {
-                            b.moveLeft();
-                            b.applySwimResistance();
-                        })
-                    });
-                    this.applySwimResistance();
-                }
-                if(!this.leftBlocked && this.world.keyboard.LEFT && this.x > this.world.level.level_start_x) {
-                    this.moveLeft();
-                    this.otherDirection = true;
-                    this.world.level.backgrounds.forEach(l => {
-                        l.forEach(b => { 
-                            b.moveRight();
-                            b.applySwimResistance();
-                        }); 
-                    });
-                    this.applySwimResistance();
-                }
-                if(!this.topBlocked && this.world.keyboard.UP && this.y > -60) {
-                    this.moveUp()
-                    this.applySwimResistance();
-                }
-                if(!this.bottomBlocked && this.world.keyboard.DOWN && this.y < 300) {
-                    this.moveDown();
-                    this.applySwimResistance();
-                }
-                if(!this.bottomBlocked && this.fallingASleep && this.y < 300) {
-                    this.speed = 1;
-                    this.moveDown();
-                }
-                this.world.camera_x = -this.x + 240;
+    movement(self) {
+        if(!self.isDead()) {
+            if(!self.rightBlocked && self.world.keyboard.RIGHT && self.x < self.world.level.level_end_x) {
+                self.moveRight();
+                self.otherDirection = false;
+                self.world.level.backgrounds.forEach(l => { 
+                    l.forEach(b => {
+                        b.moveLeft();
+                        b.applySwimResistance();
+                    })
+                });
+                self.applySwimResistance();
             }
-        },1000 / 60);
+            if(!self.leftBlocked && self.world.keyboard.LEFT && self.x > self.world.level.level_start_x) {
+                self.moveLeft();
+                self.otherDirection = true;
+                self.world.level.backgrounds.forEach(l => {
+                    l.forEach(b => { 
+                        b.moveRight();
+                        b.applySwimResistance();
+                    }); 
+                });
+                self.applySwimResistance();
+            }
+            if(!self.topBlocked && self.world.keyboard.UP && self.y > -60) {
+                self.moveUp()
+                self.applySwimResistance();
+            }
+            if(!self.bottomBlocked && self.world.keyboard.DOWN && self.y < 300) {
+                self.moveDown();
+                self.applySwimResistance();
+            }
+            if(!self.bottomBlocked && self.fallingASleep && self.y < 300) {
+                self.speed = 1;
+                self.moveDown();
+            }
+            self.world.camera_x = -self.x + 240;
+        }
     }
 
-    animate() {
-        setInterval( () => {
-            if(this.isDead()) {
-                this.deathAnimation();
-            } else if(this.isHurt()) {
-                this.hurtAnimation();
-            } else if(this.world.keyboard.H) {
-                this.bubbleAttack(this.IMAGES_NORMAL_BUBBLE, false);
-            } else if(this.world.keyboard.SPACE) {
-                this.finAttack(this.IMAGES_FIN_SLAP); 
-            } else if(this.world.keyboard.J && this.world.poisonBar.percentage >= 10) {
-                this.bubbleAttack(this.IMAGES_POISON_BUBBLE, true);
-            } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.playAnimation(this.IMAGES_SWIM);
-                this.resetSleepCountdown();
-            } else if(this.fallingASleep) {
-                this.sleepAnimation();
-            } else {
-                this.playAnimation(this.IMAGES_IDL);
-                this.runSleepCountdown();
-                this.speed = 0;
-                this.world.level.backgrounds.forEach(l => { 
-                    l.forEach(b => {
-                        b.speed = 0;
-                    });
+    animate(self) {
+        if(self.isDead()) {
+            self.deathAnimation();
+        } else if(self.isHurt()) {
+            self.hurtAnimation();
+        } else if(self.world.keyboard.H) {
+            self.bubbleAttack(self.IMAGES_NORMAL_BUBBLE, false);
+        } else if(self.world.keyboard.SPACE) {
+            self.finAttack(self.IMAGES_FIN_SLAP); 
+        } else if(self.world.keyboard.J && self.world.poisonBar.percentage >= 10) {
+            self.bubbleAttack(self.IMAGES_POISON_BUBBLE, true);
+        } else if(self.world.keyboard.RIGHT || self.world.keyboard.LEFT || self.world.keyboard.UP || self.world.keyboard.DOWN) {
+            self.playAnimation(self.IMAGES_SWIM);
+            self.resetSleepCountdown();
+        } else if(self.fallingASleep) {
+            self.sleepAnimation();
+        } else {
+            self.playAnimation(self.IMAGES_IDL);
+            self.runSleepCountdown();
+            self.speed = 0;
+            self.world.level.backgrounds.forEach(l => { 
+                l.forEach(b => {
+                    b.speed = 0;
                 });
-            }
-        },200);
+            });
+        }
     }
 
     applySwimResistance() {
@@ -346,7 +343,7 @@ class Character extends MovableObject {
 
     runSleepCountdown() {
         this.sleepCountdown++;
-        if(this.sleepCountdown >= 20) {
+        if(this.sleepCountdown >= 25) {
             this.fallingASleep = true;
         }
     }

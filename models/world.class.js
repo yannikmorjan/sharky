@@ -37,6 +37,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.poisons);
         this.addObjectsToMap(this.level.hearts);
+        this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);
         // ----------- Space for fixed objects ----------
         this.addToMap(this.healthBar);
@@ -47,7 +48,6 @@ class World {
         this.addObjectsToMap(this.bubbles);
         this.addObjectsToMap(this.poisonedBubbles);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);
         
         // draw() wird immer wieder aufgerufen
@@ -75,9 +75,6 @@ class World {
             if(mo instanceof PufferFish || mo instanceof JellyFish || mo instanceof Endboss) {
                 mo.drawFrame(this.ctx, 'red');
             }
-            // if(mo instanceof BarrierObject) {
-            //     mo.drawFrame(this.ctx, 'green');
-            // }
         }
         if(mo.otherDirection || mo.otherDirectionY) {
             this.flipImageBack(mo);

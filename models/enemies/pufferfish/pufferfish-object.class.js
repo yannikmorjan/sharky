@@ -10,18 +10,16 @@ class PufferFish extends EnemyObject {
     transition = false;
     blownUp = false;
 
-    animate() {
-        setInterval( () => {
-            if(this.dead) {
-                this.playAnimationOnce(this.IMAGES_DEAD);
-            } else if(this.blownUp) {
-                this.playAnimation(this.IMAGES_BUBBLE_SWIM);
-            } else if(this.transition) {
-                this.playTransitionAnimation(this.IMAGES_TRANSITION);
-            } else {
-                this.playAnimation(this.IMAGES_SWIM);
-            }
-        },150);
+    animate(self) {
+        if(self.dead) {
+            self.playAnimationOnce(self.IMAGES_DEAD);
+        } else if(self.blownUp) {
+            self.playAnimation(self.IMAGES_BUBBLE_SWIM);
+        } else if(self.transition) {
+            self.playTransitionAnimation(self.IMAGES_TRANSITION);
+        } else {
+            self.playAnimation(self.IMAGES_SWIM);
+        }
     }
 
     playTransitionAnimation(images) {

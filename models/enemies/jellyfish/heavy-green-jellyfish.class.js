@@ -26,7 +26,8 @@ class HeavyGreenJellyFish extends JellyFish {
         this.startX = x;
         this.startY = y;
         this.speed = 0.1 + Math.random() * 0.5;
-        this.movement();
-        this.animate();
+        const self = this;
+        setPausableInterval(() => setPausableFn(self, self.movement), 1000/60);
+        setPausableInterval(() => setPausableFn(self, self.animate), 150);
     }
 }

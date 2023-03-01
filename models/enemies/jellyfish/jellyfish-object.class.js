@@ -8,14 +8,12 @@ class JellyFish extends EnemyObject {
     offsetHeight = 10;
     currentImage = 0;
     
-    animate() {
-        setInterval( () => {
-            if(!this.dead) {
-                this.playAnimation(this.IMAGES_SWIM);
-            } else {
-                this.playAnimation(this.IMAGES_DEAD);
-            }
-        },150);
+    animate(self) {
+        if(!self.dead) {
+            self.playAnimation(self.IMAGES_SWIM);
+        } else {
+            self.playAnimation(self.IMAGES_DEAD);
+        }
     }
     
 

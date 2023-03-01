@@ -16,6 +16,12 @@ class Coin extends CollectibleObject {
         this.loadImages(this.IMAGES);
         this.x = x;
         this.y = y;
-        this.animate(this.IMAGES);
+        const self = this;
+        setPausableInterval(() => setPausableFn(self, self.animate), 200);
     }
+
+    animate(self) {
+        self.playAnimation(self.IMAGES);
+    }
+
 }

@@ -2,10 +2,23 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let fullscreen = false;
+let intervalIds = [];
+let gameIsPaused = false;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+}
+
+function setPausableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    intervalIds.push(id);
+}
+
+function setPausableFn(self, fn) {
+    if(!gameIsPaused) {
+        fn(self);
+    }
 }
 
 window.addEventListener('keydown', (e) => {
@@ -66,6 +79,7 @@ document.addEventListener('mozfullscreenchange', exitFullscreenEventHandler);
 document.addEventListener('MSFullscreenChange', exitFullscreenEventHandler);
 
 function openSettings() {
+    gameIsPaused = true;
     document.getElementById('top-pannel').innerHTML = ``;
     document.getElementById('mid-pannel').innerHTML = `
         <div id="setting-pannel" class="settingPannel">
@@ -110,6 +124,7 @@ function settingsUpdate() {
 }
 
 function closeSettings() {
+    gameIsPaused = false;
     document.getElementById('top-pannel').innerHTML = `
     <img onclick="openSettings()" src="img/6.Botones/Settings/settings.png">`;
     document.getElementById('mid-pannel').innerHTML = ``;

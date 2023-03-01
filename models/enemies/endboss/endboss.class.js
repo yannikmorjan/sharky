@@ -84,33 +84,28 @@ class Endboss extends EnemyObject {
         this.startX = x;
         this.startY = y;
         this.speed = 0.1 + Math.random() * 0.5;
-        this.animate();
-        this.movement();
+        const self = this;
+        setPausableInterval(() => setPausableFn(self, self.movement), 1000/60);
+        setPausableInterval(() => setPausableFn(self, self.animate), 150);
     }
 
-    animate() {
-        let i = 0
-        setInterval( () => {
-            if(i < 10){
-                this.playAnimationOnce(this.IMAGES_INTRO);
-            } else if(this.isDead()) {
-                this.dead = true;
-                this.playAnimationOnce(this.IMAGES_DEAD);
-            } else if(this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if(this.attacking) {
-                this.playAnimation(this.IMAGES_ATTACK);
-                this.attacking = false;
-            } else {
-                this.playAnimation(this.IMAGES_SWIM);
-                this.intro = false;
+    animate(self) {
+        if(self.intro){
+            self.playAnimationOnce(self.IMAGES_INTRO);
+            if(self.currentImage == 9) {
+                self.intro = false;
             }
-            i++;
-        },150);
-    }
-
-    isAttacking() {
-        
+        } else if(self.isDead()) {
+            self.dead = true;
+            self.playAnimationOnce(self.IMAGES_DEAD);
+        } else if(self.isHurt()) {
+            self.playAnimation(self.IMAGES_HURT);
+        } else if(self.attacking) {
+            self.playAnimation(self.IMAGES_ATTACK);
+            self.attacking = false;
+        } else {
+            self.playAnimation(self.IMAGES_SWIM);
+        }
     }
 
 }
