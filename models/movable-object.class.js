@@ -20,10 +20,10 @@ class MovableObject extends DrawableObject {
     }
 
     isBlocked(obj) {
-        if(obj.x < (this.x + this.offsetX + this.width - this.offsetWidth) &&
-        (obj.x + obj.width) > this.x + this.offsetX &&
-        obj.y < (this.y + this.offsetY + this.height - this.offsetHeight) &&
-        (obj.y + obj.height) > this.y + this.offsetY) {
+        if((this.x + this.offsetX + this.width - this.offsetWidth) > obj.x &&
+        (this.x + this.offsetX) < (obj.x + obj.width) &&
+        (this.y + this.offsetY + this.height - this.offsetHeight) > obj.y &&
+        (this.y + this.offsetY) < (obj.y + obj.height)) {
             
             const top_diff = obj.y + obj.height - this.y + this.offsetY;
             const bottom_diff = this.y + this.offsetY + this.height - this.offsetHeight - obj.y;

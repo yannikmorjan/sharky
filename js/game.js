@@ -3,6 +3,8 @@ let world;
 let keyboard = new Keyboard();
 let fullscreen = false;
 let intervalIds = [];
+let instructionImgUrl = ['img/6.Botones/Instructions 1.png', 'img/6.Botones/Instructions 2.png'];
+let instructionImgId = 0;
 let gameIsPaused = false;
 
 function init() {
@@ -156,40 +158,22 @@ function openInstructions() {
     document.getElementById('mid-pannel').innerHTML = `
         <div id="setting-pannel" class="settingPannel">
             <div class="settingHeader">
-                <img src="img/x-mark-32.png" class="closeMark" onclick="openSettings()">
+                <button class="backBtn" onclick="openSettings()">&#171;</button>
                 <span>Instructions</span>
                 <img src="img/x-mark-32.png" class="closeMark" onclick="closeSettings()">
             </div>
-            <div class="carousel" data-carousel>
-                <button class="carouselBtn prevImg" data-carousel-button="prev">&#8249;</button>
-                <button class="carouselBtn nextImg" data-carousel-button="next">&#8250;</button>
-                <ul data-slides>
-                    <li class="slide" data-active> 
-                        <img src="img/6.Botones/Instructions 1.png" alt="Instruction Image 1">
-                    </li>
-                    <li class="slide"> 
-                        <img src="img/6.Botones/Instructions 2.png" alt="Instruction Image 2">
-                    </li>
-                </ul>
+            <div class="slider">
+                <button class="sliderBtn prevImg" onclick="instructionSlider(-1)">&#8249;</button>
+                <button class="sliderBtn nextImg" onclick="instructionSlider(1)">&#8250;</button>
+                <img id="instruction-img" src="${instructionImgUrl[instructionImgId]}" alt="Instruction Image">        
             </div>
         </div>`;
-    instructionSlider();
 }
 
-function instructionSlider() {
-    const buttons = document.querySelector("[data-carousel-button]");
-    buttons.forEach(button => {
-        button.addEventListener("click", () => {
-            const offset = button.dataset.carouselBtn === "next" ? 1 : -1;
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]");
-            let newIndex = [...slides.children].indexOf(activeSlide) + offset;
-            if(newIndex < 0) newIndex = slides.children.length - 1;
-            if(newIndex >= slides.children.length) newIndex = 0;
-            slides.children[newIndex].dataset.active = true;
-            delete activeSlide.dataset.active;
-        })
-    });
+function instructionSlider(offset) {
+    const image = document.getElementById('instruction-img');
+    instructionImgId = instructionImgId + offset;
+    if(instructionImgId < 0) instructionImgId = instructionImgUrl.length - 1;
+    if(instructionImgId >= instructionImgUrl.length) instructionImgId = 0;
+    image.src = instructionImgUrl[instructionImgId];
 }
