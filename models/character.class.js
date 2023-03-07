@@ -366,4 +366,10 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_SLEEPING)
         }
     }
+
+    triggerEndscreen() {
+        document.getElementById('mid-pannel').innerHTML = returnGameOverScreen();
+        document.getElementById('bottom-pannel').innerHTML = returnFooter();
+        document.getElementById('top-pannel').innerHTML = returnHeader();
+    }
 }

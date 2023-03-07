@@ -84,6 +84,26 @@ canvas {
     scale: 1.1;
 }
 
+.endScreen {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tryAgainBtn {
+    margin-top: 50px;
+    width: 208px;
+    height: 67.5px;
+    cursor: pointer;
+}
+
+.endTitle {
+    width: 667.5px;
+    height: 93.5px;
+}
+
 .topPannel {
     height: 50px;
     display: flex;

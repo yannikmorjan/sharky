@@ -9,6 +9,8 @@ let gameIsPaused = true;
 let gameHasStarted = false;
 
 function init() {
+    gameIsPaused = true;
+    gameHasStarted = false;
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
@@ -99,6 +101,26 @@ function returnHeader() {
 
 function returnStartBtn() {
     return `<img class="startBtn" onclick="startGame()" src="img/6.Botones/Start/2.png">`
+}
+
+function returnGameOverScreen() {
+    return `
+        <div class="endScreen">
+            <img class="endTitle" src="img/6.Botones/Tittles/Game Over/Recurso 10.png">
+            <img class="tryAgainBtn" onclick="console.log('Game Over -> Try Again')" src="img/6.Botones/Try again/Recurso 17.png">
+        </div>`;
+}
+
+function returnWinScreen() {
+    return `
+        <div class="endScreen">    
+            <img class="endTitle" src="img/6.Botones/Tittles/You win/Recurso 22.png">
+            <div style="display:flex; align-items:center; gap:10px">
+                <img src="img/4. Marcadores/1. Coins/2.png" style="width:45px; height:45px;">
+                <span style="font-size:32px">${world.character.coins} / ${world.level.collectibleCoins}</span>
+            </div>
+            <img class="tryAgainBtn" onclick="console.log('You Won -> Play Again')" src="img/6.Botones/Start/2.png">
+        </div>`;
 }
 
 function openFullscreen() {

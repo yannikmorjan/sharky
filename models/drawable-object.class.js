@@ -49,6 +49,11 @@ class DrawableObject {
         this.img = this.imageCache[path];
         if(i != (images.length-1)) {
             this.currentImage++;
+        } else {
+            if((this instanceof Character || this instanceof Endboss) && this.isDead()) {
+                gameIsPaused = true;
+                this.triggerEndscreen();
+            }
         }
     }
 }
