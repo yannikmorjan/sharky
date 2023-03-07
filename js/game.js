@@ -3,13 +3,22 @@ let world;
 let keyboard = new Keyboard();
 let fullscreen = false;
 let intervalIds = [];
-let instructionImgUrl = ['img/6.Botones/Instructions 1.png', 'img/6.Botones/Instructions 2.png'];
+let instructionImgUrl = ['img/6.Botones/Instructions 0-placeholder.png','img/6.Botones/Instructions 1.png', 'img/6.Botones/Instructions 2.png'];
 let instructionImgId = 0;
-let gameIsPaused = false;
+let gameIsPaused = true;
+let gameHasStarted = false;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+}
+
+function startGame() {
+    document.getElementById('mid-pannel').innerHTML = '';
+    document.getElementById('bottom-pannel').innerHTML = '';
+    document.getElementById('pannel-container').classList.remove('startscreen');
+    gameHasStarted = true;
+    gameIsPaused = false;
 }
 
 function setPausableInterval(fn, time) {
@@ -18,41 +27,45 @@ function setPausableInterval(fn, time) {
 }
 
 function setPausableFn(self, fn) {
-    if(!gameIsPaused) {
-        fn(self);
-    }
+    if(!gameIsPaused) fn(self);
 }
 
 function openSettings() {
-    gameIsPaused = true;
+    if(gameHasStarted) gameIsPaused = true;
     document.getElementById('top-pannel').innerHTML = ``;
-    document.getElementById('mid-pannel').innerHTML = `
-        <div id="setting-pannel" class="settingPannel">
-            <div class="settingHeader">
-                <span>Settings</span>
-                <img src="img/x-mark-32.png" class="closeMark" onclick="closeSettings()">
-            </div>
-            <a id="sound-button" onclick="toggleSound(this)">
-                <img>
-                <span>Toggle Sound</span>
-            </a>
-            <a id="fullscreen-button">
-                <img src="img/fullscreen-32.png">
-                <span>Toggle Fullscreen</span>
-            </a>
-            <a onclick="openInstructions()">
-                <img src="img/help-32.png">
-                <span>Instruction</span>
-            </a>
-            <a id="hitboxes-button" onclick="toggleHitboxes()">
-                <img src="img/square-32.png">
-                <span>Show Hitboxes</span>
-            </a>
-        </div>`;
-    document.getElementById('bottom-pannel').innerHTML = `
-        <a href="#">Data Privacy</a>
-        <a href="#">Imprint</a>`;
+    document.getElementById('mid-pannel').innerHTML = returnSettingsMidPannel(); 
+    document.getElementById('bottom-pannel').innerHTML = returnFooter();
     settingsUpdate();
+}
+
+function returnSettingsMidPannel() {
+    return `<div id="setting-pannel" class="settingPannel">
+        <div class="settingHeader">
+            <span>Settings</span>
+            <img src="img/x-mark-32.png" class="closeMark" onclick="closeSettings()">
+        </div>
+        <a id="sound-button" onclick="toggleSound(this)">
+            <img>
+            <span>Toggle Sound</span>
+        </a>
+        <a id="fullscreen-button">
+            <img src="img/fullscreen-32.png">
+            <span>Toggle Fullscreen</span>
+        </a>
+        <a onclick="openInstructions()">
+            <img src="img/help-32.png">
+            <span>Instruction</span>
+        </a>
+        <a id="hitboxes-button" onclick="toggleHitboxes()">
+            <img src="img/square-32.png">
+            <span>Show Hitboxes</span>
+        </a>
+    </div>`;
+}
+
+function returnFooter() {
+    return `<a href="#">Data Privacy</a>
+        <a href="#">Imprint</a>`;
 }
 
 function settingsUpdate() {
@@ -69,11 +82,23 @@ function settingsUpdate() {
 }
 
 function closeSettings() {
-    gameIsPaused = false;
-    document.getElementById('top-pannel').innerHTML = `
-    <img onclick="openSettings()" src="img/6.Botones/Settings/settings.png">`;
-    document.getElementById('mid-pannel').innerHTML = ``;
-    document.getElementById('bottom-pannel').innerHTML = ``;
+    if(gameHasStarted) {
+        gameIsPaused = false;
+        document.getElementById('mid-pannel').innerHTML = ``;
+        document.getElementById('bottom-pannel').innerHTML = ``;
+    } else {
+        document.getElementById('mid-pannel').innerHTML = returnStartBtn();
+        document.getElementById('bottom-pannel').innerHTML = returnFooter();
+    }
+    document.getElementById('top-pannel').innerHTML = returnHeader();
+}
+
+function returnHeader() {
+    return `<img onclick="openSettings()" src="img/6.Botones/Settings/settings.png">`;
+}
+
+function returnStartBtn() {
+    return `<img class="startBtn" onclick="startGame()" src="img/6.Botones/Start/2.png">`
 }
 
 function openFullscreen() {

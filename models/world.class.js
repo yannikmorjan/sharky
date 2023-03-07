@@ -19,12 +19,12 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        const self = this;
-        setPausableInterval(() => setPausableFn(self, self.run), 100);
     }
 
     setWorld() {
-        this.character.world = this;
+        const self = this;
+        this.character.world = self;
+        setPausableInterval(() => setPausableFn(self, self.run), 100);
     }
 
     draw() {
