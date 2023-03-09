@@ -23,6 +23,14 @@ class StatusBar extends DrawableObject {
         'img/4. Marcadores/green/Coin/60.png',
         'img/4. Marcadores/green/Coin/80.png',
         'img/4. Marcadores/green/Coin/100.png'
+    ];
+    IMAGES_LIFE_ENDBOSS = [
+        'img/4. Marcadores/Purple/endboss/0_.png',
+        'img/4. Marcadores/Purple/endboss/20_.png',
+        'img/4. Marcadores/Purple/endboss/40_.png',
+        'img/4. Marcadores/Purple/endboss/60_.png',
+        'img/4. Marcadores/Purple/endboss/80_.png',
+        'img/4. Marcadores/Purple/endboss/100_.png'
     ]
 
     IMAGES;
@@ -32,7 +40,6 @@ class StatusBar extends DrawableObject {
         super();
         this.distinguishStatusbarImages(statusBar);
         this.loadImages(this.IMAGES);
-        this.x = 10;
         this.width = 200;
         this.height = 50;
         this.setPercentage(this.percentage);
@@ -64,15 +71,23 @@ class StatusBar extends DrawableObject {
         if(statusBar == 'coin') {
             this.IMAGES = this.IMAGES_COIN_GREEN;
             this.y = 80;
+            this.x = 10;
             this.percentage = 0;
 
         } else if(statusBar == 'poison') {
             this.IMAGES = this.IMAGES_POISON_GREEN;
             this.y = 40;
+            this.x = 10;
             this.percentage = 0;
-        } else {
+        } else if(statusBar == 'health') {
             this.IMAGES = this.IMAGES_LIFE_GREEN;
             this.y = 0;
+            this.x = 10;
+            this.percentage = 100;
+        } else if(statusBar == 'endboss') {
+            this.IMAGES = this.IMAGES_LIFE_ENDBOSS;
+            this.y = 0;
+            this.x = 260;
             this.percentage = 100;
         }
     }

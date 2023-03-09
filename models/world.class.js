@@ -5,9 +5,11 @@ class World {
     ctx;
     keyboard;
     camera_x = 180;
-    healthBar = new StatusBar('health');
-    poisonBar = new StatusBar('poison');
-    coinBar = new StatusBar('coin');
+    statusBars = [
+        new StatusBar('health'),
+        new StatusBar('poison'),
+        new StatusBar('coin')
+    ];
     hitboxes = false;
     sound = false;
     bubbles = [];
@@ -41,10 +43,8 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);
         // ----------- Space for fixed objects ----------
-        this.addToMap(this.healthBar);
-        this.addToMap(this.poisonBar);
-        this.addToMap(this.coinBar);
-        
+        this.addObjectsToMap(this.statusBars);
+    
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.bubbles);
         this.addObjectsToMap(this.poisonedBubbles);
@@ -112,16 +112,16 @@ class World {
                 if(enemy instanceof PufferFish && !this.character.invincible) {
                     this.character.lastInjuryNormal = true;
                     this.character.hit(enemy.damage);
-                    this.healthBar.setPercentage(this.character.energy);
+                    this.statusBars[0].setPercentage(this.character.energy);
                 } else if(enemy instanceof JellyFish) {
                     this.character.lastInjuryNormal = false;
                     this.character.hit(enemy.damage);
-                    this.healthBar.setPercentage(this.character.energy);
+                    this.statusBars[0].setPercentage(this.character.energy);
                 } else if(enemy instanceof Endboss) {
                     enemy.attacking = true;
                     this.character.lastInjuryNormal = true;
                     this.character.hit(enemy.damage);
-                    this.healthBar.setPercentage(this.character.energy);
+                    this.statusBars[0].setPercentage(this.character.energy);
                 }
             }
             if(this.character.finSlaped && enemy instanceof PufferFish && this.character.isColliding(enemy)) {
@@ -134,23 +134,23 @@ class World {
         this.level.coins.forEach( (coin) => {
             if(this.character.isColliding(coin)){
                 this.character.collectedCoin();
-                this.coinBar.setPercentage(this.character.coins*20);
+                this.statusBars[2].setPercentage(this.character.coins*20);
                 this.level.coins.splice(this.level.coins.indexOf(coin),1);
                 this.playSound(coin.collect_sound);            
             }
         });
         this.level.poisons.forEach( (poison) => {
-            if(this.character.isColliding(poison) && this.poisonBar.percentage != 100){
+            if(this.character.isColliding(poison) && this.statusBars[1].percentage != 100){
                 this.character.collectedPoison();
-                this.poisonBar.setPercentage(this.character.poison*20);
+                this.statusBars[1].setPercentage(this.character.poison*20);
                 this.level.poisons.splice(this.level.poisons.indexOf(poison),1);
                 this.playSound(poison.collect_sound);
             }
         });
         this.level.hearts.forEach( (heart) => {
-            if(this.character.isColliding(heart) && this.healthBar.percentage != 100){
+            if(this.character.isColliding(heart) && this.statusBars[0].percentage != 100){
                 this.character.collectedHeart();
-                this.healthBar.setPercentage(this.character.energy);
+                this.statusBars[0].setPercentage(this.character.energy);
                 this.level.hearts.splice(this.level.hearts.indexOf(heart),1);
                 this.playSound(heart.collect_sound);
             }
@@ -185,7 +185,8 @@ class World {
                 if(pBubble.isColliding(enemy)) {
                     this.poisonedBubbles.splice(this.poisonedBubbles.indexOf(pBubble),1);
                     if(enemy instanceof Endboss) {
-                        enemy.hit(10);
+                        enemy.hit(20);
+                        this.statusBars[3].setPercentage(enemy.energy);
                         this.playSound(pBubble.hit_sound);
                     } else {
                         this.playSound(pBubble.pop_sound);
@@ -234,6 +235,8 @@ class World {
     triggerEndboss() {
         let id = this.level.enemies.length - 1;
         if(this.character.x >= this.level.enemies[id].triggerPoint && this.level.enemies[id].firstContact != true) {
+            this.statusBars.push(new StatusBar('endboss'));
+            console.log(this.statusBars);
             this.level.enemies[id].firstContact = true;
             if(this.sound) {
                 this.level.game_sound.pause();

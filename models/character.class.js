@@ -220,7 +220,7 @@ class Character extends MovableObject {
             self.bubbleAttack(self.IMAGES_NORMAL_BUBBLE, false);
         } else if(self.world.keyboard.SPACE) {
             self.finAttack(self.IMAGES_FIN_SLAP); 
-        } else if(self.world.keyboard.J && self.world.poisonBar.percentage >= 10) {
+        } else if(self.world.keyboard.J && self.world.statusBars[1].percentage >= 10) {
             self.bubbleAttack(self.IMAGES_POISON_BUBBLE, true);
         } else if(self.world.keyboard.RIGHT || self.world.keyboard.LEFT || self.world.keyboard.UP || self.world.keyboard.DOWN) {
             self.playAnimation(self.IMAGES_SWIM);
@@ -320,7 +320,7 @@ class Character extends MovableObject {
         this.world.poisonedBubbles.push(bubble);
         this.world.playSound(this.bubble_sound);
         this.usePoison();
-        this.world.poisonBar.setPercentage(this.poison*20);
+        this.world.statusBars[1].setPercentage(this.poison*20);
     }
 
     deathAnimation() {
