@@ -7,6 +7,8 @@ let instructionImgUrl = ['img/6.Botones/Instructions 0-placeholder.png','img/6.B
 let instructionImgId = 0;
 let gameIsPaused = true;
 let gameHasStarted = false;
+let gameWinner = false;
+let gameOver = false;
 
 function init() {
     gameIsPaused = true;
@@ -51,11 +53,15 @@ function settingsUpdate() {
 }
 
 function closeSettings() {
-    if(gameHasStarted) {
+    if(!gameHasStarted && !gameOver && !gameWinner) {
+        changePannels(returnHeader,returnStartBtn,returnFooter);
+    } else if(gameHasStarted && !gameOver && !gameWinner) {
         gameIsPaused = false;
         changePannels(returnHeader,returnNothing,returnNothing);
-    } else {
-        changePannels(returnHeader,returnStartBtn,returnFooter);
+    } else if (gameHasStarted && !gameOver && gameWinner) {
+        changePannels(returnHeader,returnWinScreen,returnFooter);
+    } else if (gameHasStarted && gameOver && !gameWinner) {
+        changePannels(returnHeader,returnGameOverScreen,returnFooter);
     }
 }
 

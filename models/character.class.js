@@ -368,8 +368,7 @@ class Character extends MovableObject {
     }
 
     triggerEndscreen() {
-        document.getElementById('mid-pannel').innerHTML = returnGameOverScreen();
-        document.getElementById('bottom-pannel').innerHTML = returnFooter();
-        document.getElementById('top-pannel').innerHTML = returnHeader();
+        gameOver = true;
+        changePannels(returnHeader,returnGameOverScreen,returnFooter);
     }
 }

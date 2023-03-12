@@ -135,9 +135,8 @@ class Endboss extends EnemyObject {
     }
 
     triggerEndscreen() {
-        document.getElementById('mid-pannel').innerHTML = returnWinScreen();
-        document.getElementById('bottom-pannel').innerHTML = returnFooter();
-        document.getElementById('top-pannel').innerHTML = returnHeader();
+        gameWinner = true;
+        changePannels(returnHeader,returnWinScreen,returnFooter);
     }
 
 }
