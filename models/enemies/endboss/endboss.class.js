@@ -135,6 +135,8 @@ class Endboss extends EnemyObject {
     }
 
     triggerEndscreen() {
+        if(world.sound) world.level.win_sound.play();
+        world.level.boss_sound.pause();
         gameWinner = true;
         changePannels(returnHeader,returnWinScreen,returnFooter);
     }

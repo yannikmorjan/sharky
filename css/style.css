@@ -100,8 +100,9 @@ canvas {
 }
 
 .endTitle {
-    width: 667.5px;
-    height: 93.5px;
+    width: 667px;
+    height: 93px;
+    animation: scaleIn 225ms ease-in-out;
 }
 
 .topPannel {
@@ -266,4 +267,14 @@ canvas {
 
 .sliderBtn.nextImg {
     right: 0.6rem;
+}
+
+@keyframes scaleIn {
+    0% {
+        scale: 0;
+    }
+
+    100% {
+        scale: 1;
+    }
 }

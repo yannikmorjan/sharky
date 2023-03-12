@@ -368,6 +368,9 @@ class Character extends MovableObject {
     }
 
     triggerEndscreen() {
+        if(world.sound) world.level.lose_sound.play();
+        world.level.game_sound.pause();
+        world.level.boss_sound.pause();
         gameOver = true;
         changePannels(returnHeader,returnGameOverScreen,returnFooter);
     }

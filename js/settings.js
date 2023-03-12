@@ -40,7 +40,7 @@ function returnGameOverScreen() {
     return `
         <div class="endScreen">
             <img class="endTitle" src="img/6.Botones/Tittles/Game Over/Recurso 10.png">
-            <img class="tryAgainBtn" onclick="console.log('Game Over -> Try Again')" src="img/6.Botones/Try again/Recurso 17.png">
+            <img class="tryAgainBtn" onclick="restartGame()" src="img/6.Botones/Try again/Recurso 17.png">
         </div>`;
 }
 

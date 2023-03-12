@@ -1,9 +1,9 @@
 let canvas;
 let world;
-let keyboard = new Keyboard();
+const keyboard = new Keyboard();
 let fullscreen = false;
 let intervalIds = [];
-let instructionImgUrl = ['img/6.Botones/Instructions 0-placeholder.png','img/6.Botones/Instructions 1.png', 'img/6.Botones/Instructions 2.png'];
+const instructionImgUrl = ['img/6.Botones/Instructions 0-placeholder.png','img/6.Botones/Instructions 1.png', 'img/6.Botones/Instructions 2.png'];
 let instructionImgId = 0;
 let gameIsPaused = true;
 let gameHasStarted = false;
@@ -22,6 +22,17 @@ function startGame() {
     document.getElementById('pannel-container').classList.remove('startscreen');
     gameHasStarted = true;
     gameIsPaused = false;
+}
+
+function restartGame() {
+    intervalIds.forEach(clearInterval);
+    intervalIds = [];
+    world = new World(canvas, keyboard);
+    gameIsPaused = false;
+    gameHasStarted = true;
+    gameWinner = false;
+    gameOver = false;
+    changePannels(returnHeader,returnNothing,returnNothing);
 }
 
 function setPausableInterval(fn, time) {
@@ -95,7 +106,7 @@ function closeFullscreen() {
         document.webkitExitFullscreen();
     } else if (document.msExitFullscreen) { /* IE11 */
         document.msExitFullscreen();
-    }
+    } else {}
     fullscreen = false;
     exitFullscreenHandler();
 }
