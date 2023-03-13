@@ -1,0 +1,280 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'LuckiestGuy', Arial, Helvetica, sans-serif;
+    color: white;
+    /* background-image: url('img/620.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+}
+
+.d-none {
+    display: none;
+}
+
+.backgroundImage {
+    z-index: -2;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* object-position: 0% 100%; */
+}
+
+.title {
+    position: relative;
+    font-size: 64px;
+    text-shadow: 5px 5px 5px rgba(0,0,0, 0.8);
+    margin-bottom: 150px;
+    margin-top: 100px;
+}
+
+.canvasContainer {
+    position: relative;
+}
+
+canvas {
+    z-index: 0;
+    background-color: rgb(0, 0, 0);
+    display: block;
+}
+
+.canvasFrame {
+    z-index: -1;
+    position: absolute;
+    top: -162px;
+    left: -109px;
+    height: 760px;
+    width: 910px;
+}
+
+.pannelContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.startscreen {
+    background: url('../img/3. Background/Mesa de trabajo 1.png') no-repeat center center;
+    background-size: 120%;
+}
+
+.startBtn {
+    margin-top: 200px;
+    width: 208px;
+    height: 67.5px;
+    cursor: pointer;
+}
+
+.startBtn:hover {
+    scale: 1.1;
+}
+
+.endScreen {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tryAgainBtn {
+    margin-top: 50px;
+    width: 208px;
+    height: 67.5px;
+    cursor: pointer;
+}
+
+.endTitle {
+    width: 667px;
+    height: 93px;
+    animation: scaleIn 225ms ease-in-out;
+}
+
+.topPannel {
+    height: 50px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.topBotPannelFullScreen {
+    height: 15vh
+}
+
+.topPannel img {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    padding-top: 10px;
+    padding-right: 10px;
+    filter: invert();
+}
+
+.topPannel img:hover {
+    filter: brightness(0) saturate(100%) invert(69%) sepia(0%) saturate(0%) hue-rotate(92deg) brightness(95%) contrast(91%);
+}
+
+.midPannel {
+    width: 100%;
+    height: 380px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.midPannelFullScreen {
+    height: 70vh;
+}
+
+.settingPannel {
+    position: relative;
+    backdrop-filter: brightness(0.8) blur(2px);
+    border: 2px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: default;
+    padding: 20px;
+}
+
+.settingHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.closeMark {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+.closeMark:hover {
+    filter: brightness(0) saturate(100%) invert(69%) sepia(0%) saturate(0%) hue-rotate(92deg) brightness(95%) contrast(91%);
+}
+
+.settingPannel a {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.settingPannel a:hover {
+    color: rgb(165, 165, 165);
+}
+
+.settingPannel a:hover img {
+    filter: brightness(0) saturate(100%) invert(69%) sepia(0%) saturate(0%) hue-rotate(92deg) brightness(95%) contrast(91%);
+}
+
+.settingPannel img {
+    filter: invert(99%) sepia(4%) saturate(760%) hue-rotate(217deg) brightness(118%) contrast(100%);
+}
+
+.bottomPannel {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.bottomPannel a {
+    all: unset;
+    cursor: pointer;
+}
+
+.bottomPannel a:hover {
+    color: rgb(165, 165, 165);
+}
+
+.hoverEffect:hover img {
+    filter: brightness(0) saturate(100%) invert(69%) sepia(0%) saturate(0%) hue-rotate(92deg) brightness(95%) contrast(91%);
+}
+
+.backBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.backBtn:hover {
+    color: lightgrey;
+}
+
+.slider {
+    width: 360px;
+    height: 240px;
+    position: relative;
+}
+
+.slider img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: none; 
+}
+
+.sliderBtn {
+    position: absolute;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 2rem;
+    top: 48%;
+    z-index: 2;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    padding: 0 0.5rem;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.sliderBtn:hover {
+    color: white;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.sliderBtn.prevImg {
+    left: 0.5rem;
+}
+
+.sliderBtn.nextImg {
+    right: 0.6rem;
+}
+
+@keyframes scaleIn {
+    0% {
+        scale: 0;
+    }
+
+    100% {
+        scale: 1;
+    }
+}
