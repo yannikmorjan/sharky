@@ -13,15 +13,17 @@ let gameOver = false;
 function init() {
     gameIsPaused = true;
     gameHasStarted = false;
+    closeSettings();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
 function startGame() {
-    changePannels(returnHeader,returnNothing,returnNothing);
+    changePannels(returnHeader,returnNothing,returnController);
     document.getElementById('pannel-container').classList.remove('startscreen');
     gameHasStarted = true;
     gameIsPaused = false;
+    bindBtnPressEvents();
 }
 
 function restartGame() {
@@ -68,7 +70,7 @@ function closeSettings() {
         changePannels(returnHeader,returnStartBtn,returnFooter);
     } else if(gameHasStarted && !gameOver && !gameWinner) {
         gameIsPaused = false;
-        changePannels(returnHeader,returnNothing,returnNothing);
+        changePannels(returnHeader,returnNothing,returnController);
     } else if (gameHasStarted && !gameOver && gameWinner) {
         changePannels(returnHeader,returnWinScreen,returnFooter);
     } else if (gameHasStarted && gameOver && !gameWinner) {

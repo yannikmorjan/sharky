@@ -24,8 +24,8 @@ function returnSettings() {
 }
 
 function returnFooter() {
-    return `<a href="#">Data Privacy</a>
-        <a href="#">Imprint</a>`;
+    return `<a href="legal.html">Data Privacy</a>
+        <a href="imprint.html">Imprint</a>`;
 }
 
 function returnHeader() {
@@ -68,6 +68,25 @@ function returnInstructions() {
                 <button class="sliderBtn prevImg" onclick="instructionSlider(-1)">&#8249;</button>
                 <button class="sliderBtn nextImg" onclick="instructionSlider(1)">&#8250;</button>
                 <img id="instruction-img" src="${instructionImgUrl[instructionImgId]}" alt="Instruction Image">        
+            </div>
+        </div>`;
+}
+
+function returnController() {
+    return `
+        <div class="mobileController">
+            <div class="mobileControllerSection">
+                <img id="btn-left" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-left.png">
+                <img id="btn-right" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-right.png">
+            </div>
+            <div class="mobileControllerSection">
+                <img id="btn-bubble" class="mobileControllerBtn" src="img/6.Botones/Key/bubble.png">
+                <img id="btn-slap" class="mobileControllerBtn" src="img/6.Botones/Key/finslap.png">
+                <img id="btn-poison" class="mobileControllerBtn" src="img/6.Botones/Key/poison.png">
+            </div>
+            <div class="mobileControllerSection">
+                <img id="btn-up" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-up.png">
+                <img id="btn-down" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-down.png">
             </div>
         </div>`;
 }

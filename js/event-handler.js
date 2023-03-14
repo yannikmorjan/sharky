@@ -1,3 +1,4 @@
+// Keyboard
 window.addEventListener('keydown', (e) => {
     if(e.keyCode == 39 || e.keyCode == 68) {
         keyboard.RIGHT = true;
@@ -51,7 +52,68 @@ window.addEventListener('keyup', (e) => {
     }
 });
 
+// Fullscreen
 document.addEventListener('fullscreenchange', exitFullscreenEventHandler);
 document.addEventListener('webkitfullscreenchange', exitFullscreenEventHandler);
 document.addEventListener('mozfullscreenchange', exitFullscreenEventHandler);
 document.addEventListener('MSFullscreenChange', exitFullscreenEventHandler);
+
+// Mobile Controller
+function bindBtnPressEvents() {
+    document.getElementById('btn-left').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+    document.getElementById('btn-left').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+    document.getElementById('btn-right').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    document.getElementById('btn-right').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+    document.getElementById('btn-up').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.UP = true;
+    });
+    document.getElementById('btn-up').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.UP = false;
+    });
+    document.getElementById('btn-down').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.DOWN = true;
+    });
+    document.getElementById('btn-down').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.DOWN = false;
+    });
+    document.getElementById('btn-bubble').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.H = true;
+    });
+    document.getElementById('btn-bubble').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.H = false;
+    });
+    document.getElementById('btn-slap').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+    document.getElementById('btn-slap').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+    document.getElementById('btn-poison').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.J = true;
+    });
+    document.getElementById('btn-poison').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.J = false;
+    });
+}

@@ -269,6 +269,33 @@ canvas {
     right: 0.6rem;
 }
 
+.mobileController {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 720px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+}
+
+.mobileControllerSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.mobileControllerBtn {
+    height: 25px;
+    width: 25px;
+    padding: 10px;
+    border: solid 2px white;
+    border-radius: 15px;
+    filter: brightness(0) saturate(100%) invert();
+}
+
 @keyframes scaleIn {
     0% {
         scale: 0;
