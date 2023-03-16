@@ -99,6 +99,7 @@ function bindBtnPressEvents() {
     document.getElementById('btn-bubble').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.H = false;
+        world.character.isBubbleAttacking = false;
     });
     document.getElementById('btn-slap').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -107,6 +108,9 @@ function bindBtnPressEvents() {
     document.getElementById('btn-slap').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.SPACE = false;
+        world.character.isFinSlaping = false;
+        world.character.invincible = false;
+        world.character.finSlaped = false;
     });
     document.getElementById('btn-poison').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -115,5 +119,6 @@ function bindBtnPressEvents() {
     document.getElementById('btn-poison').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.J = false;
+        world.character.isBubbleAttacking = false;
     });
 }

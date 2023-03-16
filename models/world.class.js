@@ -134,7 +134,7 @@ class World {
         this.level.coins.forEach( (coin) => {
             if(this.character.isColliding(coin)){
                 this.character.collectedCoin();
-                this.statusBars[2].setPercentage(this.character.coins*20);
+                this.statusBars[2].setPercentage(this.character.coins*(100/this.level.collectibleCoins));
                 this.level.coins.splice(this.level.coins.indexOf(coin),1);
                 this.playSound(coin.collect_sound);            
             }
