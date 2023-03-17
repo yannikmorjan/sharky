@@ -1,0 +1,45 @@
+@-moz-keyframes spin {
+    25% {
+        -webkit-transform: rotate(90deg);
+    }
+    50% {
+        -webkit-transform: rotate(90deg);
+    }
+    75% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    25% {
+        -webkit-transform: rotate(90deg);
+    }
+    50% {
+        -webkit-transform: rotate(90deg);
+    }
+    75% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+@keyframes spin {
+    25% {
+        -webkit-transform: rotate(90deg);
+    }
+    50% {
+        -webkit-transform: rotate(90deg);
+    }
+    75% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        scale: 0;
+    }
+
+    100% {
+        scale: 1;
+    }
+}

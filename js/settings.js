@@ -1,8 +1,8 @@
 function returnSettings() {
     return `<div id="setting-pannel" class="settingPannel">
         <div class="settingHeader">
-            <span>Settings</span>
-            <img src="img/x-mark-32.png" class="closeMark" onclick="closeSettings()">
+            <span class="settingTitle">Settings</span>
+            <img src="img/x-mark-32.png" class="closeMark" onclick="calcPannelStructur()">
         </div>
         <a id="sound-button" onclick="toggleSound(this)">
             <img>
@@ -52,7 +52,7 @@ function returnWinScreen() {
                 <img src="img/4. Marcadores/1. Coins/2.png" style="width:45px; height:45px;">
                 <span style="font-size:32px">${world.character.coins} / ${world.level.collectibleCoins}</span>
             </div>
-            <img class="tryAgainBtn" onclick="console.log('You Won -> Play Again')" src="img/6.Botones/Start/2.png">
+            <img class="tryAgainBtn" onclick="restartGame()" src="img/6.Botones/Start/2.png">
         </div>`;
 }
 
@@ -61,12 +61,12 @@ function returnInstructions() {
         <div id="setting-pannel" class="settingPannel">
             <div class="settingHeader">
                 <button class="backBtn" onclick="openSettings()">&#171;</button>
-                <span>Instructions</span>
-                <img src="img/x-mark-32.png" class="closeMark" onclick="closeSettings()">
+                <span class="settingTitle">Instructions</span>
+                <img src="img/x-mark-32.png" class="closeMark" onclick="calcPannelStructur()">
             </div>
             <div class="slider">
-                <button class="sliderBtn prevImg" onclick="instructionSlider(-1)">&#8249;</button>
-                <button class="sliderBtn nextImg" onclick="instructionSlider(1)">&#8250;</button>
+                <button class="sliderBtn prevImg" onclick="stopSliderAutomation(), instructionSlider(-1)">&#8249;</button>
+                <button class="sliderBtn nextImg" onclick="stopSliderAutomation(), instructionSlider(1)">&#8250;</button>
                 <img id="instruction-img" src="${instructionImgUrl[instructionImgId]}" alt="Instruction Image">        
             </div>
         </div>`;

@@ -3,8 +3,9 @@ let world;
 const keyboard = new Keyboard();
 let fullscreen = false;
 let intervalIds = [];
-const instructionImgUrl = ['img/6.Botones/Instructions 0-placeholder.png','img/6.Botones/Instructions 1.png', 'img/6.Botones/Instructions 2.png'];
+const instructionImgUrl = ['img/6.Botones/Instructions 0.png','img/6.Botones/Instructions 1.png', 'img/6.Botones/Instructions 2.png'];
 let instructionImgId = 0;
+let sliderAutomation;
 let gameIsPaused = true;
 let gameHasStarted = false;
 let gameWinner = false;
@@ -13,9 +14,10 @@ let gameOver = false;
 function init() {
     gameIsPaused = true;
     gameHasStarted = false;
-    closeSettings();
+    calcPannelStructur();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    checkMobile();
 }
 
 function startGame() {
@@ -27,13 +29,14 @@ function startGame() {
 }
 
 function restartGame() {
+    // location.reload();
     intervalIds.forEach(clearInterval);
     intervalIds = [];
-    world = new World(canvas, keyboard);
     gameIsPaused = false;
     gameHasStarted = true;
     gameWinner = false;
     gameOver = false;
+    world = new World(canvas, keyboard);
     changePannels(returnHeader,returnNothing,returnNothing);
 }
 
@@ -48,7 +51,7 @@ function setPausableFn(self, fn) {
 
 function openSettings() {
     if(gameHasStarted) gameIsPaused = true;
-    changePannels(returnHeader,returnSettings,returnFooter);
+    changePannels(returnNothing,returnSettings,returnFooter);
     settingsUpdate();
 }
 
@@ -65,7 +68,7 @@ function settingsUpdate() {
     }
 }
 
-function closeSettings() {
+function calcPannelStructur() {
     if(!gameHasStarted && !gameOver && !gameWinner) {
         changePannels(returnHeader,returnStartBtn,returnFooter);
     } else if(gameHasStarted && !gameOver && !gameWinner) {
@@ -157,7 +160,8 @@ function toggleHitboxes() {
 }
 
 function openInstructions() {
-    changePannels(returnHeader,returnInstructions,returnFooter);
+    changePannels(returnNothing,returnInstructions,returnFooter);
+    initSliderAutomation();
 }
 
 function instructionSlider(offset) {
@@ -166,4 +170,49 @@ function instructionSlider(offset) {
     if(instructionImgId < 0) instructionImgId = instructionImgUrl.length - 1;
     if(instructionImgId >= instructionImgUrl.length) instructionImgId = 0;
     image.src = instructionImgUrl[instructionImgId];
+    initSliderAutomation();
+}
+
+function initSliderAutomation() {
+    sliderAutomation = setTimeout(() => {
+        instructionSlider(1);
+    },5000);
+}
+
+function stopSliderAutomation() {
+    clearTimeout(sliderAutomation);
+}
+
+function detectMob() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent) ||
+        (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+}
+
+function checkMobile() {
+    if(detectMob()) {
+        checkScreenOrientation();
+    }
+}
+
+function checkScreenOrientation() {
+    window.addEventListener('resize', () => {
+        if (window.innerWidth < window.innerHeight)
+            renderNonLandscape();
+        else
+            renderLandscape();
+    });
+}
+
+function renderNonLandscape() {
+    document.getElementById('mobile-rotation-screen').classList.remove('d-none');
+    document.getElementById('title').classList.add('d-none');
+    if (!document.getElementById('canvas-container').className.includes('d-none'))
+        document.getElementById('canvas-container').classList.add('d-none');
+}
+
+function renderLandscape() {
+    document.getElementById('title').classList.remove('d-none');
+    document.getElementById('canvas-container').classList.remove('d-none');
+    if (!document.getElementById('mobile-rotation-screen').className.includes('d-none'))
+        document.getElementById('mobile-rotation-screen').classList.add('d-none');
 }

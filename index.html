@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="img/1.Sharkie/1.IDLE/1.png">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/key-frames.css">
     <link rel="stylesheet" href="css/media-query.css">
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -47,7 +48,7 @@
 
     <img class="backgroundImage" src="img/background.jpg">
 
-    <h1 class="title">Sharky</h1>
+    <h1 id="title" class="title">Sharky</h1>
 
     <div id="canvas-container" class="canvasContainer">
         <div>
@@ -62,6 +63,10 @@
             </div>
         </div>
     </div>
-    
+    <div id="mobile-rotation-screen" class="mobileRotationScreen d-none">
+        <img class="rotate-device" src="img/mobile-phone-128.png">
+        <span>Please Rotate Device</span>
+    </div>
+
 </body>
 </html>
