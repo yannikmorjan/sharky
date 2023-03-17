@@ -29,15 +29,15 @@ function startGame() {
 }
 
 function restartGame() {
-    // location.reload();
-    intervalIds.forEach(clearInterval);
-    intervalIds = [];
-    gameIsPaused = false;
-    gameHasStarted = true;
-    gameWinner = false;
-    gameOver = false;
-    world = new World(canvas, keyboard);
-    changePannels(returnHeader,returnNothing,returnNothing);
+    location.reload();
+    // intervalIds.forEach(clearInterval);
+    // intervalIds = [];
+    // gameIsPaused = false;
+    // gameHasStarted = true;
+    // gameWinner = false;
+    // gameOver = false;
+    // world = new World(canvas, keyboard);
+    // changePannels(returnHeader,returnNothing,returnNothing);
 }
 
 function setPausableInterval(fn, time) {
