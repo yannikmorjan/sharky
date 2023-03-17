@@ -12,6 +12,9 @@
     .canvasContainer {
         width: 100%;
     }
+    .pannelContainer {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-height: 1000px) {
@@ -34,14 +37,26 @@
     }
 }
 
-@media only screen and (max-height: 480px) {
+@media only screen and (max-height: 540px) {
     .title {
         display: none;
     }
+    .backgroundImage {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 480px) {
     /* canvas {
         height: 100vh;
     } */
     .canvasContainer {
         height: 100vh;
+    }
+    .pannelContainer {
+        height: 100vh !important;
+    }
+    .startscreen {
+        background-size: 120%;
     }
 }
