@@ -10,6 +10,7 @@ let gameIsPaused = true;
 let gameHasStarted = false;
 let gameWinner = false;
 let gameOver = false;
+let mobileMode = false;
 
 function init() {
     gameIsPaused = true;
@@ -185,14 +186,17 @@ function stopSliderAutomation() {
     clearTimeout(sliderAutomation);
 }
 
-function detectMob() {
+function detectMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent) ||
         (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 }
 
 function checkMobile() {
-    if(detectMob()) {
+    if(detectMobile()) {
         checkScreenOrientation();
+        mobileMode = true;
+    } else {
+        mobileMode = false;
     }
 }
 

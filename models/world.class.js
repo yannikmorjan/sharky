@@ -253,6 +253,7 @@ class World {
         self.checkPoisenedBubbleCollisons();
         self.checkEnemyTransitions();
         self.triggerEndboss();
+        self.getMobileControler();
         // Not yet working well    
         self.checkBarrierCollision();
     }
@@ -260,6 +261,12 @@ class World {
     playSound(element) {
         if(this.sound) {
             element.play();
+        }
+    }
+
+    getMobileControler() {
+        if(mobileMode && document.getElementById('mobile-controller').className.includes('d-none')) {
+            document.getElementById('mobile-controller').classList.remove('d-none');
         }
     }
 

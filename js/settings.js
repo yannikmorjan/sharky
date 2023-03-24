@@ -74,7 +74,7 @@ function returnInstructions() {
 
 function returnController() {
     return `
-        <div class="mobileController">
+        <div class="mobileController d-none" id="mobile-controller">
             <div class="mobileControllerSection">
                 <img id="btn-left" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-left.png">
                 <img id="btn-right" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-right.png">
