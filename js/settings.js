@@ -40,7 +40,7 @@ function returnGameOverScreen() {
     return `
         <div class="endScreen">
             <img class="endTitle" src="img/6.Botones/Tittles/Game Over/Recurso 10.png">
-            <img class="tryAgainBtn" onclick="restartGame()" src="img/6.Botones/Try again/Recurso 17.png">
+            <img class="tryAgainBtn" onclick="restartGame()" src="img/6.Botones/Try again/Recurso 17.png" style="margin-top: 40px;">
         </div>`;
 }
 
@@ -52,7 +52,7 @@ function returnWinScreen() {
                 <img src="img/4. Marcadores/1. Coins/2.png" style="width:45px; height:45px;">
                 <span style="font-size:32px">${world.character.coins} / ${world.level.collectibleCoins}</span>
             </div>
-            <img class="tryAgainBtn" onclick="restartGame()" src="img/6.Botones/Start/2.png">
+            <img class="tryAgainBtn" onclick="restartGame()" src="img/6.Botones/Start/2.png" style="margin-top: 10px;">
         </div>`;
 }
 
@@ -66,8 +66,8 @@ function returnInstructions() {
             </div>
             <div class="slider">
                 <button class="sliderBtn prevImg" onclick="stopSliderAutomation(), instructionSlider(-1)">&#8249;</button>
-                <button class="sliderBtn nextImg" onclick="stopSliderAutomation(), instructionSlider(1)">&#8250;</button>
-                <img id="instruction-img" src="${instructionImgUrl[instructionImgId]}" alt="Instruction Image">        
+                <img id="instruction-img" src="${instructionImgUrl[instructionImgId]}" alt="Instruction Image"> 
+                <button class="sliderBtn nextImg" onclick="stopSliderAutomation(), instructionSlider(1)">&#8250;</button>       
             </div>
         </div>`;
 }

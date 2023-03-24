@@ -98,6 +98,7 @@ function enterFullscreenHandler() {
     document.getElementById('canvas-frame').classList.add('d-none');
     document.getElementById('canvas').style.width = '100vw';
     document.getElementById('canvas').style.height = '100vh';
+    document.getElementById('pannel-container').classList.add('startscreenFullScreen');
     document.getElementById('top-pannel').classList.add('topBotPannelFullScreen');
     document.getElementById('mid-pannel').classList.add('midPannelFullScreen');
     document.getElementById('bottom-pannel').classList.add('topBotPannelFullScreen');
@@ -120,6 +121,7 @@ function exitFullscreenHandler() {
     document.getElementById('canvas-frame').classList.remove('d-none');
     document.getElementById('canvas').style.width = '720px';
     document.getElementById('canvas').style.height = '480px';
+    document.getElementById('pannel-container').classList.remove('startscreenFullScreen');
     document.getElementById('top-pannel').classList.remove('topBotPannelFullScreen');
     document.getElementById('mid-pannel').classList.remove('midPannelFullScreen');
     document.getElementById('bottom-pannel').classList.remove('topBotPannelFullScreen');

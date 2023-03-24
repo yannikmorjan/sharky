@@ -31,8 +31,8 @@ body {
     position: relative;
     font-size: 64px;
     text-shadow: 5px 5px 5px rgba(0,0,0, 0.8);
-    margin-bottom: 150px;
-    margin-top: 100px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .canvasContainer {
@@ -64,13 +64,17 @@ canvas {
     z-index: 1;
     display: flex;
     flex-direction: column;
-    width: 720px;
-    height: 480px;
+    width: 100%;
+    height: 100%;
 }
 
 .startscreen {
     background: url('../img/3. Background/Mesa de trabajo 1.png') no-repeat center center;
     background-size: 120%;
+}
+
+.startscreenFullScreen {
+    background-size: cover !important;
 }
 
 .startBtn {
@@ -93,7 +97,6 @@ canvas {
 }
 
 .tryAgainBtn {
-    margin-top: 50px;
     width: 208px;
     height: 67.5px;
     cursor: pointer;
@@ -107,6 +110,7 @@ canvas {
 
 .topPannel {
     height: 50px;
+    width: 100%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -144,6 +148,8 @@ canvas {
 }
 
 .settingPannel {
+    display: flex;
+    justify-content: center;
     position: relative;
     backdrop-filter: blur(4px);
     border: 2px solid white;
@@ -199,6 +205,7 @@ canvas {
 
 .bottomPannel {
     height: 50px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -233,27 +240,28 @@ canvas {
 .slider {
     width: 600px;
     height: 300px;
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .slider img {
-    position: absolute;
     inset: 0;
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     filter: none; 
 }
 
 .sliderBtn {
-    position: absolute;
+    height: 50px;
     background: none;
     border: none;
     color: rgba(255,255,255,0.5);
     font-size: 2rem;
-    top: 48%;
     z-index: 2;
     cursor: pointer;
     border-radius: 0.25rem;
@@ -289,7 +297,7 @@ canvas {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 20px;
+    gap: 10px;
 }
 
 .mobileControllerBtn {
@@ -325,6 +333,7 @@ canvas {
 .mobileRotationScreen span {
     font-size: 32px;
     text-shadow: 5px 5px 5px rgba(0,0,0, 0.8);
+    text-align: center;
 }
 
 .rotate-device {
