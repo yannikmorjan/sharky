@@ -16,7 +16,7 @@ function returnSettings() {
             <img src="img/help-32.png">
             <span>Instruction</span>
         </a>
-        <a id="hitboxes-button" onclick="toggleHitboxes()">
+        <a id="hitboxes-button" onclick="toggleHitboxes(this)">
             <img src="img/square-32.png">
             <span>Show Hitboxes</span>
         </a>

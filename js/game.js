@@ -67,6 +67,11 @@ function settingsUpdate() {
     } else if(!world.sound) {
         document.getElementById('sound-button').childNodes[1].src = 'img/mute-32.png';
     }
+    if(world.hitboxes) {
+        document.getElementById('hitboxes-button').childNodes[3].innerHTML = 'Hide Hitboxes';
+    } else if(!world.hitboxes) {
+        document.getElementById('hitboxes-button').childNodes[3].innerHTML = 'Show Hitboxes';
+    }
 }
 
 function calcPannelStructur() {
@@ -158,8 +163,13 @@ function chooseGameSound() {
     }
 }
 
-function toggleHitboxes() {
+function toggleHitboxes(element) {
     world.hitboxes = !world.hitboxes
+    if(world.hitboxes) {
+        element.childNodes[3].innerHTML = 'Hide Hitboxes';
+    } else {
+        element.childNodes[3].innerHTML = 'Show Hitboxes';
+    }
 }
 
 function openInstructions() {
