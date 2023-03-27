@@ -2,10 +2,10 @@ class PufferFish extends EnemyObject {
 
     width = 50;
     height = 50;
-    offsetX = 0;
+    offsetX = 2.5;
     offsetY = 0;
-    offsetWidth = 0;
-    offsetHeight = 10;
+    offsetWidth = 10;
+    offsetHeight = 15;
 
     transition = false;
     blownUp = false;

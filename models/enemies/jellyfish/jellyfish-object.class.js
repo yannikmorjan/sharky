@@ -2,10 +2,10 @@ class JellyFish extends EnemyObject {
 
     width = 50;
     height = 50;
-    offsetX = 0;
-    offsetY = 0;
-    offsetWidth = 0;
-    offsetHeight = 10;
+    offsetX = 5;
+    offsetY = 5;
+    offsetWidth = 10;
+    offsetHeight = 15;
     currentImage = 0;
     
     animate(self) {

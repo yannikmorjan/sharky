@@ -123,10 +123,10 @@ class Character extends MovableObject {
     height = 200;
     x = 0;
     y = 100;
-    offsetX = 40;
-    offsetY = 95;
-    offsetWidth = 80;
-    offsetHeight = 140;
+    offsetX = 50;
+    offsetY = 100;
+    offsetWidth = 100;
+    offsetHeight = 150;
     speed = 0;
     maxSpeed = 5;
     acceloration = 0.1;

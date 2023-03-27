@@ -61,10 +61,10 @@ class Endboss extends EnemyObject {
     currentImage = 0;
     width = 250;
     height = 250;
-    offsetX = 10;
-    offsetY = 80;
-    offsetWidth = 25;
-    offsetHeight = 120;
+    offsetX = 20;
+    offsetY = 100;
+    offsetWidth = 40;
+    offsetHeight = 150;
     triggerPoint;
     firstContact = false;
     intro = true;
