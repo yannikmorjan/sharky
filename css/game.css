@@ -109,7 +109,9 @@ canvas {
 }
 
 .topPannel {
-    height: 50px;
+    position: absolute;
+    z-index: 3;
+    height: 10%;
     width: 100%;
     display: flex;
     justify-content: end;
@@ -134,8 +136,10 @@ canvas {
 }
 
 .midPannel {
+    position: absolute;
+    z-index: 2;
     width: 100%;
-    height: 380px;
+    height: 80%;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     display: flex;
     justify-content: center;
@@ -204,7 +208,9 @@ canvas {
 }
 
 .bottomPannel {
-    height: 50px;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;

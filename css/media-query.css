@@ -8,9 +8,6 @@
 @media only screen and (max-width: 720px) {
     .canvasContainer,
     .pannel-container,
-    .topPannel,
-    .midPannel,
-    .bottomPannel,
     canvas {
         width: 100vw;
     }
@@ -58,13 +55,6 @@
     canvas {
         height: 100vh;
     }
-    .topPannel,
-    .bottomPannel {
-        height: 10vh;
-    }
-    .midPannel {
-        height: 80vh;
-    }
     .startscreen {
         background-size: 175%;
     }
@@ -104,13 +94,6 @@
         margin-top: 50px;
         width: 100px;
         height: 35px;
-    }
-}
-
-@media only screen and (max-width: 720px) and (min-height: 481px) and (max-height: 620px) {
-    .bottomPannel {
-        position: fixed;
-        bottom: 0;
     }
 }
 
