@@ -3,6 +3,7 @@ class Level {
     enemies;
     backgrounds;
     barriers;
+    barrierColider = [];
     coins;
     poisons;
     hearts;
@@ -22,8 +23,12 @@ class Level {
         this.poisons = poisons;
         this.hearts = hearts;
         this.barriers = barriers;
+        barriers.forEach(barrier => {
+            barrier.rectColider.forEach(colider => {
+                this.barrierColider.push(colider)
+            })
+        });
         this.backgrounds = [bgL5, bgL4, bgL3, bgL2, bgL1];
-        
         this.game_sound.loop = true;
         this.ambience_sound.loop = true;
         this.boss_sound.loop = true;

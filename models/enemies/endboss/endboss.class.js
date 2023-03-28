@@ -105,8 +105,9 @@ class Endboss extends EnemyObject {
             } else if(self.isHurt()) {
                 self.playAnimation(self.IMAGES_HURT);
             } else if(self.attacking) {
-                self.playAnimation(self.IMAGES_ATTACK);
-                self.attacking = false;
+                self.playAnimationOnce(self.IMAGES_ATTACK);
+                if(self.currentImage % self.IMAGES_ATTACK.length == self.IMAGES_ATTACK.length-1)
+                    self.attacking = false;
             } else {
                 self.playAnimation(self.IMAGES_SWIM);
             }

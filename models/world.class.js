@@ -217,19 +217,32 @@ class World {
     }
 
     checkBarrierCollision() {
-        this.level.barriers.forEach( (barrier) => {
-            for (let i = 0; i < barrier.rectColider.length; i++) {
-                let result = this.character.isBlocked(barrier.rectColider[i])
-                if(result == null){ 
-                    continue;
-                } else {
+        for(let i = 0; i < this.level.barrierColider.length; i++) {
+            this.resetDetectionCycle(i);
+            let result = this.character.isBlocked(this.level.barrierColider[i])
+            if(result != null) {
+                if(result.bottom){ 
                     this.character.bottomBlocked = result.bottom;
+                } else if(result.right){
                     this.character.rightBlocked = result.right;
+                } else if(result.left){
                     this.character.leftBlocked = result.left;
+                } else if(result.top){
                     this.character.topBlocked = result.top;
                 }
+            } else {
+                continue;
             }
-        })
+        }
+    }
+
+    resetDetectionCycle(i) {
+        if(i == 0) {
+            this.character.bottomBlocked = false;
+            this.character.rightBlocked = false;
+            this.character.leftBlocked = false;
+            this.character.topBlocked = false;
+        }
     }
 
     triggerEndboss() {
