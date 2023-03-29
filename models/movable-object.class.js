@@ -20,38 +20,39 @@ class MovableObject extends DrawableObject {
     }
 
     isBlocked(obj) {
-        if((this.x + this.offsetX + this.width - this.offsetWidth) > obj.x &&
-        (this.x + this.offsetX) < (obj.x + obj.width) &&
-        (this.y + this.offsetY + this.height - this.offsetHeight) > obj.y &&
-        (this.y + this.offsetY) < (obj.y + obj.height)) {
-            let charY = this.y + this.offsetY;
-            let charX = this.x + this.offsetX;
-            let charWidth = this.width - this.offsetWidth;
-            let charHeight = this.height - this.offsetHeight;
-            let p1Top = {x:charX + (1/3 * charWidth), y:charY};
-            let p2Top = {x:charX + (1/2 * charWidth), y:charY};
-            let p3Top = {x:charX + (2/3 * charWidth), y:charY};
-            let p1Bottom = {x:charX + (1/3 * charWidth), y:charY + charHeight};
-            let p2Bottom = {x:charX + (1/2 * charWidth), y:charY + charHeight};
-            let p3Bottom = {x:charX + (2/3 * charWidth), y:charY + charHeight};
-            let p1Left = {x:charX, y:charY + (1/3 * charHeight)};
-            let p2Left = {x:charX, y:charY + (1/2 * charHeight)};
-            let p3Left = {x:charX, y:charY + (2/3 * charHeight)};
-            let p1Right = {x:charX + charWidth, y:charY + (1/3 * charHeight)};
-            let p2Right = {x:charX + charWidth, y:charY + (1/2 * charHeight)};
-            let p3Right = {x:charX + charWidth, y:charY + (2/3 * charHeight)};
+        return (this.x + this.offsetX + this.width - this.offsetWidth) > obj.x &&
+            (this.x + this.offsetX) < (obj.x + obj.width) &&
+            (this.y + this.offsetY + this.height - this.offsetHeight) > obj.y &&
+            (this.y + this.offsetY) < (obj.y + obj.height);
+    }
 
-            if(this.isPointInsideRect(p1Top,p2Top,p3Top,obj)) {
-                return 'top';
-            } if(this.isPointInsideRect(p1Bottom,p2Bottom,p3Bottom,obj)) {
-                return 'bottom';
-            } if(this.isPointInsideRect(p1Left,p2Left,p3Left,obj)) {
-                return 'left';
-            } if(this.isPointInsideRect(p1Right,p2Right,p3Right,obj)) {
-                return 'right';
-            } 
+    calcBlocking(obj) {
+        let charY = this.y + this.offsetY;
+        let charX = this.x + this.offsetX;
+        let charWidth = this.width - this.offsetWidth;
+        let charHeight = this.height - this.offsetHeight;
+        let p1Top = {x:charX + (1/3 * charWidth), y:charY};
+        let p2Top = {x:charX + (1/2 * charWidth), y:charY};
+        let p3Top = {x:charX + (2/3 * charWidth), y:charY};
+        let p1Bottom = {x:charX + (1/3 * charWidth), y:charY + charHeight};
+        let p2Bottom = {x:charX + (1/2 * charWidth), y:charY + charHeight};
+        let p3Bottom = {x:charX + (2/3 * charWidth), y:charY + charHeight};
+        let p1Left = {x:charX, y:charY + (1/3 * charHeight)};
+        let p2Left = {x:charX, y:charY + (1/2 * charHeight)};
+        let p3Left = {x:charX, y:charY + (2/3 * charHeight)};
+        let p1Right = {x:charX + charWidth, y:charY + (1/3 * charHeight)};
+        let p2Right = {x:charX + charWidth, y:charY + (1/2 * charHeight)};
+        let p3Right = {x:charX + charWidth, y:charY + (2/3 * charHeight)};
+
+        if(this.isPointInsideRect(p1Top,p2Top,p3Top,obj)) {
+            return 'top';
+        } if(this.isPointInsideRect(p1Bottom,p2Bottom,p3Bottom,obj)) {
+            return 'bottom';
+        } if(this.isPointInsideRect(p1Left,p2Left,p3Left,obj)) {
+            return 'left';
+        } if(this.isPointInsideRect(p1Right,p2Right,p3Right,obj)) {
+            return 'right';
         }
-        return null;
     }
 
     isPointInsideRect(point1, point2, point3, rect) {

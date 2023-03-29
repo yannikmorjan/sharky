@@ -6,6 +6,7 @@ class PufferFish extends EnemyObject {
     offsetY = 0;
     offsetWidth = 10;
     offsetHeight = 15;
+    blocked = false;
 
     transition = false;
     blownUp = false;
@@ -53,7 +54,7 @@ class PufferFish extends EnemyObject {
         } else if (self.isDead()) {
             self.damage = 0;
             self.speed = 1;
-            if(self.y <= 400) {
+            if(self.y <= 400 || self.blocked) {
                 self.moveDown();
             }    
         }

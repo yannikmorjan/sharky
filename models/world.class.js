@@ -208,9 +208,16 @@ class World {
                     enemy.transition = true;
                     enemy.offsetHeight = 0;   
                 }
-                if(enemy.isDead && enemy.y >= 400) {
-                    this.level.poisons.push(new Poison(enemy.x, enemy.y));
-                    this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
+                if(enemy.isDead){
+                    for(let i = 0; i < this.level.barrierColider.length; i++) {
+                        if(enemy.isBlocked(this.level.barrierColider[i])) {
+                            enemy.blocked = true;
+                        }
+                    };
+                    if(enemy.blocked || enemy.y >= 400) {
+                        this.level.poisons.push(new Poison(enemy.x, enemy.y));
+                        this.level.enemies.splice(this.level.enemies.indexOf(enemy),1);
+                    } 
                 }
             }
         })
@@ -218,26 +225,32 @@ class World {
 
     checkBarrierCollision() {
         for(let i = 0; i < this.level.barrierColider.length; i++) {
-            this.resetDetectionCycle(i);
-            let result = this.character.isBlocked(this.level.barrierColider[i])
-            if(result != null) {
-                console.log(result)
-                if(result == 'bottom'){ 
-                    this.character.bottomBlocked = true;
-                } else if(result == 'right'){
-                    this.character.rightBlocked = true;
-                } else if(result == 'left'){
-                    this.character.leftBlocked = true;
-                } else if(result == 'top'){
-                    this.character.topBlocked = true;
+            this.resetBlockingCycle(i);
+            if(this.character.isBlocked(this.level.barrierColider[i])){
+                let result = this.character.calcBlocking(this.level.barrierColider[i])
+                switch(result) {
+                    case 'bottom':
+                        this.character.bottomBlocked = true;
+                        break;
+                    case 'right':
+                        this.character.rightBlocked = true;
+                        break;
+                    case 'left':
+                        this.character.leftBlocked = true;
+                        break;
+                    case 'top':
+                        this.character.topBlocked = true;
+                        break;
+                    default:
+                        continue;
                 }
             } else {
                 continue;
-            }
+            } 
         }
     }
 
-    resetDetectionCycle(i) {
+    resetBlockingCycle(i) {
         if(i == 0) {
             this.character.bottomBlocked = false;
             this.character.rightBlocked = false;
