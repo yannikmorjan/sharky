@@ -221,14 +221,15 @@ class World {
             this.resetDetectionCycle(i);
             let result = this.character.isBlocked(this.level.barrierColider[i])
             if(result != null) {
-                if(result.bottom){ 
-                    this.character.bottomBlocked = result.bottom;
-                } else if(result.right){
-                    this.character.rightBlocked = result.right;
-                } else if(result.left){
-                    this.character.leftBlocked = result.left;
-                } else if(result.top){
-                    this.character.topBlocked = result.top;
+                console.log(result)
+                if(result == 'bottom'){ 
+                    this.character.bottomBlocked = true;
+                } else if(result == 'right'){
+                    this.character.rightBlocked = true;
+                } else if(result == 'left'){
+                    this.character.leftBlocked = true;
+                } else if(result == 'top'){
+                    this.character.topBlocked = true;
                 }
             } else {
                 continue;
@@ -266,8 +267,7 @@ class World {
         self.checkPoisenedBubbleCollisons();
         self.checkEnemyTransitions();
         self.triggerEndboss();
-        self.getMobileControler();
-        // Not yet working well    
+        self.getMobileControler();  
         self.checkBarrierCollision();
     }
 

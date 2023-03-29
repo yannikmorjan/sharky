@@ -11,10 +11,10 @@ class Tunnel extends BarrierObject {
         this.x = x;
         this.rectColider = [
             // BottomFrame
-            {x: (this.x), y: (this.y + this.height), width: (this.width - 10), height: (-50)},
-            {x: (this.x + 20), y: (this.y + this.height -50), width: (this.width - 50), height: (-30)},
-            {x: (this.x + 100), y: (this.y + this.height -80), width: (this.width - 150), height: (-20)},
-            {x: (this.x + 200), y: (this.y + this.height -100), width: (this.width - 300), height: (-20)},
+            {x: (this.x), y: (this.y + this.height - 50), width: (this.width - 10), height: (50)},
+            {x: (this.x + 20), y: (this.y + this.height - 80), width: (this.width - 50), height: (30)},
+            {x: (this.x + 100), y: (this.y + this.height - 100), width: (this.width - 150), height: (20)},
+            {x: (this.x + 200), y: (this.y + this.height - 120), width: (this.width - 300), height: (20)},
             // TopFrame
             {x: (this.x + 10), y: (this.y), width: (this.width - 20), height: (this.height - 380)},
             {x: (this.x + 40), y: (this.y + this.height - 380), width: (this.width - 620), height: (this.height - 450)},

@@ -24,26 +24,49 @@ class MovableObject extends DrawableObject {
         (this.x + this.offsetX) < (obj.x + obj.width) &&
         (this.y + this.offsetY + this.height - this.offsetHeight) > obj.y &&
         (this.y + this.offsetY) < (obj.y + obj.height)) {
-            
-            const top_diff = obj.y + obj.height - this.y + this.offsetY;
-            const bottom_diff = this.y + this.offsetY + this.height - this.offsetHeight - obj.y;
-            const left_diff = obj.x + obj.width - this.x + this.offsetX;
-            const right_diff = this.x + this.offsetX + this.width - this.offsetWidth - obj.x;
-                  
-            const min = Math.min(bottom_diff, top_diff, left_diff, right_diff);
-            
-            return {
-                bottom: bottom_diff == min,
-                right: right_diff == min,
-                left: left_diff == min,
-                top: top_diff == min
-            }
+            let charY = this.y + this.offsetY;
+            let charX = this.x + this.offsetX;
+            let charWidth = this.width - this.offsetWidth;
+            let charHeight = this.height - this.offsetHeight;
+            let p1Top = {x:charX + (1/3 * charWidth), y:charY};
+            let p2Top = {x:charX + (1/2 * charWidth), y:charY};
+            let p3Top = {x:charX + (2/3 * charWidth), y:charY};
+            let p1Bottom = {x:charX + (1/3 * charWidth), y:charY + charHeight};
+            let p2Bottom = {x:charX + (1/2 * charWidth), y:charY + charHeight};
+            let p3Bottom = {x:charX + (2/3 * charWidth), y:charY + charHeight};
+            let p1Left = {x:charX, y:charY + (1/3 * charHeight)};
+            let p2Left = {x:charX, y:charY + (1/2 * charHeight)};
+            let p3Left = {x:charX, y:charY + (2/3 * charHeight)};
+            let p1Right = {x:charX + charWidth, y:charY + (1/3 * charHeight)};
+            let p2Right = {x:charX + charWidth, y:charY + (1/2 * charHeight)};
+            let p3Right = {x:charX + charWidth, y:charY + (2/3 * charHeight)};
+
+            if(this.isPointInsideRect(p1Top,p2Top,p3Top,obj)) {
+                return 'top';
+            } if(this.isPointInsideRect(p1Bottom,p2Bottom,p3Bottom,obj)) {
+                return 'bottom';
+            } if(this.isPointInsideRect(p1Left,p2Left,p3Left,obj)) {
+                return 'left';
+            } if(this.isPointInsideRect(p1Right,p2Right,p3Right,obj)) {
+                return 'right';
+            } 
         }
         return null;
     }
-          
-    
 
+    isPointInsideRect(point1, point2, point3, rect) {
+        if (point1.x > rect.x && point1.x < (rect.x + rect.width) &&
+            point1.y > rect.y && point1.y < (rect.y + rect.height) ||
+            point2.x > rect.x && point2.x < (rect.x + rect.width) &&
+            point2.y > rect.y && point2.y < (rect.y + rect.height) ||
+            point3.x > rect.x && point3.x < (rect.x + rect.width) &&
+            point3.y > rect.y && point3.y < (rect.y + rect.height)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+          
     moveLeft() {
         this.x -= this.speed;
     }
