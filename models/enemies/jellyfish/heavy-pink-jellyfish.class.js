@@ -7,10 +7,10 @@ class HeavyPinkJellyFish extends JellyFish {
         'img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png'
     ];
     IMAGES_DEAD = [
-        'img/2.Enemy/2 Jelly fish/Dead/pink/P1.png',
-        'img/2.Enemy/2 Jelly fish/Dead/pink/P2.png',
-        'img/2.Enemy/2 Jelly fish/Dead/pink/P3.png',
-        'img/2.Enemy/2 Jelly fish/Dead/pink/P4.png'
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P1.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P2.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P3.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P4.png'
     ];
 
     damage = 30;
