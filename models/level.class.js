@@ -7,8 +7,8 @@ class Level {
     coins;
     poisons;
     hearts;
-    level_end_x = 1440*5;
-    level_start_x = 1440*(-3);
+    level_start_x;
+    level_end_x;
     collectibleCoins;
     ambience_sound = new Audio('audio/ambience_1.mp3');
     game_sound = new Audio('audio/gamesound.mp3');
@@ -16,7 +16,9 @@ class Level {
     win_sound = new Audio('audio/gamewin.mp3');
     lose_sound = new Audio('audio/gameover.mp3');
 
-    constructor(enemies, coins, poisons, hearts, barriers, bgL5, bgL4, bgL3, bgL2, bgL1) {
+    constructor(lvlArea, enemies, coins, poisons, hearts, barriers, bgL5, bgL4, bgL3, bgL2, bgL1) {
+        this.level_start_x = lvlArea[0];
+        this.level_end_x = lvlArea[1];
         this.enemies = enemies;
         this.coins = coins;
         this.collectibleCoins = coins.length;

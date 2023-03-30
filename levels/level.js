@@ -6,6 +6,10 @@ function initLevel(lvl) {
 
 const level1 = new Level(
     [
+        -720,
+        2400
+    ],
+    [
         new LilaJellyFish(-550, 300, 0, 100),
         new LilaJellyFish(-500, 300, 0, 100),
         new LilaJellyFish(-450, 300, 0, 100),

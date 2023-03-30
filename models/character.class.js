@@ -173,26 +173,30 @@ class Character extends MovableObject {
 
     movement(self) {
         if(!self.isDead()) {
-            if(!self.rightBlocked && self.world.keyboard.RIGHT && self.x < self.world.level.level_end_x) {
+            if(!self.rightBlocked && self.world.keyboard.RIGHT && self.x < (self.world.level.level_end_x + 240)) {
                 self.moveRight();
                 self.otherDirection = false;
-                self.world.level.backgrounds.forEach(l => { 
-                    l.forEach(b => {
-                        b.moveLeft();
-                        b.applySwimResistance();
-                    })
-                });
+                if(self.x < self.world.level.level_end_x && self.x > self.world.level.level_start_x) {
+                    self.world.level.backgrounds.forEach(l => { 
+                        l.forEach(b => {
+                            b.moveLeft();
+                            b.applySwimResistance();
+                        })
+                    });
+                };
                 self.applySwimResistance();
             }
-            if(!self.leftBlocked && self.world.keyboard.LEFT && self.x > self.world.level.level_start_x) {
+            if(!self.leftBlocked && self.world.keyboard.LEFT && self.x > (self.world.level.level_start_x - 240)) {
                 self.moveLeft();
                 self.otherDirection = true;
-                self.world.level.backgrounds.forEach(l => {
-                    l.forEach(b => { 
-                        b.moveRight();
-                        b.applySwimResistance();
-                    }); 
-                });
+                if(self.x > self.world.level.level_start_x && self.x < self.world.level.level_end_x) {
+                    self.world.level.backgrounds.forEach(l => {
+                        l.forEach(b => { 
+                            b.moveRight();
+                            b.applySwimResistance();
+                        }); 
+                    });
+                };
                 self.applySwimResistance();
             }
             if(!self.topBlocked && self.world.keyboard.UP && self.y > -60) {
@@ -207,7 +211,9 @@ class Character extends MovableObject {
                 self.speed = 1;
                 self.moveDown();
             }
-            self.world.camera_x = -self.x + 240;
+            if(self.x > self.world.level.level_start_x && self.x < self.world.level.level_end_x) {
+                self.world.camera_x = -self.x + 240;
+            }
         }
     }
 
