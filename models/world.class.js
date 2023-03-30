@@ -263,7 +263,6 @@ class World {
         let id = this.level.enemies.length - 1;
         if(this.character.x >= this.level.enemies[id].triggerPoint && this.level.enemies[id].firstContact != true) {
             this.statusBars.push(new StatusBar('endboss'));
-            console.log(this.statusBars);
             this.level.enemies[id].firstContact = true;
             if(this.sound) {
                 this.level.game_sound.pause();

@@ -59,7 +59,7 @@ function returnWinScreen() {
 function returnInstructions() {
     return `
         <div id="setting-pannel" class="settingPannel">
-            <div class="settingHeader">
+            <div class="instrucionHeader">
                 <button class="backBtn" onclick="openSettings()">&#171;</button>
                 <span class="settingTitle">Instructions</span>
                 <img src="img/x-mark-32.png" class="closeMark" onclick="calcPannelStructur()">
