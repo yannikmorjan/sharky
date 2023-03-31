@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = initLevel('lvl1');
+    level;
     canvas;
     ctx;
     keyboard;
@@ -15,10 +15,11 @@ class World {
     bubbles = [];
     poisonedBubbles = [];
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, lvl) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.level = initLevel(lvl);
         this.draw();
         this.setWorld();
     }
@@ -271,7 +272,6 @@ class World {
         }
     }
 
-
     run(self) {
         self.checkEnemyCollisions();
         self.checkCollectibleCollision();
@@ -290,9 +290,9 @@ class World {
     }
 
     getMobileControler() {
-        if(mobileMode && document.getElementById('mobile-controller').className.includes('d-none')) {
+        let mobileController = document.getElementById('mobile-controller');
+        if(mobileMode && mobileController && mobileController.className.includes('d-none')) {
             document.getElementById('mobile-controller').classList.remove('d-none');
         }
     }
-
 }

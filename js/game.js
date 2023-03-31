@@ -17,7 +17,7 @@ function init() {
     gameHasStarted = false;
     calcPannelStructur();
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, 'lvl1');
     checkMobile();
 }
 
@@ -30,15 +30,15 @@ function startGame() {
 }
 
 function restartGame() {
-    location.reload();
-    // intervalIds.forEach(clearInterval);
-    // intervalIds = [];
-    // gameIsPaused = false;
-    // gameHasStarted = true;
-    // gameWinner = false;
-    // gameOver = false;
-    // world = new World(canvas, keyboard);
-    // changePannels(returnHeader,returnNothing,returnNothing);
+    intervalIds.forEach(clearInterval);
+    gameIsPaused = false;
+    gameHasStarted = true;
+    gameWinner = false;
+    gameOver = false;
+    intervalIds = [];
+    world = new World(canvas, keyboard, 'lvl1');
+    checkMobile();
+    changePannels(returnHeader,returnNothing,returnController);
 }
 
 function setPausableInterval(fn, time) {
