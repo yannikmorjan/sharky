@@ -226,7 +226,7 @@ class Character extends MovableObject {
             self.bubbleAttack(self.IMAGES_NORMAL_BUBBLE, false);
         } else if(self.world.keyboard.SPACE) {
             self.finAttack(self.IMAGES_FIN_SLAP); 
-        } else if(self.world.keyboard.J && self.world.statusBars[1].percentage >= 10) {
+        } else if(self.world.keyboard.J) {
             self.bubbleAttack(self.IMAGES_POISON_BUBBLE, true);
         } else if(self.world.keyboard.RIGHT || self.world.keyboard.LEFT || self.world.keyboard.UP || self.world.keyboard.DOWN) {
             self.playAnimation(self.IMAGES_SWIM);
@@ -290,6 +290,8 @@ class Character extends MovableObject {
                 this.createPoisonBubble()
             }
             this.isBubbleAttacking = false;
+            this.world.keyboard.H = false;
+            this.world.keyboard.J = false;
         }
     }
 
@@ -309,6 +311,7 @@ class Character extends MovableObject {
             }
             if(this.currentImage == 8) {
                 this.isFinSlaping = false;
+                this.world.keyboard.SPACE = false;
             } 
         }
     }

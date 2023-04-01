@@ -15,7 +15,7 @@ window.addEventListener('keydown', (e) => {
     if(e.keyCode == 72) {
         keyboard.H = true;
     }
-    if(e.keyCode == 74) {
+    if(e.keyCode == 74 && world.statusBars[1].percentage >= 10) {
         keyboard.J = true;
     }
     if(e.keyCode == 32) {
@@ -35,20 +35,6 @@ window.addEventListener('keyup', (e) => {
     }
     if(e.keyCode == 40 || e.keyCode == 83) {
         keyboard.DOWN = false;
-    }
-    if(e.keyCode == 72) {
-        keyboard.H = false;
-        world.character.isBubbleAttacking = false;
-    }
-    if(e.keyCode == 74) {
-        keyboard.J = false;
-        world.character.isBubbleAttacking = false;
-    }
-    if(e.keyCode == 32) {
-        keyboard.SPACE = false;
-        world.character.isFinSlaping = false;
-        world.character.invincible = false;
-        world.character.finSlaped = false;
     }
 });
 
@@ -96,29 +82,13 @@ function bindBtnPressEvents() {
         e.preventDefault();
         keyboard.H = true;
     });
-    document.getElementById('btn-bubble').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.H = false;
-        world.character.isBubbleAttacking = false;
-    });
     document.getElementById('btn-slap').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.SPACE = true;
     });
-    document.getElementById('btn-slap').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.SPACE = false;
-        world.character.isFinSlaping = false;
-        world.character.invincible = false;
-        world.character.finSlaped = false;
-    });
     document.getElementById('btn-poison').addEventListener('touchstart', (e) => {
         e.preventDefault();
-        keyboard.J = true;
-    });
-    document.getElementById('btn-poison').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.J = false;
-        world.character.isBubbleAttacking = false;
+        if(world.statusBars[1].percentage >= 10)
+            keyboard.J = true;
     });
 }
