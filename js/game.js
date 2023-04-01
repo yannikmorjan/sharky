@@ -189,7 +189,7 @@ function instructionSlider(offset) {
 function initSliderAutomation() {
     sliderAutomation = setTimeout(() => {
         instructionSlider(1);
-    },5000);
+    },10000);
 }
 
 function stopSliderAutomation() {

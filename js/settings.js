@@ -60,9 +60,9 @@ function returnInstructions() {
     return `
         <div id="setting-pannel" class="settingPannel">
             <div class="instrucionHeader">
-                <button class="backBtn" onclick="openSettings()">&#171;</button>
+                <button class="backBtn" onclick="openSettings(), stopSliderAutomation()">&#171;</button>
                 <span class="settingTitle">Instructions</span>
-                <img src="img/x-mark-32.png" class="closeMark" onclick="calcPannelStructur()">
+                <img src="img/x-mark-32.png" class="closeMark" onclick="calcPannelStructur(), stopSliderAutomation()">
             </div>
             <div class="slider">
                 <button class="sliderBtn prevImg" onclick="stopSliderAutomation(), instructionSlider(-1)">&#8249;</button>
