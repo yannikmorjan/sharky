@@ -203,11 +203,11 @@ function detectMobile() {
 
 function checkMobile() {
     if(detectMobile()) {
-        checkScreenOrientation();
         mobileMode = true;
     } else {
         mobileMode = false;
     }
+    checkScreenOrientation();
 }
 
 function checkScreenOrientation() {

@@ -55,8 +55,10 @@ function initLevel(lvl) {
     }
 
     function createLevel1Poison() {
-        return [new Poison(500,400),
-            new Poison(1300,400)
+        return [new Poison(-800,330),
+            new Poison(500,400),
+            new Poison(1300,400),
+            new Poison(2500,400)
         ];
     }
 
