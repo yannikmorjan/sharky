@@ -15,6 +15,11 @@ class Poison extends CollectibleObject {
 
     collect_sound = new Audio('audio/collect_poison.mp3');
 
+    /**
+     * Creates a new poison collectible itm and sets the x and y coordinates.
+     * @param x - x position of the image
+     * @param y - y position of the image
+     */
     constructor(x,y) {
         super().loadImage(this.IMAGE_DARK_LEFT);
         this.x = x;

@@ -5,6 +5,11 @@ class RockVertical extends BarrierObject {
     width = 180;
     height = 480;
 
+    /**
+     * Creates a vertical rock barrier and sets the x and y coordinates of the object.
+     * @param x - x position of the image
+     * @param y - y position of the image
+     */
     constructor(x,y) {
         super().loadImage(this.IMAGE);
         this.y = y - this.height;

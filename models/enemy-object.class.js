@@ -9,6 +9,9 @@ class EnemyObject extends MovableObject {
     intro = false;
     dead = false;
 
+    /**
+     * Calls the moveLeft function until the end of the moving range is reached. 
+     */
     routingLeft() {
         this.moveLeft();
         if(this.x <= (this.startX - this.rangeX)){
@@ -16,6 +19,9 @@ class EnemyObject extends MovableObject {
         }
     }
     
+    /**
+     * Calls the moveRight function until the origin starting position is reached. 
+     */
     routingRight() {
         this.moveRight();
         if(this.x >= this.startX){
@@ -23,6 +29,9 @@ class EnemyObject extends MovableObject {
         }
     }
 
+    /**
+     * Calls the moveUp function until the end of the moving range is reached. 
+     */
     routingUp() {
         this.moveUp();
         if(this.y <= (this.startY - this.rangeY)){
@@ -30,6 +39,9 @@ class EnemyObject extends MovableObject {
         }
     }
 
+    /**
+     * Calls the moveDown function until the origin starting position is reached. 
+     */
     routingDown() {
         this.moveDown();
         if(this.y >= this.startY){

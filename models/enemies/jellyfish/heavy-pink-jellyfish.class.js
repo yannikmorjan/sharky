@@ -15,10 +15,17 @@ class HeavyPinkJellyFish extends JellyFish {
 
     damage = 30;
 
+    /**
+     * Creates a new heavy pink jellyfish, and it sets up the enemy's movement and
+     * animation.
+     * @param x - the x position of the enemy
+     * @param y - The y position of the enemy
+     * @param rangeX - The range of the x-axis that the enemy can move in.
+     * @param rangeY - The range of the y-axis that the enemy can move in.
+     */
     constructor(x, y, rangeX, rangeY) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png');
-        this.loadImages(this.IMAGES_SWIM);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadAllImages();
         this.x = x;
         this.y = y;
         this.rangeX = rangeX;

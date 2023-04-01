@@ -6,7 +6,10 @@ class RockHorizontal extends BarrierObject {
     height = 240;
 
     
-
+    /**
+     * Creates a horizontal rock barrier and sets the x coordinate of the object.
+     * @param x - x position of the image
+     */
     constructor(x) {
         super().loadImage(this.IMAGE);
         this.y = 480 - this.height;

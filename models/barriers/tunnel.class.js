@@ -5,6 +5,10 @@ class Tunnel extends BarrierObject {
     width = 720;
     height = 480;
 
+    /**
+     * Creates a tunnel barrier and sets the x coordinate of the object.
+     * @param x - x position of the image
+     */
     constructor(x) {
         super().loadImage(this.IMAGE);
         this.y = 480 - this.height;

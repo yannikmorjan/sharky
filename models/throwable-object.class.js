@@ -13,13 +13,18 @@ class ThrowableObject extends MovableObject {
     acceloration = 0.1;
     characterWidth;
 
+    /**
+     * Create a new thorwable object. If the boolean is true it creates a poisoned bubble, else a normal one. 
+     * @param x - The x coordinate of the bubble
+     * @param y - The y coordinate of the bubble
+     * @param poisoned - boolean
+     */
     constructor(x, y, poisoned) {
         super().poisoned = poisoned;
-        if(this.poisoned){
+        if(this.poisoned)
             this.loadImage(this.IMAGE_POISON_BUBBLE);
-        } else {
+        else
             this.loadImage(this.IMAGE_NORMAL_BUBBLE);
-        }
         this.x = x;
         this.y = y;
         this.width = 30;
@@ -27,6 +32,9 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
+    /**
+     * It's supposed to make the object move in a parabolic motion.
+     */
     throw() {
         let startX = this.x;
         setInterval(() => {
@@ -43,10 +51,14 @@ class ThrowableObject extends MovableObject {
                     this.uplift += this.acceloration;
                 }
             }
-            
         }, 1000 / 60)
     }
 
+    /**
+     * Corrects the x position for the bubble, if the character is facing the other direction.
+     * @param otherDirection - Boolean
+     * @param changePosition - The amount of pixels the character should move.
+     */
     checkOtherDirection(otherDirection, changePosition) {
         this.characterWidth = changePosition;
         if(otherDirection) {

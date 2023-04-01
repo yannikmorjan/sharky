@@ -5,6 +5,12 @@ class BackgroundObject extends MovableObject {
     maxSpeed;
     acceloration = 0.1;
 
+    /**
+     * Creates a new background object.
+     * @param imagePath - The path to the image you want to load.
+     * @param x - The x position of the image
+     * @param maxSpeed - The maximum movement speed of the image (shouldnt be faster than character).
+     */
     constructor(imagePath, x, maxSpeed) {
         super().loadImage(imagePath);
         this.y = 480 - this.height;
@@ -12,15 +18,13 @@ class BackgroundObject extends MovableObject {
         this.maxSpeed = maxSpeed;
     }
 
+    /**
+     * Managed the movement speed of the background depending on the maxSpeed.
+     */
     applySwimResistance() {
         if(this.speed > this.maxSpeed) {
             this.speed -= this.acceloration;
         }
     }
 
-    update(characterX, siblingX) {
-        if(characterX >= (siblingX + this.width / 4)) {
-            this.x = siblingX + this.width;
-        }
-    }
 }

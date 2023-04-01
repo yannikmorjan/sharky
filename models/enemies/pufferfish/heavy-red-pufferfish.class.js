@@ -29,12 +29,17 @@ class HeavyRedPufferFish extends PufferFish {
     
     damage = 30;
 
+    /**
+     * Creates a new heavy red pufferfish, and it sets up the enemy's movement and
+     * animation.
+     * @param x - the x position of the enemy
+     * @param y - The y position of the enemy
+     * @param rangeX - The range of the x-axis that the enemy can move in.
+     * @param rangeY - The height of the area the enemy can move in.
+     */
     constructor(x, y, rangeX, rangeY) {
         super().loadImage('img/2.Enemy/1.Puffer fish/1.Swim/3.swim1.png');
-        this.loadImages(this.IMAGES_SWIM);
-        this.loadImages(this.IMAGES_TRANSITION);
-        this.loadImages(this.IMAGES_BUBBLE_SWIM);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadAllImages();
         this.x = x;
         this.y = y;
         this.rangeX = rangeX;

@@ -1,4 +1,7 @@
 // Keyboard
+/**
+ * Eventlistener for onkeydown events
+ */
 window.addEventListener('keydown', (e) => {
     if(e.keyCode == 39 || e.keyCode == 68) {
         keyboard.RIGHT = true;
@@ -23,6 +26,9 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
+/**
+ * Eventlistener for onkeyup events
+ */
 window.addEventListener('keyup', (e) => {
     if(e.keyCode == 39 || e.keyCode == 68) {
         keyboard.RIGHT = false;
@@ -45,6 +51,9 @@ document.addEventListener('mozfullscreenchange', exitFullscreenEventHandler);
 document.addEventListener('MSFullscreenChange', exitFullscreenEventHandler);
 
 // Mobile Controller
+/**
+ * Eventlistener for touchstart and touchend events
+ */
 function bindBtnPressEvents() {
     document.getElementById('btn-left').addEventListener('touchstart', (e) => {
         e.preventDefault();
