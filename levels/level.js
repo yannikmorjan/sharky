@@ -1,3 +1,8 @@
+/**
+ * Returns a new level object depending on the lvl string.
+ * @param {string} lvl 
+ * @returns - level object
+ */
 function initLevel(lvl) {
     if (lvl == 'lvl1') {
         return new Level(
@@ -7,19 +12,24 @@ function initLevel(lvl) {
             createLevel1Poison(),
             createLevel1Health(),
             createLevel1Barriers(),
-            createLevel1BgL5(),
-            createLevel1BgL4(),
-            createLevel1BgL3(),
-            createLevel1BgL2(),
-            createLevel1BgL1()
+            [createLevel1BgL5(),
+             createLevel1BgL4(),
+             createLevel1BgL3(),
+             createLevel1BgL2(),
+             createLevel1BgL1()]
         );
     }
 }
-
+    /**
+     * @returns - the start and end point on x-axis for level 1 in an array
+     */
     function createLevel1Area() {
         return [-720, 2400]
     }   
     
+    /**
+     * @returns - the enemies for level 1 in an array
+     */
     function createLevel1Enemies() {
         return [new LilaJellyFish(-550, 300, 0, 100),
             new LilaJellyFish(-500, 300, 0, 100),
@@ -45,6 +55,9 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the coins for level 1 in an array
+     */
     function createLevel1Coins() {
         return [new Coin(-800,150),
             new Coin(-625,150),
@@ -54,6 +67,9 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the poison for level 1 in an array
+     */
     function createLevel1Poison() {
         return [new Poison(-800,330),
             new Poison(500,400),
@@ -62,12 +78,18 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the health items for level 1 in an array 
+     */
     function createLevel1Health() {
         return [new Health(-250,100),
             new Health(2050,400)
         ];
     }
 
+    /**
+     * @returns - the barriers for level 1 in an array
+     */
     function createLevel1Barriers() {
         return [new RockVertical(-1000,480),
             new Tunnel(-1000),
@@ -79,6 +101,9 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the layer 5 backgrounds for level 1 in an array
+     */
     function createLevel1BgL5() {
         return [new BackgroundObject('img/3. Background/Layers/5. Water/D.png', -1440,-4),
             new BackgroundObject('img/3. Background/Layers/5. Water/D.png', 0,-4),
@@ -86,6 +111,9 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the layer 4 backgrounds for level 1 in an array
+     */
     function createLevel1BgL4() {
         return [new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png', -1440,-3),
             new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png', 0,-3),
@@ -93,6 +121,9 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the layer 3 backgrounds for level 1 in an array
+     */
     function createLevel1BgL3() {
         return [new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', -2880,-2),
             new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', -1440,-2),
@@ -102,6 +133,9 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the layer 2 backgrounds for level 1 in an array
+     */
     function createLevel1BgL2() {
         return [new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', -2880,-1),
             new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', -1440,-1),
@@ -110,6 +144,9 @@ function initLevel(lvl) {
         ];
     }
 
+    /**
+     * @returns - the layer 1 backgrounds for level 1 in an array
+     */
     function createLevel1BgL1() {
         return [new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', -2880,0),
             new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', -1440,0),

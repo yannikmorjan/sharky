@@ -1,5 +1,4 @@
 class Character extends MovableObject {
-
     IMAGES_IDL = [
         'img/1.Sharkie/1.IDLE/1.png',
         'img/1.Sharkie/1.IDLE/2.png',
@@ -148,7 +147,9 @@ class Character extends MovableObject {
     topBlocked = false;
     bottomBlocked = false;
     
-
+    /**
+     * Creats a new character object and sets pausable animation and movement function.
+     */
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadAllImages();
@@ -157,6 +158,9 @@ class Character extends MovableObject {
         setPausableInterval(() => setPausableFn(self, self.animate), 200);
     }
 
+    /**
+     * Collects and loads all image arrays that are needed for the character animation.
+     */
     loadAllImages() {
         this.loadImages(this.IMAGES_IDL);
         this.loadImages(this.IMAGES_FALLING_A_SLEEP);
@@ -171,57 +175,101 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_ELECTRO);
     }
 
+    /**
+     * Managed the character and camera movement.
+     * @param {object} self 
+     */
     movement(self) {
         if(!self.isDead()) {
-            if(!self.rightBlocked && self.world.keyboard.RIGHT && self.x < (self.world.level.level_end_x + 240)) {
-                self.moveRight();
-                self.otherDirection = false;
-                if(self.x < self.world.level.level_end_x && self.x > self.world.level.level_start_x) {
-                    self.world.level.backgrounds.forEach(l => { 
-                        l.forEach(b => {
-                            b.moveLeft();
-                            b.applySwimResistance();
-                        })
-                    });
-                };
-                self.applySwimResistance();
-            }
-            if(!self.leftBlocked && self.world.keyboard.LEFT && self.x > (self.world.level.level_start_x - 240)) {
-                self.moveLeft();
-                self.otherDirection = true;
-                if(self.x > self.world.level.level_start_x && self.x < self.world.level.level_end_x) {
-                    self.world.level.backgrounds.forEach(l => {
-                        l.forEach(b => { 
-                            b.moveRight();
-                            b.applySwimResistance();
-                        }); 
-                    });
-                };
-                self.applySwimResistance();
-            }
-            if(!self.topBlocked && self.world.keyboard.UP && self.y > -60) {
-                self.moveUp()
-                self.applySwimResistance();
-            }
-            if(!self.bottomBlocked && self.world.keyboard.DOWN && self.y < 300) {
-                self.moveDown();
-                self.applySwimResistance();
-            }
-            if(!self.bottomBlocked && self.fallingASleep && self.y < 300) {
-                self.speed = 1;
-                self.moveDown();
-            }
-            if(self.x > self.world.level.level_start_x && self.x < self.world.level.level_end_x) {
+            if(!self.rightBlocked && self.world.keyboard.RIGHT && self.x < (self.world.level.level_end_x + 240))
+                self.rightMovementHandler(self);
+            if(!self.leftBlocked && self.world.keyboard.LEFT && self.x > (self.world.level.level_start_x - 240))
+                self.leftMovementHandler(self);
+            if(!self.topBlocked && self.world.keyboard.UP && self.y > -60)
+                self.upMovementHandler(self);
+            if(!self.bottomBlocked && self.world.keyboard.DOWN && self.y < 300)
+                self.downMovementHandler(self);
+            if(!self.bottomBlocked && self.fallingASleep && self.y < 300)
+                self.sleepMovementHandler(self);
+            if(self.x > self.world.level.level_start_x && self.x < self.world.level.level_end_x)
                 self.world.camera_x = -self.x + 240;
-            }
         }
     }
 
+    /**
+     * Calls a function that moves the character and all backgrounds to the right, applys the swiming speed.
+     * @param {object} self 
+     */
+    rightMovementHandler(self) {
+        self.moveRight();
+        self.otherDirection = false;
+        if(self.x < self.world.level.level_end_x && self.x > self.world.level.level_start_x) {
+            self.world.level.backgrounds.forEach(l => { 
+                l.forEach(b => {
+                    b.moveLeft();
+                    b.applySwimResistance();
+                })
+            });
+        };
+        self.applySwimResistance();
+    }
+
+    /**
+     * Calls a function that moves the character and all backgrounds to the left, applys the swiming speed.
+     * @param {object} self 
+     */
+    leftMovementHandler(self) {
+        self.moveLeft();
+        self.otherDirection = true;
+        if(self.x > self.world.level.level_start_x && self.x < self.world.level.level_end_x) {
+            self.world.level.backgrounds.forEach(l => {
+                l.forEach(b => { 
+                    b.moveRight();
+                    b.applySwimResistance();
+                }); 
+            });
+        };
+        self.applySwimResistance();
+    }
+
+    /**
+     * Calls a function that moves the character up, applys the swiming speed.
+     * @param {object} self 
+     */
+    upMovementHandler(self) {
+        self.moveUp()
+        self.applySwimResistance();
+    }
+
+    /**
+     * Calls a function that moves the character down, applys the swiming speed.
+     * @param {object} self 
+     */
+    downMovementHandler(self) {
+        self.moveDown();
+        self.applySwimResistance();
+    }
+
+    /**
+     * Calls a function that moves the character down with a speed of 1.
+     * @param {object} self 
+     */
+    sleepMovementHandler(self) {
+        self.speed = 1;
+        self.moveDown();
+    }
+
+    /**
+     * Managed all character animations.
+     * @param {object} self 
+     */
     animate(self) {
         if(self.isDead()) {
             self.deathAnimation();
+            self.resetAttackAnimation();
         } else if(self.isHurt()) {
             self.hurtAnimation();
+            self.resetAttackAnimation()
         } else if(self.world.keyboard.H) {
             self.bubbleAttack(self.IMAGES_NORMAL_BUBBLE, false);
         } else if(self.world.keyboard.SPACE) {
@@ -229,42 +277,70 @@ class Character extends MovableObject {
         } else if(self.world.keyboard.J) {
             self.bubbleAttack(self.IMAGES_POISON_BUBBLE, true);
         } else if(self.world.keyboard.RIGHT || self.world.keyboard.LEFT || self.world.keyboard.UP || self.world.keyboard.DOWN) {
-            self.playAnimation(self.IMAGES_SWIM);
-            self.resetSleepCountdown();
+            self.sleepAnimationHandler(self);
         } else if(self.fallingASleep) {
             self.sleepAnimation();
         } else {
-            self.playAnimation(self.IMAGES_IDL);
-            self.runSleepCountdown();
-            self.speed = 0;
-            self.world.level.backgrounds.forEach(l => { 
-                l.forEach(b => {
-                    b.speed = 0;
-                });
-            });
+            self.idlAnimationHandler(self);
         }
     }
 
+    /**
+     * calls the character swim animation function and resets the sleep countdown
+     * @param {object} self 
+     */
+    sleepAnimationHandler(self) {
+        self.playAnimation(self.IMAGES_SWIM);
+        self.resetSleepCountdown();
+    }
+
+    /**
+     * calls the character idl animation function and starts the sleep countdown. Resets character and cackground speed.
+     * @param {object} self 
+     */
+    idlAnimationHandler(self) {
+        self.playAnimation(self.IMAGES_IDL);
+        self.runSleepCountdown();
+        self.speed = 0;
+        self.world.level.backgrounds.forEach(l => { 
+            l.forEach(b => {
+                b.speed = 0;
+            });
+        });
+    }
+
+    /**
+     * Sets the character speed up till the max speed is reached, depending on how often the function is called.
+     */
     applySwimResistance() {
         if(this.speed < this.maxSpeed) {
             this.speed += this.acceloration;
         }
     }
 
+    /**
+     * Add one coin if max number of coins isnt reached.
+     */
     collectedCoin() {
         this.coins += 1;
-        if(this.coins > 5) {
-            this.coins = 5; 
+        if(this.coins > this.world.level.coins.lenght) {
+            this.coins = this.world.level.coins.lenght; 
         }
     }
 
+    /**
+     * Add one poison if max number of poisons isnt reached.
+     */
     collectedPoison() {
         this.poison += 1;
-        if(this.poison > 5) {
-            this.poison = 5; 
+        if(this.poison > this.world.level.poisons.lenght) {
+            this.poison = this.world.level.poisons.lenght; 
         }
     }
 
+    /**
+     * Reduse poison by 0.5 if poison isnt 0.
+     */
     usePoison() {
         this.poison -= 0.5;
         if(this.poison < 0) {
@@ -272,10 +348,20 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Fills up all the character energy.
+     */
     collectedHeart() {
         this.energy = 100;
     }
 
+    /**
+     * Plays the bubble spiting aninmation of normal or poisond bubble and if the boolean is true,
+     * it calls the function to create a poisoned bubble else it calls the function to create a
+     * normal bubble.
+     * @param {Array} IMAGE 
+     * @param {boolean} poisoned 
+     */
     bubbleAttack(IMAGE, poisoned) {
         if(!this.isBubbleAttacking) {
             this.currentImage = 0;
@@ -283,23 +369,22 @@ class Character extends MovableObject {
         }
         this.playAnimation(IMAGE);
         if(this.isBubbleAttacking && this.currentImage == 8) {
-            if(!poisoned) {
+            if(!poisoned)
                 this.createBubble();
-            }
-            if(poisoned) {
+            if(poisoned)
                 this.createPoisonBubble()
-            }
-            this.isBubbleAttacking = false;
-            this.world.keyboard.H = false;
-            this.world.keyboard.J = false;
+            this.resetAttackAnimation();
         }
     }
 
+    /**
+     * Starts the finslaping animation, if a specific image is reacht it plays a sound. During this time 
+     * the character is invincible against puffefish. This get reset at the end of the animation cycle.
+     * @param {Array} IMAGE 
+     */
     finAttack(IMAGE) {
         if(!this.isFinSlaping) {
             this.currentImage = 0;
-            this.invincible = false;
-            this.finSlaped = false;
             this.isFinSlaping = true;
         }
         this.playAnimation(IMAGE);
@@ -308,14 +393,23 @@ class Character extends MovableObject {
             if(this.currentImage >= 5 && this.currentImage <= 7) {
                 this.finSlaped = true;
                 this.world.playSound(this.punsh_sound);
-            }
-            if(this.currentImage == 8) {
-                this.isFinSlaping = false;
-                this.world.keyboard.SPACE = false;
+            } else if(this.currentImage == 8) {
+                this.resetAttackAnimation();
             } 
         }
     }
 
+    /**
+     * Resets all values for an attack animation
+     */
+    resetAttackAnimation() {
+        this.isBubbleAttacking = this.isFinSlaping = this.invincible = this.finSlaped = false;
+        this.world.keyboard.H = this.world.keyboard.J = this.world.keyboard.SPACE = false;
+    }
+
+    /**
+     * Creats a new bubble object, positions and collect it and plays a specific sound
+     */
     createBubble() {
         let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), false);
         bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
@@ -323,6 +417,10 @@ class Character extends MovableObject {
         this.world.playSound(this.bubble_sound);
     }
 
+    /**
+     * Creats a new poisoned bubble object, positions and collect it, plays a specific sound and calls a function, that reduce
+     * the charachters poison storage.
+     */
     createPoisonBubble() {
         let bubble = new ThrowableObject((this.x + this.offsetX + this.width - this.offsetWidth), (this.y + this.height / 2), true);
         bubble.checkOtherDirection(this.otherDirection, (this.width - this.offsetWidth));
@@ -332,6 +430,9 @@ class Character extends MovableObject {
         this.world.statusBars[1].setPercentage(this.poison*20);
     }
 
+    /**
+     * Plays the death animation depending on what the last injury was.
+     */
     deathAnimation() {
             if(!this.lastInjuryNormal) {
                 this.playAnimationOnce(this.IMAGES_DEAD_ELECTRO);
@@ -340,6 +441,9 @@ class Character extends MovableObject {
             }
     }
 
+    /**
+     * Plays the hurt animation depending on what the last injury was.
+     */
     hurtAnimation() {
         if(!this.lastInjuryNormal) {
             this.playAnimation(this.IMAGES_HURT_ELECTRO);
@@ -350,6 +454,9 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * If the sleepcountdown reachs 25, the character is falling a sleep
+     */
     runSleepCountdown() {
         this.sleepCountdown++;
         if(this.sleepCountdown >= 25) {
@@ -357,6 +464,9 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Resets the sleepingcountdown.
+     */
     resetSleepCountdown() {
         if(this.sleepCountdown != 0) {
             this.sleepCountdown = 0;
@@ -365,6 +475,10 @@ class Character extends MovableObject {
         } 
     }
 
+    /**
+     * Plays the falling animation till the character reachs the ground or a blocking object,
+     * than plays the sleeping animation.
+     */
     sleepAnimation() {
         if(!this.sleeping) {
             this.playAnimationOnce(this.IMAGES_FALLING_A_SLEEP)
@@ -376,6 +490,9 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Triggers the Loosing Screen. If the sound is on, managed the specific sounds.
+     */
     triggerEndscreen() {
         if(world.sound) world.level.lose_sound.play();
         world.level.game_sound.pause();
