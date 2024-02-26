@@ -76,17 +76,17 @@ function returnController() {
     return `
         <div class="mobileController d-none" id="mobile-controller">
             <div class="mobileControllerSection">
-                <img id="btn-left" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-left.png">
-                <img id="btn-right" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-right.png">
+                <img id="btn-left" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-left.png" oncontextmenu="return false;">
+                <img id="btn-right" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-right.png" oncontextmenu="return false;">
             </div>
             <div class="mobileControllerSection">
-                <img id="btn-bubble" class="mobileControllerBtn" src="img/6.Botones/Key/bubble.png">
-                <img id="btn-slap" class="mobileControllerBtn" src="img/6.Botones/Key/finslap.png">
-                <img id="btn-poison" class="mobileControllerBtn" src="img/6.Botones/Key/poison.png">
+                <img id="btn-bubble" class="mobileControllerBtn" src="img/6.Botones/Key/bubble.png" oncontextmenu="return false;">
+                <img id="btn-slap" class="mobileControllerBtn" src="img/6.Botones/Key/finslap.png" oncontextmenu="return false;">
+                <img id="btn-poison" class="mobileControllerBtn" src="img/6.Botones/Key/poison.png" oncontextmenu="return false;">
             </div>
             <div class="mobileControllerSection">
-                <img id="btn-up" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-up.png">
-                <img id="btn-down" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-down.png">
+                <img id="btn-up" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-up.png" oncontextmenu="return false;">
+                <img id="btn-down" class="mobileControllerBtn" src="img/6.Botones/Key/arrow-down.png" oncontextmenu="return false;">
             </div>
         </div>`;
 }

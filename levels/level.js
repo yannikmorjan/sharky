@@ -106,8 +106,8 @@ function initLevel(lvl) {
      */
     function createLevel1BgL5() {
         return [new BackgroundObject('img/3. Background/Layers/5. Water/D.png', -1440,-4),
-            new BackgroundObject('img/3. Background/Layers/5. Water/D.png', 0,-4),
-            new BackgroundObject('img/3. Background/Layers/5. Water/D.png', 1440,-4)
+            new BackgroundObject('img/3. Background/Layers/5. Water/D.png', -1,-4),
+            new BackgroundObject('img/3. Background/Layers/5. Water/D.png', 1438,-4)
         ];
     }
 
@@ -116,8 +116,8 @@ function initLevel(lvl) {
      */
     function createLevel1BgL4() {
         return [new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png', -1440,-3),
-            new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png', 0,-3),
-            new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png', 1440,-3)
+            new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png', -1,-3),
+            new BackgroundObject('img/3. Background/Layers/4.Fondo 2/D.png', 1438,-3)
         ];
     }
 
@@ -126,10 +126,10 @@ function initLevel(lvl) {
      */
     function createLevel1BgL3() {
         return [new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', -2880,-2),
-            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', -1440,-2),
-            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', 0,-2),
-            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', 1440,-2),
-            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', 2880,-2)
+            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', -1439,-2),
+            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', -2,-2),
+            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', 1437,-2),
+            new BackgroundObject('img/3. Background/Layers/3.Fondo 1/D.png', 2876,-2)
         ];
     }
 
@@ -138,9 +138,9 @@ function initLevel(lvl) {
      */
     function createLevel1BgL2() {
         return [new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', -2880,-1),
-            new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', -1440,-1),
-            new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', 0,-1),
-            new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', 1440,-1)
+            new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', -1439,-1),
+            new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', -2,-1),
+            new BackgroundObject('img/3. Background/Layers/1. Light/COMPLETO.png', 1437,-1)
         ];
     }
 
@@ -149,9 +149,9 @@ function initLevel(lvl) {
      */
     function createLevel1BgL1() {
         return [new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', -2880,0),
-            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', -1440,0),
-            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', 0,0),
-            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', 1440,0),
-            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', 2880,0)
+            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', -1439,0),
+            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', -2,0),
+            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', 1437,0),
+            new BackgroundObject('img/3. Background/Layers/2. Floor/D.png', 2876,0)
         ];
     }

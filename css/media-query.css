@@ -20,12 +20,6 @@
     }
 }
 
-@media only screen and (max-height: 1000px) {
-    .title {
-        margin-top: 50px;
-    }
-}
-
 @media only screen and (max-height: 800px) {
     .title {
         margin-bottom: 50px;
@@ -53,7 +47,7 @@
     .canvasContainer,
     .pannelContainer,
     canvas {
-        height: 100vh;
+        height: 100dvh;
     }
     .startscreen {
         background-size: 175%;
