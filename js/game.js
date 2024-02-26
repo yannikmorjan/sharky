@@ -48,6 +48,7 @@ function restartGame() {
     world = new World(canvas, keyboard, 'lvl1');
     checkMobile();
     changePannels(returnHeader,returnNothing,returnController);
+    bindBtnPressEvents();
 }
 
 /**
@@ -101,6 +102,7 @@ function calcPannelStructur() {
     } else if(gameHasStarted && !gameOver && !gameWinner) {
         gameIsPaused = false;
         changePannels(returnHeader,returnNothing,returnController);
+        bindBtnPressEvents();
     } else if (gameHasStarted && !gameOver && gameWinner) {
         changePannels(returnHeader,returnWinScreen,returnFooter);
     } else if (gameHasStarted && gameOver && !gameWinner) {
